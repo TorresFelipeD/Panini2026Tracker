@@ -18,6 +18,14 @@ img,
   border-radius: 0.9rem;
 }
 
+img {
+  transition: filter 160ms ease;
+}
+
+.sticker-image--missing {
+  filter: grayscale(1) saturate(0.15) brightness(0.95);
+}
+
 .state-box {
   display: grid;
   place-items: center;
