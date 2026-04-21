@@ -33,7 +33,19 @@ export class ImagesPageComponent {
       return;
     }
 
+    const existingImage = this.imagesStore.items().find(item => item.stickerId === this.stickerId);
+    if (existingImage) {
+      const confirmed = window.confirm(
+        `La lámina "${existingImage.displayName}" ya tiene una imagen. ¿Quieres sobreescribirla?`
+      );
+
+      if (!confirmed) {
+        return;
+      }
+    }
+
     this.imagesStore.upload(this.stickerId, this.selectedFile);
+    this.albumStore.load();
     this.selectedFile = null;
     input.value = '';
   }
@@ -45,6 +57,7 @@ export class ImagesPageComponent {
     }
 
     this.imagesStore.remove(stickerId);
+    this.albumStore.load();
   }
 
   protected get selectedFileName(): string {

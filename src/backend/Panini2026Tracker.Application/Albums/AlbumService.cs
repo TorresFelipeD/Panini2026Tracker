@@ -1,3 +1,4 @@
+using Panini2026Tracker.Application.Common;
 using Panini2026Tracker.Domain.Repositories;
 
 namespace Panini2026Tracker.Application.Albums;
@@ -30,7 +31,7 @@ public sealed class AlbumService : IAlbumService
                         sticker.CollectionEntry?.IsOwned ?? false,
                         sticker.StickerImage is not null,
                         sticker.DuplicateEntry?.Quantity ?? 0,
-                        sticker.StickerImage is null ? null : $"/uploads/{sticker.StickerImage.RelativePath.Replace("\\", "/")}",
+                        ImageUrlBuilder.Build(sticker.StickerImage),
                         sticker.IsProvisional))
                     .ToArray();
 

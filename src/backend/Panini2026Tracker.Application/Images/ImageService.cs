@@ -1,4 +1,5 @@
 using Panini2026Tracker.Application.Abstractions;
+using Panini2026Tracker.Application.Common;
 using Panini2026Tracker.Domain.Entities;
 using Panini2026Tracker.Domain.Repositories;
 
@@ -37,14 +38,19 @@ public sealed class ImageService : IImageService
             .Where(sticker => sticker.StickerImage is not null)
             .OrderBy(sticker => sticker.Country.Name)
             .ThenBy(sticker => sticker.StickerCode)
-            .Select(sticker => new StickerImageDto(
-                sticker.Id,
-                sticker.StickerCode,
-                sticker.Country.Code,
-                sticker.Country.Name,
-                sticker.DisplayName,
-                $"/uploads/{sticker.StickerImage!.RelativePath.Replace("\\", "/")}",
-                sticker.StickerImage.UploadedAtUtc))
+            .Select(sticker =>
+            {
+                var image = sticker.StickerImage!;
+
+                return new StickerImageDto(
+                    sticker.Id,
+                    sticker.StickerCode,
+                    sticker.Country.Code,
+                    sticker.Country.Name,
+                    sticker.DisplayName,
+                    ImageUrlBuilder.Build(image)!,
+                    image.UploadedAtUtc);
+            })
             .ToArray();
     }
 
@@ -71,7 +77,14 @@ public sealed class ImageService : IImageService
             cancellationToken);
         await _unitOfWork.SaveChangesAsync(cancellationToken);
 
-        return new StickerImageDto(sticker.Id, sticker.StickerCode, sticker.Country.Code, sticker.Country.Name, sticker.DisplayName, $"/uploads/{relativePath.Replace("\\", "/")}", now);
+        return new StickerImageDto(
+            sticker.Id,
+            sticker.StickerCode,
+            sticker.Country.Code,
+            sticker.Country.Name,
+            sticker.DisplayName,
+            ImageUrlBuilder.Build(existingImage)!,
+            now);
     }
 
     public async Task DeleteAsync(Guid stickerId, CancellationToken cancellationToken)

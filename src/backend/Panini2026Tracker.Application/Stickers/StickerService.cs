@@ -93,7 +93,7 @@ public sealed class StickerService : IStickerService
             sticker.CollectionEntry?.IsOwned ?? false,
             sticker.DuplicateEntry?.Quantity ?? 0,
             sticker.CollectionEntry?.Notes,
-            sticker.StickerImage is null ? null : $"/uploads/{sticker.StickerImage.RelativePath.Replace("\\", "/")}",
+            ImageUrlBuilder.Build(sticker.StickerImage),
             sticker.IsProvisional,
             DeserializeDictionary(sticker.AdditionalInfoJson),
             DeserializeDictionary(sticker.MetadataJson));
