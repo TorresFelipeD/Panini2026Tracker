@@ -2,6 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { computed, inject, Injectable, signal } from '@angular/core';
 import { AlbumOverview, StickerDetail } from '../models/app.models';
 import { APP_CONFIG } from '../tokens/app-config.token';
+import { resolveImageUrl } from '../utils/image-url';
 
 export interface AlbumFilters {
   search: string;
@@ -44,7 +45,16 @@ export class AlbumStoreService {
 
     this.http.get<AlbumOverview>(`${this.config.apiBaseUrl}/album`, { params }).subscribe({
       next: value => {
-        this.overview.set(value);
+        this.overview.set({
+          ...value,
+          countries: value.countries.map(country => ({
+            ...country,
+            stickers: country.stickers.map(sticker => ({
+              ...sticker,
+              imageUrl: resolveImageUrl(this.config.apiBaseUrl, sticker.imageUrl)
+            }))
+          }))
+        });
         this.loading.set(false);
       },
       error: () => this.loading.set(false)
@@ -58,7 +68,10 @@ export class AlbumStoreService {
 
   openSticker(stickerId: string): void {
     this.http.get<StickerDetail>(`${this.config.apiBaseUrl}/stickers/${stickerId}`).subscribe({
-      next: value => this.selectedSticker.set(value)
+      next: value => this.selectedSticker.set({
+        ...value,
+        imageUrl: resolveImageUrl(this.config.apiBaseUrl, value.imageUrl)
+      })
     });
   }
 
@@ -69,7 +82,10 @@ export class AlbumStoreService {
   saveSticker(payload: { stickerId: string; isOwned: boolean; duplicateCount: number; notes: string }): void {
     this.http.put<StickerDetail>(`${this.config.apiBaseUrl}/stickers/${payload.stickerId}/state`, payload).subscribe({
       next: value => {
-        this.selectedSticker.set(value);
+        this.selectedSticker.set({
+          ...value,
+          imageUrl: resolveImageUrl(this.config.apiBaseUrl, value.imageUrl)
+        });
         this.load();
       }
     });

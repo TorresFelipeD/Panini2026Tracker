@@ -4,11 +4,19 @@ namespace Panini2026Tracker.Infrastructure.Services;
 
 public sealed class LocalFileStorageService : IFileStorageService
 {
+    private readonly string _webRootPath;
+
+    public LocalFileStorageService()
+    {
+        _webRootPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot");
+        Directory.CreateDirectory(_webRootPath);
+    }
+
     public async Task<string> SaveStickerImageAsync(Guid stickerId, Stream content, string fileName, CancellationToken cancellationToken)
     {
         var extension = Path.GetExtension(fileName);
         var safeExtension = string.IsNullOrWhiteSpace(extension) ? ".png" : extension.ToLowerInvariant();
-        var folderPath = Path.Combine(AppContext.BaseDirectory, "wwwroot", "uploads", stickerId.ToString("N"));
+        var folderPath = Path.Combine(_webRootPath, "uploads", stickerId.ToString("N"));
         Directory.CreateDirectory(folderPath);
 
         var storedFileName = $"sticker{safeExtension}";

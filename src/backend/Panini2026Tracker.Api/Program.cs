@@ -8,6 +8,7 @@ using Panini2026Tracker.Domain.Entities;
 using Panini2026Tracker.Domain.Repositories;
 using Panini2026Tracker.Infrastructure.Configuration;
 using Panini2026Tracker.Infrastructure.Persistence;
+using Microsoft.Extensions.FileProviders;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -72,8 +73,16 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+var uploadsPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads");
+Directory.CreateDirectory(uploadsPath);
+
 app.UseMiddleware<ExceptionLoggingMiddleware>();
 app.UseCors("frontend");
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new PhysicalFileProvider(uploadsPath),
+    RequestPath = "/uploads"
+});
 app.UseStaticFiles();
 app.UseAuthorization();
 app.MapControllers();

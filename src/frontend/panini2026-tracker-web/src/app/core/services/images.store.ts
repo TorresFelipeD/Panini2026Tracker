@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
 import { APP_CONFIG } from '../tokens/app-config.token';
 import { StickerImageItem } from '../models/app.models';
+import { resolveImageUrl } from '../utils/image-url';
 
 @Injectable({ providedIn: 'root' })
 export class ImagesStoreService {
@@ -12,7 +13,12 @@ export class ImagesStoreService {
 
   load(): void {
     this.http.get<StickerImageItem[]>(`${this.config.apiBaseUrl}/images`).subscribe({
-      next: value => this.items.set(value)
+      next: value => this.items.set(
+        value.map(item => ({
+          ...item,
+          imageUrl: resolveImageUrl(this.config.apiBaseUrl, item.imageUrl) ?? item.imageUrl
+        }))
+      )
     });
   }
 

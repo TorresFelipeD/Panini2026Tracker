@@ -1,5 +1,5 @@
 <button type="button" class="sticker-card" (click)="select.emit(sticker.stickerId)">
-  <ng-container *ngIf="sticker.isOwned && sticker.imageUrl; else fallbackState">
+  <ng-container *ngIf="sticker.imageUrl; else fallbackState">
     <img [src]="sticker.imageUrl" [alt]="sticker.displayName">
   </ng-container>
 
