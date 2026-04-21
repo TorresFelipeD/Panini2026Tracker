@@ -11,7 +11,7 @@
 
     <div class="modal-grid">
       <div class="preview">
-        <img *ngIf="selected.imageUrl; else noImage" [src]="selected.imageUrl" [alt]="selected.displayName">
+        <img *ngIf="selected.imageUrl; else noImage" [src]="selected.imageUrl" [alt]="selected.displayName" [class.preview-image--missing]="!isOwned">
         <ng-template #noImage>
           <div class="empty-preview">Sin imagen asociada</div>
         </ng-template>

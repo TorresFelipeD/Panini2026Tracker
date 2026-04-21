@@ -48,6 +48,14 @@ footer {
   place-items: center;
 }
 
+.preview img {
+  transition: filter 160ms ease;
+}
+
+.preview-image--missing {
+  filter: grayscale(1) saturate(0.15) brightness(0.95);
+}
+
 .details,
 .info-block dl {
   display: grid;
