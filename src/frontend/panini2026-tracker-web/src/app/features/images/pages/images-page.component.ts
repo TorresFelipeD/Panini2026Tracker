@@ -32,4 +32,13 @@ export class ImagesPageComponent {
     this.imagesStore.upload(this.stickerId, file);
     input.value = '';
   }
+
+  protected remove(stickerId: string, displayName: string): void {
+    const confirmed = window.confirm(`¿Seguro que quieres eliminar la imagen de "${displayName}"?`);
+    if (!confirmed) {
+      return;
+    }
+
+    this.imagesStore.remove(stickerId);
+  }
 }

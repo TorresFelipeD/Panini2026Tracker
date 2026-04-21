@@ -73,4 +73,21 @@ public sealed class ImageService : IImageService
 
         return new StickerImageDto(sticker.Id, sticker.StickerCode, sticker.Country.Code, sticker.Country.Name, sticker.DisplayName, $"/uploads/{relativePath.Replace("\\", "/")}", now);
     }
+
+    public async Task DeleteAsync(Guid stickerId, CancellationToken cancellationToken)
+    {
+        var sticker = await _catalogRepository.GetStickerByIdAsync(stickerId, cancellationToken)
+            ?? throw new InvalidOperationException("Sticker not found.");
+        var existingImage = await _imageRepository.GetByStickerIdAsync(stickerId, cancellationToken)
+            ?? throw new InvalidOperationException("Image not found.");
+
+        await _fileStorageService.DeleteStickerImageAsync(existingImage.RelativePath, cancellationToken);
+        _imageRepository.Remove(existingImage);
+
+        var now = _dateTimeProvider.UtcNow;
+        await _logRepository.AddAsync(
+            new SystemLog("images", "images.deleted", $"Image deleted for sticker {sticker.StickerCode}.", "info", now),
+            cancellationToken);
+        await _unitOfWork.SaveChangesAsync(cancellationToken);
+    }
 }

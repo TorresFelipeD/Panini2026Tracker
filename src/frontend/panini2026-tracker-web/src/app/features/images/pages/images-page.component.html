@@ -24,6 +24,7 @@
         <strong>{{ item.stickerCode }}</strong>
         <p>{{ item.displayName }}</p>
         <small>{{ item.countryName }} · {{ item.uploadedAtUtc | date:'medium' }}</small>
+        <button type="button" class="danger" (click)="remove(item.stickerId, item.displayName)">Eliminar imagen</button>
       </div>
     </article>
   </div>

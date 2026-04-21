@@ -27,4 +27,38 @@ public sealed class LocalFileStorageService : IFileStorageService
 
         return Path.Combine(stickerId.ToString("N"), storedFileName);
     }
+
+    public Task DeleteStickerImageAsync(string relativePath, CancellationToken cancellationToken)
+    {
+        cancellationToken.ThrowIfCancellationRequested();
+
+        if (string.IsNullOrWhiteSpace(relativePath))
+        {
+            return Task.CompletedTask;
+        }
+
+        var normalizedRelativePath = relativePath
+            .Replace('/', Path.DirectorySeparatorChar)
+            .Replace('\\', Path.DirectorySeparatorChar);
+        var fullPath = Path.GetFullPath(Path.Combine(_webRootPath, "uploads", normalizedRelativePath));
+        var uploadsRoot = Path.GetFullPath(Path.Combine(_webRootPath, "uploads"));
+
+        if (!fullPath.StartsWith(uploadsRoot, StringComparison.OrdinalIgnoreCase))
+        {
+            throw new InvalidOperationException("Invalid image path.");
+        }
+
+        if (File.Exists(fullPath))
+        {
+            File.Delete(fullPath);
+        }
+
+        var folderPath = Path.GetDirectoryName(fullPath);
+        if (!string.IsNullOrWhiteSpace(folderPath) && Directory.Exists(folderPath) && !Directory.EnumerateFileSystemEntries(folderPath).Any())
+        {
+            Directory.Delete(folderPath);
+        }
+
+        return Task.CompletedTask;
+    }
 }

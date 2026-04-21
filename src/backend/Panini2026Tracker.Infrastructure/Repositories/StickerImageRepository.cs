@@ -19,4 +19,7 @@ public sealed class StickerImageRepository : IStickerImageRepository
 
     public Task AddAsync(StickerImage image, CancellationToken cancellationToken) =>
         _dbContext.StickerImages.AddAsync(image, cancellationToken).AsTask();
+
+    public void Remove(StickerImage image) =>
+        _dbContext.StickerImages.Remove(image);
 }

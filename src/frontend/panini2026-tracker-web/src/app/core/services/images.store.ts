@@ -30,4 +30,10 @@ export class ImagesStoreService {
       next: () => this.load()
     });
   }
+
+  remove(stickerId: string): void {
+    this.http.delete(`${this.config.apiBaseUrl}/images/${stickerId}`).subscribe({
+      next: () => this.load()
+    });
+  }
 }

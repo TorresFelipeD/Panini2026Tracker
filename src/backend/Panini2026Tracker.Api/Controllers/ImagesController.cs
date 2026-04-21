@@ -34,4 +34,11 @@ public sealed class ImagesController : ControllerBase
         var result = await _imageService.UploadAsync(stickerId, stream, file.FileName, file.ContentType, cancellationToken);
         return Ok(result);
     }
+
+    [HttpDelete("{stickerId:guid}")]
+    public async Task<IActionResult> DeleteAsync(Guid stickerId, CancellationToken cancellationToken)
+    {
+        await _imageService.DeleteAsync(stickerId, cancellationToken);
+        return NoContent();
+    }
 }

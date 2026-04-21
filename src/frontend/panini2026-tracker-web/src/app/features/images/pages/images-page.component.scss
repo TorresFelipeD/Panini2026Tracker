@@ -46,6 +46,21 @@
   padding: 1rem;
 }
 
+.image-card button {
+  margin-top: 0.9rem;
+  width: 100%;
+  padding: 0.8rem 1rem;
+  border-radius: 0.9rem;
+  border: 1px solid rgba(255, 110, 110, 0.25);
+  background: rgba(120, 26, 26, 0.22);
+  color: #ffd9d9;
+  cursor: pointer;
+}
+
+.image-card button:hover {
+  background: rgba(160, 36, 36, 0.3);
+}
+
 .image-card p,
 .image-card small {
   color: var(--text-secondary);

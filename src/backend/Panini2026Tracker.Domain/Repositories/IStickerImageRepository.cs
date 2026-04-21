@@ -6,4 +6,5 @@ public interface IStickerImageRepository
 {
     Task<StickerImage?> GetByStickerIdAsync(Guid stickerId, CancellationToken cancellationToken);
     Task AddAsync(StickerImage image, CancellationToken cancellationToken);
+    void Remove(StickerImage image);
 }
