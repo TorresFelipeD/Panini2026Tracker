@@ -1,0 +1,51 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{2EC6FC01-5C16-492A-9EEB-02348F3F0F84}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "backend", "backend", "{E6233506-7655-49EE-A5FA-CF3AEC0BDD99}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Panini2026Tracker.Domain", "src\backend\Panini2026Tracker.Domain\Panini2026Tracker.Domain.csproj", "{5F824DE2-44B6-435F-BC21-0E74B9E81923}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Panini2026Tracker.Application", "src\backend\Panini2026Tracker.Application\Panini2026Tracker.Application.csproj", "{366B11E3-83A0-4705-9CC8-CC791F072509}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Panini2026Tracker.Infrastructure", "src\backend\Panini2026Tracker.Infrastructure\Panini2026Tracker.Infrastructure.csproj", "{F7F793D0-FFCB-4FC0-A6F8-74AB567EB590}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Panini2026Tracker.Api", "src\backend\Panini2026Tracker.Api\Panini2026Tracker.Api.csproj", "{A05A5309-0F0E-4E83-8962-DC024787C75A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5F824DE2-44B6-435F-BC21-0E74B9E81923}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F824DE2-44B6-435F-BC21-0E74B9E81923}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5F824DE2-44B6-435F-BC21-0E74B9E81923}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5F824DE2-44B6-435F-BC21-0E74B9E81923}.Release|Any CPU.Build.0 = Release|Any CPU
+		{366B11E3-83A0-4705-9CC8-CC791F072509}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{366B11E3-83A0-4705-9CC8-CC791F072509}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{366B11E3-83A0-4705-9CC8-CC791F072509}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{366B11E3-83A0-4705-9CC8-CC791F072509}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F7F793D0-FFCB-4FC0-A6F8-74AB567EB590}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F7F793D0-FFCB-4FC0-A6F8-74AB567EB590}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F7F793D0-FFCB-4FC0-A6F8-74AB567EB590}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F7F793D0-FFCB-4FC0-A6F8-74AB567EB590}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A05A5309-0F0E-4E83-8962-DC024787C75A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A05A5309-0F0E-4E83-8962-DC024787C75A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A05A5309-0F0E-4E83-8962-DC024787C75A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A05A5309-0F0E-4E83-8962-DC024787C75A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{E6233506-7655-49EE-A5FA-CF3AEC0BDD99} = {2EC6FC01-5C16-492A-9EEB-02348F3F0F84}
+		{5F824DE2-44B6-435F-BC21-0E74B9E81923} = {E6233506-7655-49EE-A5FA-CF3AEC0BDD99}
+		{366B11E3-83A0-4705-9CC8-CC791F072509} = {E6233506-7655-49EE-A5FA-CF3AEC0BDD99}
+		{F7F793D0-FFCB-4FC0-A6F8-74AB567EB590} = {E6233506-7655-49EE-A5FA-CF3AEC0BDD99}
+		{A05A5309-0F0E-4E83-8962-DC024787C75A} = {E6233506-7655-49EE-A5FA-CF3AEC0BDD99}
+	EndGlobalSection
+EndGlobal

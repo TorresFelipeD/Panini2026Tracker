@@ -1,0 +1,9 @@
+{
+  "AppMeta": {
+    "name": "Álbum Mundial 2026 Tracker",
+    "version": "1.0.0",
+    "license": "MIT",
+    "backendFramework": ".NET 8 Web API",
+    "frontendTarget": "Angular standalone SPA"
+  }
+}

@@ -1,0 +1,36 @@
+<section class="panel">
+  <header>
+    <div>
+      <h2>Láminas repetidas</h2>
+      <p>Registro, búsqueda y edición de cantidades repetidas.</p>
+    </div>
+  </header>
+
+  <div class="toolbar">
+    <input [(ngModel)]="search" (ngModelChange)="store.updateFilter(search, countryCode)" placeholder="Buscar repetidas">
+    <input [(ngModel)]="countryCode" (ngModelChange)="store.updateFilter(search, countryCode)" placeholder="Filtrar por país">
+  </div>
+
+  <div class="table">
+    <div class="row row--head">
+      <span>Código</span>
+      <span>Lámina</span>
+      <span>País</span>
+      <span>Cantidad</span>
+      <span>Acciones</span>
+    </div>
+
+    <div class="row" *ngFor="let item of store.items()">
+      <span>{{ item.stickerCode }}</span>
+      <span>{{ item.displayName }}</span>
+      <span>{{ item.countryName }}</span>
+      <span>
+        <input #qty type="number" min="0" [value]="item.quantity">
+      </span>
+      <span class="actions">
+        <button type="button" (click)="store.save(item.stickerId, +qty.value)">Guardar</button>
+        <button type="button" class="danger" (click)="store.remove(item.stickerId)">Eliminar</button>
+      </span>
+    </div>
+  </div>
+</section>

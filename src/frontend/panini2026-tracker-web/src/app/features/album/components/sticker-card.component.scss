@@ -1,0 +1,52 @@
+.sticker-card {
+  width: 100%;
+  display: grid;
+  gap: 0.75rem;
+  border: 1px solid var(--border-color);
+  background: var(--panel-background);
+  border-radius: 1rem;
+  padding: 0.75rem;
+  text-align: left;
+  color: var(--text-primary);
+}
+
+img,
+.state-box {
+  width: 100%;
+  aspect-ratio: 5 / 3;
+  object-fit: cover;
+  border-radius: 0.9rem;
+}
+
+.state-box {
+  display: grid;
+  place-items: center;
+  background: rgba(122, 132, 153, 0.18);
+  color: var(--text-secondary);
+  font-weight: 700;
+}
+
+.state-box--owned {
+  background: linear-gradient(135deg, rgba(83, 214, 157, 0.2), rgba(20, 115, 82, 0.7));
+  color: #dffcef;
+}
+
+.checkmark svg {
+  width: 2rem;
+  height: 2rem;
+  stroke: currentColor;
+  stroke-width: 2.2;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.sticker-meta {
+  display: grid;
+  gap: 0.25rem;
+}
+
+.sticker-meta span,
+.sticker-meta small {
+  color: var(--text-secondary);
+}

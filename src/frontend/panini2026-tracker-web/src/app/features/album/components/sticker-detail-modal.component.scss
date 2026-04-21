@@ -1,0 +1,97 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(4, 10, 18, 0.75);
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+  z-index: 30;
+}
+
+.modal {
+  width: min(980px, 100%);
+  border-radius: 1.5rem;
+  background: var(--panel-background);
+  border: 1px solid var(--border-color);
+  padding: 1.5rem;
+}
+
+header,
+footer,
+.field-grid,
+.toggle-row {
+  display: flex;
+  gap: 1rem;
+}
+
+header,
+footer {
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.preview img,
+.empty-preview {
+  width: 100%;
+  min-height: 280px;
+  border-radius: 1rem;
+  object-fit: cover;
+  background: rgba(122, 132, 153, 0.15);
+  display: grid;
+  place-items: center;
+}
+
+.details,
+.info-block dl {
+  display: grid;
+  gap: 1rem;
+}
+
+label span,
+.info-block h3,
+dt,
+header p {
+  color: var(--text-secondary);
+}
+
+input,
+textarea,
+button {
+  width: 100%;
+  border-radius: 0.9rem;
+  border: 1px solid var(--border-color);
+  background: rgba(9, 15, 24, 0.35);
+  color: var(--text-primary);
+  padding: 0.8rem 1rem;
+}
+
+.toggle-row button.active,
+.primary {
+  background: var(--accent-color);
+  color: #061013;
+  border-color: transparent;
+}
+
+dl div {
+  display: grid;
+  grid-template-columns: 110px 1fr;
+  gap: 1rem;
+}
+
+@media (max-width: 900px) {
+  .modal-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .field-grid,
+  .toggle-row {
+    flex-direction: column;
+  }
+}

@@ -1,0 +1,30 @@
+<section class="panel">
+  <header>
+    <div>
+      <h2>Asociar imágenes</h2>
+      <p>Carga local de imágenes vinculadas a una lámina específica.</p>
+    </div>
+  </header>
+
+  <div class="uploader">
+    <select [(ngModel)]="stickerId">
+      <option value="">Selecciona una lámina</option>
+      <option *ngFor="let sticker of albumStore.allStickers()" [value]="sticker.stickerId">
+        {{ sticker.stickerCode }} · {{ sticker.displayName }} · {{ sticker.countryName }}
+      </option>
+    </select>
+
+    <input type="file" accept="image/*" (change)="upload($event)">
+  </div>
+
+  <div class="gallery">
+    <article class="image-card" *ngFor="let item of imagesStore.items()">
+      <img [src]="item.imageUrl" [alt]="item.displayName">
+      <div>
+        <strong>{{ item.stickerCode }}</strong>
+        <p>{{ item.displayName }}</p>
+        <small>{{ item.countryName }} · {{ item.uploadedAtUtc | date:'medium' }}</small>
+      </div>
+    </article>
+  </div>
+</section>

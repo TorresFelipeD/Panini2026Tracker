@@ -1,0 +1,43 @@
+:root {
+  --background: #f3f5f8;
+  --background-accent: radial-gradient(circle at top left, rgba(25, 150, 135, 0.22), transparent 34%), radial-gradient(circle at bottom right, rgba(227, 172, 86, 0.18), transparent 28%);
+  --panel-background: rgba(255, 255, 255, 0.8);
+  --border-color: rgba(24, 43, 61, 0.12);
+  --text-primary: #112031;
+  --text-secondary: #597083;
+  --accent-color: #5de4c2;
+  --font-family: "Segoe UI", "Trebuchet MS", sans-serif;
+}
+
+:root[data-theme='dark'] {
+  --background: #08111c;
+  --panel-background: rgba(9, 18, 29, 0.82);
+  --border-color: rgba(147, 169, 191, 0.18);
+  --text-primary: #ecf5ff;
+  --text-secondary: #98adbf;
+  --accent-color: #6af1cf;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+  font-family: var(--font-family);
+  background: var(--background-accent), var(--background);
+  color: var(--text-primary);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}

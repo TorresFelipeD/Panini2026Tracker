@@ -1,0 +1,75 @@
+<ng-container *ngIf="sticker as selected">
+<div class="overlay" (click)="close.emit()">
+  <section class="modal" (click)="$event.stopPropagation()">
+    <header>
+      <div>
+        <p>{{ selected.countryName }}</p>
+        <h2>{{ selected.displayName }}</h2>
+      </div>
+      <button type="button" (click)="close.emit()">Cerrar</button>
+    </header>
+
+    <div class="modal-grid">
+      <div class="preview">
+        <img *ngIf="selected.imageUrl; else noImage" [src]="selected.imageUrl" [alt]="selected.displayName">
+        <ng-template #noImage>
+          <div class="empty-preview">Sin imagen asociada</div>
+        </ng-template>
+      </div>
+
+      <form class="details" (ngSubmit)="submit()">
+        <div class="field-grid">
+          <label>
+            <span>Identificador</span>
+            <input [value]="selected.stickerCode" readonly>
+          </label>
+
+          <label>
+            <span>Tipo</span>
+            <input [value]="selected.type" readonly>
+          </label>
+        </div>
+
+        <div class="toggle-row">
+          <button type="button" [class.active]="isOwned" (click)="isOwned = true">Marcar obtenida</button>
+          <button type="button" [class.active]="!isOwned" (click)="isOwned = false">Marcar faltante</button>
+        </div>
+
+        <label>
+          <span>Repetidas</span>
+          <input type="number" min="0" [(ngModel)]="duplicateCount" name="duplicateCount">
+        </label>
+
+        <label>
+          <span>Observaciones</span>
+          <textarea rows="4" [(ngModel)]="notes" name="notes"></textarea>
+        </label>
+
+        <div class="info-block" *ngIf="(selected.additionalInfo | keyvalue).length">
+          <h3>Información adicional</h3>
+          <dl>
+            <div *ngFor="let item of selected.additionalInfo | keyvalue">
+              <dt>{{ item.key }}</dt>
+              <dd>{{ item.value }}</dd>
+            </div>
+          </dl>
+        </div>
+
+        <div class="info-block" *ngIf="(selected.metadata | keyvalue).length">
+          <h3>Metadata</h3>
+          <dl>
+            <div *ngFor="let item of selected.metadata | keyvalue">
+              <dt>{{ item.key }}</dt>
+              <dd>{{ item.value }}</dd>
+            </div>
+          </dl>
+        </div>
+
+        <footer>
+          <button type="submit" class="primary">Guardar cambios</button>
+        </footer>
+      </form>
+    </div>
+  </section>
+</div>
+</ng-container>

@@ -1,0 +1,63 @@
+.panel,
+.row {
+  border: 1px solid var(--border-color);
+  background: var(--panel-background);
+  border-radius: 1.5rem;
+}
+
+.panel {
+  padding: 1.25rem;
+}
+
+.toolbar,
+.row {
+  display: grid;
+  gap: 1rem;
+  align-items: center;
+}
+
+.toolbar {
+  grid-template-columns: 2fr 1fr;
+  margin: 1rem 0;
+}
+
+.table {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.row {
+  grid-template-columns: 0.8fr 1.5fr 1fr 0.8fr 1fr;
+  padding: 0.9rem 1rem;
+}
+
+.row--head {
+  background: transparent;
+  border-style: dashed;
+  color: var(--text-secondary);
+}
+
+input,
+button {
+  padding: 0.75rem 1rem;
+  border-radius: 0.9rem;
+  border: 1px solid var(--border-color);
+  background: rgba(9, 15, 24, 0.28);
+  color: var(--text-primary);
+}
+
+.actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.danger {
+  border-color: rgba(255, 92, 92, 0.4);
+}
+
+@media (max-width: 900px) {
+  .toolbar,
+  .row {
+    grid-template-columns: 1fr;
+  }
+}

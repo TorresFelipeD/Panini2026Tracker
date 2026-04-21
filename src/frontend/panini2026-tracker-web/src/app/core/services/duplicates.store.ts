@@ -1,0 +1,46 @@
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { inject, Injectable, signal } from '@angular/core';
+import { APP_CONFIG } from '../tokens/app-config.token';
+import { DuplicateItem } from '../models/app.models';
+
+@Injectable({ providedIn: 'root' })
+export class DuplicatesStoreService {
+  private readonly http = inject(HttpClient);
+  private readonly config = inject(APP_CONFIG);
+
+  readonly items = signal<DuplicateItem[]>([]);
+  readonly search = signal('');
+  readonly countryCode = signal('');
+
+  load(): void {
+    let params = new HttpParams();
+    if (this.search()) {
+      params = params.set('search', this.search());
+    }
+    if (this.countryCode()) {
+      params = params.set('countryCode', this.countryCode());
+    }
+
+    this.http.get<DuplicateItem[]>(`${this.config.apiBaseUrl}/duplicates`, { params }).subscribe({
+      next: value => this.items.set(value)
+    });
+  }
+
+  updateFilter(search: string, countryCode: string): void {
+    this.search.set(search);
+    this.countryCode.set(countryCode);
+    this.load();
+  }
+
+  save(stickerId: string, quantity: number): void {
+    this.http.put(`${this.config.apiBaseUrl}/duplicates/${stickerId}`, { quantity }).subscribe({
+      next: () => this.load()
+    });
+  }
+
+  remove(stickerId: string): void {
+    this.http.delete(`${this.config.apiBaseUrl}/duplicates/${stickerId}`).subscribe({
+      next: () => this.load()
+    });
+  }
+}

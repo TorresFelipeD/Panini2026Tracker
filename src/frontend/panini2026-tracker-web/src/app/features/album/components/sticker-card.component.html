@@ -1,0 +1,22 @@
+<button type="button" class="sticker-card" (click)="select.emit(sticker.stickerId)">
+  <ng-container *ngIf="sticker.isOwned && sticker.imageUrl; else fallbackState">
+    <img [src]="sticker.imageUrl" [alt]="sticker.displayName">
+  </ng-container>
+
+  <ng-template #fallbackState>
+    <div class="state-box" [class.state-box--owned]="sticker.isOwned">
+      <span *ngIf="!sticker.isOwned">{{ sticker.stickerCode }}</span>
+      <span *ngIf="sticker.isOwned" class="checkmark">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M5 13.2 9.3 17.5 19 7.8" />
+        </svg>
+      </span>
+    </div>
+  </ng-template>
+
+  <div class="sticker-meta">
+    <strong>{{ sticker.stickerCode }}</strong>
+    <span>{{ sticker.displayName }}</span>
+    <small>{{ sticker.type }}<span *ngIf="sticker.duplicateCount > 0"> · repetidas {{ sticker.duplicateCount }}</span></small>
+  </div>
+</button>

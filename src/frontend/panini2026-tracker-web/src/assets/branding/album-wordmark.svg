@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 84" fill="none">
+  <rect width="360" height="84" rx="22" fill="#08111c"/>
+  <path d="M28 24h48v8H28zm0 18h48v8H28zm0 18h26v8H28z" fill="#6af1cf"/>
+  <text x="98" y="38" fill="#ecf5ff" font-size="22" font-family="Segoe UI, sans-serif">Álbum Mundial</text>
+  <text x="98" y="62" fill="#98adbf" font-size="18" font-family="Segoe UI, sans-serif">2026 Tracker</text>
+</svg>

@@ -1,0 +1,58 @@
+<section class="hero">
+  <div class="summary-card">
+    <span>Obtenidas</span>
+    <strong>{{ store.overview()?.summary?.owned ?? 0 }}</strong>
+  </div>
+  <div class="summary-card">
+    <span>Faltantes</span>
+    <strong>{{ store.overview()?.summary?.missing ?? 0 }}</strong>
+  </div>
+  <div class="summary-card">
+    <span>Progreso</span>
+    <strong>{{ store.overview()?.summary?.completionPercentage ?? 0 }}%</strong>
+  </div>
+</section>
+
+<section class="filters">
+  <input [(ngModel)]="search" (ngModelChange)="applyFilters()" placeholder="Buscar por código, nombre o país">
+  <input [(ngModel)]="countryCode" (ngModelChange)="applyFilters()" placeholder="Filtrar por país">
+  <select [(ngModel)]="isOwned" (ngModelChange)="applyFilters()">
+    <option value="">Estado</option>
+    <option value="true">Obtenidas</option>
+    <option value="false">Faltantes</option>
+  </select>
+  <select [(ngModel)]="hasImage" (ngModelChange)="applyFilters()">
+    <option value="">Imagen</option>
+    <option value="true">Con imagen</option>
+    <option value="false">Sin imagen</option>
+  </select>
+  <select [(ngModel)]="hasDuplicates" (ngModelChange)="applyFilters()">
+    <option value="">Repetidas</option>
+    <option value="true">Con repetidas</option>
+    <option value="false">Sin repetidas</option>
+  </select>
+</section>
+
+<section class="country-list" *ngIf="store.overview() as overview">
+  <article class="country-panel" *ngFor="let country of overview.countries">
+    <header>
+      <div>
+        <h2>{{ country.countryName }}</h2>
+        <p>{{ country.owned }} / {{ country.total }} obtenidas · {{ country.completionPercentage }}%</p>
+      </div>
+      <span>{{ country.countryCode }}</span>
+    </header>
+
+    <div class="sticker-grid">
+      <app-sticker-card
+        *ngFor="let sticker of country.stickers"
+        [sticker]="sticker"
+        (select)="store.openSticker($event)" />
+    </div>
+  </article>
+</section>
+
+<app-sticker-detail-modal
+  [sticker]="store.selectedSticker()"
+  (close)="store.closeSticker()"
+  (save)="store.saveSticker($event)" />

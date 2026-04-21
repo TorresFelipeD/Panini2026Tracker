@@ -1,0 +1,58 @@
+.panel,
+.log-item {
+  border: 1px solid var(--border-color);
+  background: var(--panel-background);
+  border-radius: 1.5rem;
+}
+
+.panel {
+  padding: 1.25rem;
+}
+
+header,
+.toolbar,
+.log-item__meta {
+  display: flex;
+  gap: 1rem;
+}
+
+header {
+  justify-content: space-between;
+  align-items: center;
+}
+
+.toolbar {
+  margin: 1rem 0;
+}
+
+.toolbar input,
+button {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  border-radius: 0.9rem;
+  border: 1px solid var(--border-color);
+  background: rgba(9, 15, 24, 0.28);
+  color: var(--text-primary);
+}
+
+.log-item {
+  padding: 1rem;
+  margin-bottom: 0.75rem;
+}
+
+.log-item__meta {
+  justify-content: space-between;
+  color: var(--text-secondary);
+  flex-wrap: wrap;
+}
+
+.danger {
+  width: auto;
+}
+
+@media (max-width: 900px) {
+  header,
+  .toolbar {
+    flex-direction: column;
+  }
+}

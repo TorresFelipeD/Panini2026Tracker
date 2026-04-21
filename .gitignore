@@ -1,0 +1,25 @@
+# Build
+bin/
+obj/
+dist/
+.angular/
+
+# Frontend
+node_modules/
+coverage/
+
+# IDE
+.vscode/
+.vs/
+*.user
+*.suo
+
+# Local data
+*.db
+*.db-shm
+*.db-wal
+src/backend/Panini2026Tracker.Api/wwwroot/uploads/
+
+# OS
+Thumbs.db
+.DS_Store

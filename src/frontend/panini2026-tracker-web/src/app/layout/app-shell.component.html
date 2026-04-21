@@ -1,0 +1,31 @@
+<div class="shell">
+  <header class="topbar">
+    <div>
+      <p class="eyebrow">Álbum Mundial 2026 Tracker</p>
+      <h1>Seguimiento local del álbum Panini 2026</h1>
+    </div>
+
+    <div class="topbar-actions">
+      <nav class="nav">
+        <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Álbum</a>
+        <a routerLink="/repetidas" routerLinkActive="active">Repetidas</a>
+        <a routerLink="/imagenes" routerLinkActive="active">Imágenes</a>
+        <a routerLink="/logs" routerLinkActive="active">Logs</a>
+      </nav>
+
+      <button type="button" class="theme-toggle" (click)="themeService.toggle()">
+        {{ themeService.isDark() ? 'Modo oscuro' : 'Modo claro' }}
+      </button>
+    </div>
+  </header>
+
+  <main class="content">
+    <router-outlet />
+  </main>
+
+  <footer class="footer">
+    <span>{{ metaService.meta()?.name ?? 'Álbum Mundial 2026 Tracker' }}</span>
+    <span>Versión {{ metaService.meta()?.version ?? '0.1.0' }}</span>
+    <span>Licencia {{ metaService.meta()?.license ?? 'MIT' }}</span>
+  </footer>
+</div>
