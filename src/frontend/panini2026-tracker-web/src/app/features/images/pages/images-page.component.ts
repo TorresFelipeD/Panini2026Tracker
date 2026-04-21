@@ -16,20 +16,25 @@ export class ImagesPageComponent {
   protected readonly imagesStore = inject(ImagesStoreService);
 
   protected stickerId = '';
+  protected selectedFile: File | null = null;
 
   constructor() {
     this.albumStore.load();
     this.imagesStore.load();
   }
 
-  protected upload(event: Event): void {
+  protected onFileSelected(event: Event): void {
     const input = event.target as HTMLInputElement;
-    const file = input.files?.[0];
-    if (!file || !this.stickerId) {
+    this.selectedFile = input.files?.[0] ?? null;
+  }
+
+  protected upload(input: HTMLInputElement): void {
+    if (!this.selectedFile || !this.stickerId) {
       return;
     }
 
-    this.imagesStore.upload(this.stickerId, file);
+    this.imagesStore.upload(this.stickerId, this.selectedFile);
+    this.selectedFile = null;
     input.value = '';
   }
 
@@ -40,5 +45,9 @@ export class ImagesPageComponent {
     }
 
     this.imagesStore.remove(stickerId);
+  }
+
+  protected get selectedFileName(): string {
+    return this.selectedFile?.name ?? 'Ningún archivo seleccionado';
   }
 }

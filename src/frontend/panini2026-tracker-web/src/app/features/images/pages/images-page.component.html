@@ -7,14 +7,25 @@
   </header>
 
   <div class="uploader">
-    <select [(ngModel)]="stickerId">
-      <option value="">Selecciona una lámina</option>
-      <option *ngFor="let sticker of albumStore.allStickers()" [value]="sticker.stickerId">
-        {{ sticker.stickerCode }} · {{ sticker.displayName }} · {{ sticker.countryName }}
-      </option>
-    </select>
+    <div class="uploader-fields">
+      <select [(ngModel)]="stickerId">
+        <option value="">Selecciona una lámina</option>
+        <option *ngFor="let sticker of albumStore.allStickers()" [value]="sticker.stickerId">
+          {{ sticker.stickerCode }} · {{ sticker.displayName }} · {{ sticker.countryName }}
+        </option>
+      </select>
 
-    <input type="file" accept="image/*" (change)="upload($event)">
+      <div class="upload-box">
+        <input #fileInput type="file" accept="image/*" class="sr-only-file" (change)="onFileSelected($event)">
+        <div class="upload-file-row">
+          <button type="button" class="secondary" (click)="fileInput.click()">Elegir archivo</button>
+          <span [class.upload-file-name--empty]="!selectedFile">{{ selectedFileName }}</span>
+        </div>
+      </div>
+    </div>
+
+    <p class="upload-help">Selecciona una imagen y luego confirma la carga para asociarla a la lámina elegida.</p>
+    <button type="button" class="primary upload-submit" [disabled]="!stickerId || !selectedFile" (click)="upload(fileInput)">Cargar imagen</button>
   </div>
 
   <div class="gallery">
