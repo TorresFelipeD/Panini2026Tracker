@@ -23,7 +23,17 @@
 
     <div class="filter-panel dropdown-scroll" *ngIf="openFilter === 'countryCode'">
       <div class="filter-panel-actions">
-        <input [(ngModel)]="countrySearch" placeholder="Buscar país">
+        <div class="filter-search">
+          <input [(ngModel)]="countrySearch" placeholder="Buscar país">
+          <button
+            type="button"
+            class="filter-search-clear"
+            *ngIf="countrySearch"
+            (click)="countrySearch = ''"
+            aria-label="Limpiar búsqueda de país">
+            ×
+          </button>
+        </div>
         <button type="button" class="filter-clear" (click)="clearCountries()">
           Deseleccionar todo
         </button>
