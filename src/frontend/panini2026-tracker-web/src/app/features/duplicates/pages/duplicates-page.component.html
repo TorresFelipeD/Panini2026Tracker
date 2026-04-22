@@ -29,7 +29,7 @@
       </span>
       <span class="actions">
         <button type="button" (click)="store.save(item.stickerId, +qty.value)">Guardar</button>
-        <button type="button" class="danger" (click)="store.remove(item.stickerId)">Eliminar</button>
+        <button type="button" class="danger" (click)="remove(item.stickerId, item.displayName)">Eliminar</button>
       </span>
     </div>
   </div>

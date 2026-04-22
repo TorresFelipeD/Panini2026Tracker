@@ -18,4 +18,13 @@ export class DuplicatesPageComponent {
   constructor() {
     this.store.load();
   }
+
+  protected remove(stickerId: string, displayName: string): void {
+    const confirmed = window.confirm(`¿Seguro que quieres eliminar la repetida de "${displayName}"?`);
+    if (!confirmed) {
+      return;
+    }
+
+    this.store.remove(stickerId);
+  }
 }
