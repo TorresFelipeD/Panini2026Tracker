@@ -1,3 +1,4 @@
+using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
 using Panini2026Tracker.Domain.Entities;
 using Panini2026Tracker.Domain.Repositories;
@@ -20,10 +21,10 @@ public sealed class SystemLogRepository : ISystemLogRepository
     public Task AddAsync(SystemLog log, CancellationToken cancellationToken) =>
         _dbContext.SystemLogs.AddAsync(log, cancellationToken).AsTask();
 
-    public Task<int> DeleteAsync(Func<SystemLog, bool> predicate, CancellationToken cancellationToken)
+    public async Task<int> DeleteAsync(Expression<Func<SystemLog, bool>> predicate, CancellationToken cancellationToken)
     {
-        var logs = _dbContext.SystemLogs.Where(log => predicate(log)).ToArray();
+        var logs = await _dbContext.SystemLogs.Where(predicate).ToArrayAsync(cancellationToken);
         _dbContext.SystemLogs.RemoveRange(logs);
-        return Task.FromResult(logs.Length);
+        return logs.Length;
     }
 }
