@@ -16,6 +16,18 @@
   backdrop-filter: blur(14px);
 }
 
+.topbar {
+  gap: 1.5rem;
+}
+
+.topbar-brand {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex: 1;
+}
+
 .eyebrow {
   margin: 0 0 0.35rem;
   text-transform: uppercase;
@@ -33,15 +45,18 @@ h1 {
   display: flex;
   gap: 1rem;
   align-items: center;
+  justify-content: flex-end;
 }
 
 .nav {
   display: flex;
   gap: 0.75rem;
   flex-wrap: wrap;
+  align-items: center;
 }
 
 .nav a,
+.nav-toggle,
 .theme-toggle {
   padding: 0.7rem 1rem;
   border-radius: 999px;
@@ -49,6 +64,50 @@ h1 {
   text-decoration: none;
   color: var(--text-primary);
   background: transparent;
+}
+
+.nav a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.8rem;
+}
+
+.topbar-mobile-actions {
+  display: none;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.nav-toggle {
+  display: none;
+  min-width: 3rem;
+  min-height: 3rem;
+  padding: 0;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 0.28rem;
+}
+
+.nav-toggle__line {
+  width: 1.1rem;
+  height: 0.12rem;
+  border-radius: 999px;
+  background: currentColor;
+  transition: transform 160ms ease, opacity 160ms ease;
+}
+
+.nav-toggle--open .nav-toggle__line:nth-child(1) {
+  transform: translateY(0.4rem) rotate(45deg);
+}
+
+.nav-toggle--open .nav-toggle__line:nth-child(2) {
+  opacity: 0;
+}
+
+.nav-toggle--open .nav-toggle__line:nth-child(3) {
+  transform: translateY(-0.4rem) rotate(-45deg);
 }
 
 .theme-toggle {
@@ -150,9 +209,57 @@ h1 {
   }
 
   .topbar,
-  .footer,
-  .topbar-actions {
+  .footer {
     flex-direction: column;
     align-items: stretch;
+  }
+
+  .topbar {
+    gap: 1rem;
+  }
+
+  .topbar-brand {
+    flex-wrap: wrap;
+  }
+
+  .topbar-mobile-actions {
+    display: flex;
+  }
+
+  .topbar-actions {
+    width: 100%;
+  }
+
+  .theme-toggle--desktop {
+    display: none;
+  }
+
+  .nav-toggle {
+    display: inline-flex;
+  }
+
+  .nav {
+    display: none;
+    width: 100%;
+    padding: 0.4rem;
+    border: 1px solid var(--border-color);
+    border-radius: 1.25rem;
+    background: color-mix(in srgb, var(--panel-background) 92%, transparent);
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .nav--open {
+    display: flex;
+  }
+
+  .nav a {
+    width: 100%;
+  }
+}
+
+@media (min-width: 901px) {
+  .nav {
+    display: flex !important;
   }
 }
