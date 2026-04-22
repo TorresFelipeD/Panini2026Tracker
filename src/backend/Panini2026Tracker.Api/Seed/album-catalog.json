@@ -3,6 +3,7 @@
     {
       "code": "CAN",
       "name": "Canadá",
+      "flagCode": "ca",
       "displayOrder": 1,
       "stickers": [
         { "stickerCode": "CAN-001", "displayName": "Escudo de Canadá", "type": "escudo", "imageReference": "catalog/canada/shield.svg", "isProvisional": true, "displayOrder": 1, "additionalInfo": { "nota": "Código provisional inspirado en álbumes Panini previos" }, "metadata": { "segment": "team-core" } },
@@ -15,6 +16,7 @@
     {
       "code": "MEX",
       "name": "México",
+      "flagCode": "mx",
       "displayOrder": 2,
       "stickers": [
         { "stickerCode": "MEX-001", "displayName": "Escudo de México", "type": "escudo", "imageReference": "catalog/mexico/shield.svg", "isProvisional": true, "displayOrder": 1, "additionalInfo": { "nota": "Código provisional" }, "metadata": { "segment": "team-core" } },
@@ -27,6 +29,7 @@
     {
       "code": "USA",
       "name": "Estados Unidos",
+      "flagCode": "us",
       "displayOrder": 3,
       "stickers": [
         { "stickerCode": "USA-001", "displayName": "Escudo de Estados Unidos", "type": "escudo", "imageReference": "catalog/usa/shield.svg", "isProvisional": true, "displayOrder": 1, "additionalInfo": { "nota": "Código provisional" }, "metadata": { "segment": "team-core" } },
@@ -39,6 +42,7 @@
     {
       "code": "ARG",
       "name": "Argentina",
+      "flagCode": "ar",
       "displayOrder": 4,
       "stickers": [
         { "stickerCode": "ARG-001", "displayName": "Escudo de Argentina", "type": "escudo", "imageReference": "catalog/argentina/shield.svg", "isProvisional": true, "displayOrder": 1, "additionalInfo": { "nota": "Código provisional" }, "metadata": { "segment": "team-core" } },
@@ -51,6 +55,7 @@
     {
       "code": "BRA",
       "name": "Brasil",
+      "flagCode": "br",
       "displayOrder": 5,
       "stickers": [
         { "stickerCode": "BRA-001", "displayName": "Escudo de Brasil", "type": "escudo", "imageReference": "catalog/brasil/shield.svg", "isProvisional": true, "displayOrder": 1, "additionalInfo": { "nota": "Código provisional" }, "metadata": { "segment": "team-core" } },
@@ -63,6 +68,7 @@
     {
       "code": "ENG",
       "name": "Inglaterra",
+      "flagCode": "gb-eng",
       "displayOrder": 6,
       "stickers": [
         { "stickerCode": "ENG-001", "displayName": "Escudo de Inglaterra", "type": "escudo", "imageReference": "catalog/england/shield.svg", "isProvisional": true, "displayOrder": 1, "additionalInfo": { "nota": "Código provisional" }, "metadata": { "segment": "team-core" } },
@@ -75,6 +81,7 @@
     {
       "code": "ESP",
       "name": "España",
+      "flagCode": "es",
       "displayOrder": 7,
       "stickers": [
         { "stickerCode": "ESP-001", "displayName": "Escudo de España", "type": "escudo", "imageReference": "catalog/spain/shield.svg", "isProvisional": true, "displayOrder": 1, "additionalInfo": { "nota": "Código provisional" }, "metadata": { "segment": "team-core" } },
@@ -87,6 +94,7 @@
     {
       "code": "FRA",
       "name": "Francia",
+      "flagCode": "fr",
       "displayOrder": 8,
       "stickers": [
         { "stickerCode": "FRA-001", "displayName": "Escudo de Francia", "type": "escudo", "imageReference": "catalog/france/shield.svg", "isProvisional": true, "displayOrder": 1, "additionalInfo": { "nota": "Código provisional" }, "metadata": { "segment": "team-core" } },
@@ -99,6 +107,7 @@
     {
       "code": "GER",
       "name": "Alemania",
+      "flagCode": "de",
       "displayOrder": 9,
       "stickers": [
         { "stickerCode": "GER-001", "displayName": "Escudo de Alemania", "type": "escudo", "imageReference": "catalog/germany/shield.svg", "isProvisional": true, "displayOrder": 1, "additionalInfo": { "nota": "Código provisional" }, "metadata": { "segment": "team-core" } },
@@ -111,6 +120,7 @@
     {
       "code": "JPN",
       "name": "Japón",
+      "flagCode": "jp",
       "displayOrder": 10,
       "stickers": [
         { "stickerCode": "JPN-001", "displayName": "Escudo de Japón", "type": "escudo", "imageReference": "catalog/japan/shield.svg", "isProvisional": true, "displayOrder": 1, "additionalInfo": { "nota": "Código provisional" }, "metadata": { "segment": "team-core" } },

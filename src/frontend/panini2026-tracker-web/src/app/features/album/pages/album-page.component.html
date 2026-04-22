@@ -17,6 +17,7 @@
   <input [(ngModel)]="search" (ngModelChange)="applyFilters()" placeholder="Buscar por código, nombre o país">
   <div class="filter-picker" [class.filter-picker--open]="openFilter === 'countryCode'">
     <button type="button" class="filter-trigger" (click)="toggleFilter('countryCode')">
+      <img class="country-flag" *ngIf="countryFlagUrl" [src]="countryFlagUrl" alt="" aria-hidden="true">
       <span>{{ countryLabel }}</span>
       <span class="dropdown-chevron" aria-hidden="true"></span>
     </button>
@@ -43,9 +44,12 @@
         type="button"
         class="filter-option"
         *ngFor="let option of countryOptions"
-        [class.filter-option--active]="countryCodes.includes(option.value)"
-        (click)="toggleCountry(option.value)">
-        {{ option.label }}
+      [class.filter-option--active]="countryCodes.includes(option.value)"
+      (click)="toggleCountry(option.value)">
+        <span class="country-option-label">
+          <img class="country-flag" [src]="option.flagUrl" alt="" aria-hidden="true">
+          <span>{{ option.label }}</span>
+        </span>
       </button>
 
       <div class="filter-empty" *ngIf="!countryOptions.length">
@@ -119,7 +123,10 @@
   <article class="country-panel" *ngFor="let country of overview.countries">
     <header>
       <div>
-        <h2>{{ country.countryName }}</h2>
+        <h2>
+          <img class="country-flag" [src]="getCountryFlagUrl(country.flagCode)" alt="" aria-hidden="true">
+          {{ country.countryName }}
+        </h2>
         <p>{{ country.owned }} / {{ country.total }} obtenidas · {{ country.completionPercentage }}%</p>
       </div>
       <span>{{ country.countryCode }}</span>

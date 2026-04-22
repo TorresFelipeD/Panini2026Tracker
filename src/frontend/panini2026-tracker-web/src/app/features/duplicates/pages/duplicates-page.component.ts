@@ -3,6 +3,7 @@ import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AlbumStoreService } from '../../../core/services/album.store';
 import { DuplicatesStoreService } from '../../../core/services/duplicates.store';
+import { getCountryFlagUrl } from '../../../core/utils/country-flag';
 
 @Component({
   selector: 'app-duplicates-page',
@@ -25,10 +26,11 @@ export class DuplicatesPageComponent {
     this.store.load();
   }
 
-  protected get countryOptions(): { value: string; label: string }[] {
+  protected get countryOptions(): { value: string; label: string; flagUrl: string }[] {
     const options = this.albumStore.availableCountries().map(country => ({
       value: country.countryCode,
-      label: country.countryName
+      label: country.countryName,
+      flagUrl: getCountryFlagUrl(country.flagCode)
     }));
 
     const search = this.countrySearch.trim().toLowerCase();
@@ -49,6 +51,12 @@ export class DuplicatesPageComponent {
     }
 
     return `${this.countryCodes.length} países`;
+  }
+
+  protected get countryFlagUrl(): string {
+    return this.countryCodes.length === 1
+      ? this.countryOptions.find(option => option.value === this.countryCodes[0])?.flagUrl ?? ''
+      : '';
   }
 
   protected toggleCountryPicker(): void {

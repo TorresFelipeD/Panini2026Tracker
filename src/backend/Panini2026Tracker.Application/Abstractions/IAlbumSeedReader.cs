@@ -10,6 +10,7 @@ public sealed record SeedCatalogDto(IReadOnlyCollection<SeedCountryDto> Countrie
 public sealed record SeedCountryDto(
     string Code,
     string Name,
+    string FlagCode,
     int DisplayOrder,
     IReadOnlyCollection<SeedStickerDto> Stickers);
 

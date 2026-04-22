@@ -25,6 +25,7 @@ public sealed class AppDbContext : DbContext
             builder.HasKey(country => country.Id);
             builder.Property(country => country.Code).HasMaxLength(10).IsRequired();
             builder.Property(country => country.Name).HasMaxLength(120).IsRequired();
+            builder.Property(country => country.FlagCode).HasColumnName("FlagEmoji").HasMaxLength(16).IsRequired();
             builder.HasIndex(country => country.Code).IsUnique();
         });
 

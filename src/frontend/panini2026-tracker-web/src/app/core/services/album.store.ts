@@ -29,7 +29,7 @@ export class AlbumStoreService {
 
   readonly filters = signal<AlbumFilters>(defaultFilters);
   readonly overview = signal<AlbumOverview | null>(null);
-  readonly availableCountries = signal<{ countryCode: string; countryName: string }[]>([]);
+  readonly availableCountries = signal<{ countryCode: string; countryName: string; flagCode: string }[]>([]);
   readonly selectedSticker = signal<StickerDetail | null>(null);
   readonly loading = signal(false);
 
@@ -65,7 +65,7 @@ export class AlbumStoreService {
         if (this.availableCountries().length === 0) {
           this.availableCountries.set(
             value.countries
-              .map(country => ({ countryCode: country.countryCode, countryName: country.countryName }))
+              .map(country => ({ countryCode: country.countryCode, countryName: country.countryName, flagCode: country.flagCode }))
               .sort((a, b) => a.countryName.localeCompare(b.countryName))
           );
         }
@@ -84,7 +84,7 @@ export class AlbumStoreService {
       next: value => {
         this.availableCountries.set(
           value.countries
-            .map(country => ({ countryCode: country.countryCode, countryName: country.countryName }))
+            .map(country => ({ countryCode: country.countryCode, countryName: country.countryName, flagCode: country.flagCode }))
             .sort((a, b) => a.countryName.localeCompare(b.countryName))
         );
       }

@@ -42,6 +42,7 @@ public sealed class AlbumService : IAlbumService
                     country.Id,
                     country.Code,
                     country.Name,
+                    country.FlagCode,
                     total,
                     owned,
                     total - owned,

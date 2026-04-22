@@ -16,6 +16,7 @@ public sealed class JsonAlbumSeedReader : IAlbumSeedReader
         return new SeedCatalogDto(root.Countries.Select(country => new SeedCountryDto(
             country.Code,
             country.Name,
+            country.FlagCode,
             country.DisplayOrder,
             country.Stickers.Select(sticker => new SeedStickerDto(
                 sticker.StickerCode,
@@ -37,6 +38,7 @@ public sealed class JsonAlbumSeedReader : IAlbumSeedReader
     {
         public string Code { get; set; } = string.Empty;
         public string Name { get; set; } = string.Empty;
+        public string FlagCode { get; set; } = string.Empty;
         public int DisplayOrder { get; set; }
         public List<JsonSeedSticker> Stickers { get; set; } = [];
     }

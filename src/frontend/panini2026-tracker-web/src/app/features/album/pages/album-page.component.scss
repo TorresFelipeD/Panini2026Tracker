@@ -125,6 +125,9 @@
 
 .country-panel h2 {
   margin: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
 }
 
 .country-panel span {

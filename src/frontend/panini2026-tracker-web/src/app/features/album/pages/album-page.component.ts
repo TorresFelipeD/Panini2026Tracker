@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AlbumStoreService } from '../../../core/services/album.store';
+import { getCountryFlagUrl } from '../../../core/utils/country-flag';
 import { StickerCardComponent } from '../components/sticker-card.component';
 import { StickerDetailModalComponent } from '../components/sticker-detail-modal.component';
 
@@ -80,10 +81,11 @@ export class AlbumPageComponent {
     return this.filterOptions[filter].find(option => option.value === this[filter])?.label ?? this.filterOptions[filter][0].label;
   }
 
-  protected get countryOptions(): { value: string; label: string }[] {
+  protected get countryOptions(): { value: string; label: string; flagUrl: string }[] {
     const options = this.store.availableCountries().map(country => ({
       value: country.countryCode,
-      label: country.countryName
+      label: country.countryName,
+      flagUrl: getCountryFlagUrl(country.flagCode)
     }));
 
     const search = this.countrySearch.trim().toLowerCase();
@@ -104,6 +106,16 @@ export class AlbumPageComponent {
     }
 
     return `${this.countryCodes.length} países`;
+  }
+
+  protected get countryFlagUrl(): string {
+    return this.countryCodes.length === 1
+      ? this.countryOptions.find(option => option.value === this.countryCodes[0])?.flagUrl ?? ''
+      : '';
+  }
+
+  protected getCountryFlagUrl(flagCode: string): string {
+    return getCountryFlagUrl(flagCode);
   }
 
   protected toggleCountry(code: string): void {

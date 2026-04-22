@@ -10,6 +10,7 @@
     <input [(ngModel)]="search" (ngModelChange)="store.updateFilter(search, countryCodes)" placeholder="Buscar repetidas">
     <div class="filter-picker" [class.filter-picker--open]="countryPickerOpen">
       <button type="button" class="filter-trigger" (click)="toggleCountryPicker()">
+        <img class="country-flag" *ngIf="countryFlagUrl" [src]="countryFlagUrl" alt="" aria-hidden="true">
         <span>{{ countryLabel }}</span>
         <span class="dropdown-chevron" aria-hidden="true"></span>
       </button>
@@ -36,9 +37,12 @@
           type="button"
           class="filter-option"
           *ngFor="let option of countryOptions"
-          [class.filter-option--active]="countryCodes.includes(option.value)"
-          (click)="toggleCountry(option.value)">
-          {{ option.label }}
+        [class.filter-option--active]="countryCodes.includes(option.value)"
+        (click)="toggleCountry(option.value)">
+          <span class="country-option-label">
+            <img class="country-flag" [src]="option.flagUrl" alt="" aria-hidden="true">
+            <span>{{ option.label }}</span>
+          </span>
         </button>
 
         <div class="filter-empty" *ngIf="!countryOptions.length">

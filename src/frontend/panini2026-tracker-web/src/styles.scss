@@ -215,6 +215,22 @@ select option {
   color: var(--text-secondary);
 }
 
+.country-option-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+.country-flag {
+  display: inline-block;
+  width: 1.35rem;
+  min-width: 1.35rem;
+  height: 1rem;
+  border-radius: 0.2rem;
+  object-fit: cover;
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--border-color) 75%, transparent);
+}
+
 .filter-empty {
   padding: 0.9rem 0.85rem;
   color: var(--text-secondary);

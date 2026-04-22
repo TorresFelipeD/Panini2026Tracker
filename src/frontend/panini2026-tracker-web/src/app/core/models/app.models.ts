@@ -14,6 +14,7 @@ export interface CountryAlbum {
   countryId: string;
   countryCode: string;
   countryName: string;
+  flagCode: string;
   total: number;
   owned: number;
   missing: number;
