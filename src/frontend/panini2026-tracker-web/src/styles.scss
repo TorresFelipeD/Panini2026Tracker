@@ -6,6 +6,9 @@
   --text-primary: #112031;
   --text-secondary: #597083;
   --accent-color: #5de4c2;
+  --field-background: rgba(255, 255, 255, 0.72);
+  --field-background-hover: rgba(255, 255, 255, 0.9);
+  --select-option-background: #f6fbfc;
   --font-family: "Segoe UI", "Trebuchet MS", sans-serif;
 }
 
@@ -16,6 +19,9 @@
   --text-primary: #ecf5ff;
   --text-secondary: #98adbf;
   --accent-color: #6af1cf;
+  --field-background: rgba(9, 15, 24, 0.28);
+  --field-background-hover: rgba(13, 24, 37, 0.58);
+  --select-option-background: #11202d;
 }
 
 html,
@@ -40,4 +46,69 @@ textarea {
 
 button {
   cursor: pointer;
+}
+
+select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  padding-right: 3rem;
+  background-color: var(--field-background);
+  background-image:
+    linear-gradient(45deg, transparent 50%, var(--accent-color) 50%),
+    linear-gradient(135deg, var(--accent-color) 50%, transparent 50%);
+  background-position:
+    calc(100% - 1.2rem) calc(50% - 0.15rem),
+    calc(100% - 0.85rem) calc(50% - 0.15rem);
+  background-size: 0.4rem 0.4rem, 0.4rem 0.4rem;
+  background-repeat: no-repeat;
+  transition: border-color 160ms ease, box-shadow 160ms ease, background-color 160ms ease;
+}
+
+select:hover {
+  background-color: var(--field-background-hover);
+}
+
+select:focus {
+  outline: none;
+  border-color: color-mix(in srgb, var(--accent-color) 45%, var(--border-color) 55%);
+  box-shadow: 0 0 0 0.18rem color-mix(in srgb, var(--accent-color) 14%, transparent);
+}
+
+select option {
+  background: var(--select-option-background);
+  color: var(--text-primary);
+}
+
+.picker-options {
+  scrollbar-width: thin;
+  scrollbar-color: color-mix(in srgb, var(--accent-color) 55%, #365061 45%) transparent;
+}
+
+.picker-options::-webkit-scrollbar {
+  width: 0.7rem;
+}
+
+.picker-options::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.picker-options::-webkit-scrollbar-thumb {
+  border-radius: 999px;
+  border: 0.18rem solid transparent;
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--accent-color) 65%, #7fb2a3 35%),
+    color-mix(in srgb, var(--accent-color) 32%, #243847 68%)
+  );
+  background-clip: padding-box;
+}
+
+.picker-options::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--accent-color) 78%, #a7f1dd 22%),
+    color-mix(in srgb, var(--accent-color) 45%, #2d4454 55%)
+  );
+  background-clip: padding-box;
 }
