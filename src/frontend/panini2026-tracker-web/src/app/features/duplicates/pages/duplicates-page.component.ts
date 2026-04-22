@@ -16,6 +16,7 @@ export class DuplicatesPageComponent {
   protected readonly store = inject(DuplicatesStoreService);
   protected search = '';
   protected countryCodes: string[] = [];
+  protected countrySearch = '';
   protected countryPickerOpen = false;
 
   constructor() {
@@ -25,10 +26,17 @@ export class DuplicatesPageComponent {
   }
 
   protected get countryOptions(): { value: string; label: string }[] {
-    return this.albumStore.availableCountries().map(country => ({
+    const options = this.albumStore.availableCountries().map(country => ({
       value: country.countryCode,
       label: country.countryName
     }));
+
+    const search = this.countrySearch.trim().toLowerCase();
+    if (!search) {
+      return options;
+    }
+
+    return options.filter(option => option.label.toLowerCase().includes(search));
   }
 
   protected get countryLabel(): string {
@@ -45,6 +53,9 @@ export class DuplicatesPageComponent {
 
   protected toggleCountryPicker(): void {
     this.countryPickerOpen = !this.countryPickerOpen;
+    if (!this.countryPickerOpen) {
+      this.countrySearch = '';
+    }
   }
 
   protected toggleCountry(value: string): void {
@@ -56,6 +67,12 @@ export class DuplicatesPageComponent {
 
   protected closeCountryPicker(): void {
     this.countryPickerOpen = false;
+    this.countrySearch = '';
+  }
+
+  protected clearCountries(): void {
+    this.countryCodes = [];
+    this.store.updateFilter(this.search, this.countryCodes);
   }
 
   protected remove(stickerId: string, displayName: string): void {

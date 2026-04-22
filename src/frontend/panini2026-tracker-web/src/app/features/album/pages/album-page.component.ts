@@ -34,6 +34,7 @@ export class AlbumPageComponent {
 
   protected search = '';
   protected countryCodes: string[] = [];
+  protected countrySearch = '';
   protected isOwned = '';
   protected hasImage = '';
   protected hasDuplicates = '';
@@ -56,6 +57,9 @@ export class AlbumPageComponent {
 
   protected toggleFilter(filter: 'countryCode' | 'isOwned' | 'hasImage' | 'hasDuplicates'): void {
     this.openFilter = this.openFilter === filter ? null : filter;
+    if (this.openFilter !== 'countryCode') {
+      this.countrySearch = '';
+    }
   }
 
   protected selectFilter(
@@ -69,6 +73,7 @@ export class AlbumPageComponent {
 
   protected closeFilters(): void {
     this.openFilter = null;
+    this.countrySearch = '';
   }
 
   protected getFilterLabel(filter: 'isOwned' | 'hasImage' | 'hasDuplicates'): string {
@@ -76,10 +81,17 @@ export class AlbumPageComponent {
   }
 
   protected get countryOptions(): { value: string; label: string }[] {
-    return this.store.availableCountries().map(country => ({
+    const options = this.store.availableCountries().map(country => ({
       value: country.countryCode,
       label: country.countryName
     }));
+
+    const search = this.countrySearch.trim().toLowerCase();
+    if (!search) {
+      return options;
+    }
+
+    return options.filter(option => option.label.toLowerCase().includes(search));
   }
 
   protected get countryLabel(): string {
@@ -98,6 +110,11 @@ export class AlbumPageComponent {
     this.countryCodes = this.countryCodes.includes(code)
       ? this.countryCodes.filter(current => current !== code)
       : [...this.countryCodes, code];
+    this.applyFilters();
+  }
+
+  protected clearCountries(): void {
+    this.countryCodes = [];
     this.applyFilters();
   }
 }

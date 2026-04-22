@@ -22,6 +22,13 @@
     </button>
 
     <div class="filter-panel dropdown-scroll" *ngIf="openFilter === 'countryCode'">
+      <div class="filter-panel-actions">
+        <input [(ngModel)]="countrySearch" placeholder="Buscar país">
+        <button type="button" class="filter-clear" (click)="clearCountries()">
+          Deseleccionar todo
+        </button>
+      </div>
+
       <button
         type="button"
         class="filter-option"
@@ -30,6 +37,10 @@
         (click)="toggleCountry(option.value)">
         {{ option.label }}
       </button>
+
+      <div class="filter-empty" *ngIf="!countryOptions.length">
+        No se encontraron países.
+      </div>
     </div>
   </div>
   <div class="filter-picker" [class.filter-picker--open]="openFilter === 'isOwned'">
