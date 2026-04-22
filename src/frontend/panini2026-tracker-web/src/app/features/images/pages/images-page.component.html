@@ -11,7 +11,7 @@
       <div class="picker" [class.picker--open]="pickerOpen">
         <button type="button" class="picker-trigger" (click)="togglePicker()">
           <span>{{ selectedStickerLabel }}</span>
-          <span class="picker-chevron" aria-hidden="true">⌄</span>
+          <span class="picker-chevron" aria-hidden="true"></span>
         </button>
 
         <div class="picker-panel" *ngIf="pickerOpen">

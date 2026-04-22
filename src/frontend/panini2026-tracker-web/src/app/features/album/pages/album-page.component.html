@@ -16,22 +16,67 @@
 <section class="filters">
   <input [(ngModel)]="search" (ngModelChange)="applyFilters()" placeholder="Buscar por código, nombre o país">
   <input [(ngModel)]="countryCode" (ngModelChange)="applyFilters()" placeholder="Filtrar por país">
-  <select [(ngModel)]="isOwned" (ngModelChange)="applyFilters()">
-    <option value="">Estado</option>
-    <option value="true">Obtenidas</option>
-    <option value="false">Faltantes</option>
-  </select>
-  <select [(ngModel)]="hasImage" (ngModelChange)="applyFilters()">
-    <option value="">Imagen</option>
-    <option value="true">Con imagen</option>
-    <option value="false">Sin imagen</option>
-  </select>
-  <select [(ngModel)]="hasDuplicates" (ngModelChange)="applyFilters()">
-    <option value="">Repetidas</option>
-    <option value="true">Con repetidas</option>
-    <option value="false">Sin repetidas</option>
-  </select>
+  <div class="filter-picker" [class.filter-picker--open]="openFilter === 'isOwned'">
+    <button type="button" class="filter-trigger" (click)="toggleFilter('isOwned')">
+      <span>{{ getFilterLabel('isOwned') }}</span>
+      <span class="filter-chevron" aria-hidden="true"></span>
+    </button>
+
+    <div class="filter-panel" *ngIf="openFilter === 'isOwned'">
+      <button
+        type="button"
+        class="filter-option"
+        *ngFor="let option of filterOptions.isOwned"
+        [class.filter-option--active]="isOwned === option.value"
+        (click)="selectFilter('isOwned', option.value)">
+        {{ option.label }}
+      </button>
+    </div>
+  </div>
+
+  <div class="filter-picker" [class.filter-picker--open]="openFilter === 'hasImage'">
+    <button type="button" class="filter-trigger" (click)="toggleFilter('hasImage')">
+      <span>{{ getFilterLabel('hasImage') }}</span>
+      <span class="filter-chevron" aria-hidden="true"></span>
+    </button>
+
+    <div class="filter-panel" *ngIf="openFilter === 'hasImage'">
+      <button
+        type="button"
+        class="filter-option"
+        *ngFor="let option of filterOptions.hasImage"
+        [class.filter-option--active]="hasImage === option.value"
+        (click)="selectFilter('hasImage', option.value)">
+        {{ option.label }}
+      </button>
+    </div>
+  </div>
+
+  <div class="filter-picker" [class.filter-picker--open]="openFilter === 'hasDuplicates'">
+    <button type="button" class="filter-trigger" (click)="toggleFilter('hasDuplicates')">
+      <span>{{ getFilterLabel('hasDuplicates') }}</span>
+      <span class="filter-chevron" aria-hidden="true"></span>
+    </button>
+
+    <div class="filter-panel" *ngIf="openFilter === 'hasDuplicates'">
+      <button
+        type="button"
+        class="filter-option"
+        *ngFor="let option of filterOptions.hasDuplicates"
+        [class.filter-option--active]="hasDuplicates === option.value"
+        (click)="selectFilter('hasDuplicates', option.value)">
+        {{ option.label }}
+      </button>
+    </div>
+  </div>
 </section>
+
+<button
+  type="button"
+  class="filter-backdrop"
+  *ngIf="openFilter"
+  (click)="closeFilters()"
+  aria-label="Cerrar filtros"></button>
 
 <section class="country-list" *ngIf="store.overview() as overview">
   <article class="country-panel" *ngFor="let country of overview.countries">

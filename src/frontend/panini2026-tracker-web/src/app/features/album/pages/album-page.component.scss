@@ -34,13 +34,87 @@
 }
 
 .filters input,
-.filters select {
+.filter-picker {
+  width: 100%;
+}
+
+.filters input,
+.filter-trigger {
   width: 100%;
   padding: 0.85rem 1rem;
   border-radius: 1rem;
   border: 1px solid var(--border-color);
   background: var(--field-background);
   color: var(--text-primary);
+}
+
+.filter-picker {
+  position: relative;
+}
+
+.filter-trigger {
+  min-height: 3.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  text-align: left;
+}
+
+.filter-picker--open .filter-trigger {
+  border-color: color-mix(in srgb, var(--accent-color) 45%, var(--border-color) 55%);
+  box-shadow: 0 0 0 0.15rem color-mix(in srgb, var(--accent-color) 12%, transparent);
+}
+
+.filter-chevron {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1rem;
+  height: 1rem;
+  border-right: 0.12rem solid var(--accent-color);
+  border-bottom: 0.12rem solid var(--accent-color);
+  transform: translateY(-0.08rem) rotate(45deg);
+}
+
+.filter-panel {
+  position: absolute;
+  top: calc(100% + 0.55rem);
+  left: 0;
+  right: 0;
+  z-index: 30;
+  display: grid;
+  gap: 0.35rem;
+  padding: 0.55rem;
+  border-radius: 1rem;
+  border: 1px solid color-mix(in srgb, var(--accent-color) 18%, var(--border-color) 82%);
+  background: color-mix(in srgb, var(--panel-background) 88%, var(--field-background-hover) 12%);
+  box-shadow: 0 1rem 2.4rem rgba(0, 0, 0, 0.16);
+  backdrop-filter: blur(14px);
+}
+
+.filter-option {
+  width: 100%;
+  padding: 0.8rem 0.85rem;
+  border: 1px solid transparent;
+  border-radius: 0.85rem;
+  background: color-mix(in srgb, var(--panel-background) 84%, var(--field-background-hover) 16%);
+  color: var(--text-primary);
+  text-align: left;
+}
+
+.filter-option:hover,
+.filter-option--active {
+  border-color: color-mix(in srgb, var(--accent-color) 22%, var(--border-color) 78%);
+  background: color-mix(in srgb, var(--accent-color) 10%, var(--panel-background) 90%);
+}
+
+.filter-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  border: 0;
+  background: transparent;
 }
 
 .country-list {
