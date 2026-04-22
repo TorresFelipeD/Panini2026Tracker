@@ -51,6 +51,24 @@ h1 {
   background: transparent;
 }
 
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+.theme-toggle-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.2rem;
+  height: 1.2rem;
+  color: var(--accent-color);
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
 .nav a.active {
   background: var(--accent-color);
   color: #061013;

@@ -14,7 +14,8 @@
       </nav>
 
       <button type="button" class="theme-toggle" (click)="themeService.toggle()">
-        {{ themeService.isDark() ? 'Modo oscuro' : 'Modo claro' }}
+        <span class="theme-toggle-icon" aria-hidden="true">{{ themeService.isDark() ? '☀' : '◐' }}</span>
+        {{ themeService.isDark() ? 'Modo claro' : 'Modo oscuro' }}
       </button>
     </div>
   </header>
