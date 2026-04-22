@@ -13,9 +13,20 @@
         <a routerLink="/logs" routerLinkActive="active">Logs</a>
       </nav>
 
-      <button type="button" class="theme-toggle" (click)="themeService.toggle()">
-        <span class="theme-toggle-icon" aria-hidden="true">{{ themeService.isDark() ? '☀' : '◐' }}</span>
-        {{ themeService.isDark() ? 'Modo claro' : 'Modo oscuro' }}
+      <button
+        type="button"
+        class="theme-toggle"
+        [class.theme-toggle--dark]="themeService.isDark()"
+        [attr.aria-label]="themeService.isDark() ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro'"
+        [attr.title]="themeService.isDark() ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro'"
+        (click)="themeService.toggle()">
+        <span class="theme-toggle-track" aria-hidden="true">
+          <span class="theme-toggle-glyph theme-toggle-glyph--sun">☀</span>
+          <span class="theme-toggle-glyph theme-toggle-glyph--moon">☾</span>
+          <span class="theme-toggle-thumb">
+            <span>{{ themeService.isDark() ? '☾' : '☀' }}</span>
+          </span>
+        </span>
       </button>
     </div>
   </header>

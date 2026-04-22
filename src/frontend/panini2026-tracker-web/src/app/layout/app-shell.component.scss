@@ -52,21 +52,80 @@ h1 {
 }
 
 .theme-toggle {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.55rem;
+  padding: 0;
+  min-width: auto;
+  border: 0;
+  justify-content: center;
+  background: transparent;
+  transition: box-shadow 160ms ease;
 }
 
-.theme-toggle-icon {
+.theme-toggle:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 0.18rem color-mix(in srgb, var(--accent-color) 14%, transparent);
+}
+
+.theme-toggle-track {
+  position: relative;
+  width: 4.2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 0.5rem;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--border-color) 75%, var(--accent-color) 25%);
+  background: color-mix(in srgb, var(--panel-background) 78%, var(--accent-color) 22%);
+  overflow: hidden;
+}
+
+.theme-toggle-glyph,
+.theme-toggle-thumb {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 1.2rem;
-  height: 1.2rem;
-  color: var(--accent-color);
-  font-size: 1rem;
-  font-weight: 700;
+}
+
+.theme-toggle-glyph {
+  position: relative;
+  z-index: 1;
+  width: 1rem;
+  height: 1rem;
+  font-size: 0.95rem;
   line-height: 1;
+}
+
+.theme-toggle-glyph--sun {
+  color: #d79217;
+}
+
+.theme-toggle-glyph--moon {
+  color: #2a4c68;
+}
+
+.theme-toggle-thumb {
+  position: absolute;
+  top: 0.18rem;
+  left: 0.18rem;
+  z-index: 2;
+  width: 1.6rem;
+  height: 1.6rem;
+  border-radius: 50%;
+  background: linear-gradient(180deg, #fff6d6, #ffd77a);
+  color: #7d5500;
+  box-shadow: 0 0.45rem 0.8rem rgba(24, 43, 61, 0.16);
+  transition: transform 180ms ease, background 180ms ease, color 180ms ease, box-shadow 180ms ease;
+}
+
+.theme-toggle--dark .theme-toggle-track {
+  background: color-mix(in srgb, var(--panel-background) 92%, #09111b 8%);
+}
+
+.theme-toggle--dark .theme-toggle-thumb {
+  transform: translateX(2.22rem);
+  background: linear-gradient(180deg, #d9f1ff, #8fb3d5);
+  color: #143251;
+  box-shadow: 0 0.45rem 0.8rem rgba(0, 0, 0, 0.28);
 }
 
 .nav a.active {
