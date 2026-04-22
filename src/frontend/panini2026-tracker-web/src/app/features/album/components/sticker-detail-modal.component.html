@@ -37,7 +37,17 @@
 
         <label>
           <span>Repetidas</span>
-          <input type="number" min="0" [(ngModel)]="duplicateCount" name="duplicateCount">
+          <div class="number-field">
+            <input type="number" min="0" [(ngModel)]="duplicateCount" name="duplicateCount">
+            <div class="number-stepper">
+              <button type="button" class="number-step" (click)="incrementDuplicates()">
+                <span aria-hidden="true"></span>
+              </button>
+              <button type="button" class="number-step number-step--down" (click)="decrementDuplicates()">
+                <span aria-hidden="true"></span>
+              </button>
+            </div>
+          </div>
         </label>
 
         <label>

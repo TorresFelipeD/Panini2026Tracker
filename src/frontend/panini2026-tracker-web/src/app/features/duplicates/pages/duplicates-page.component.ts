@@ -27,4 +27,12 @@ export class DuplicatesPageComponent {
 
     this.store.remove(stickerId);
   }
+
+  protected increment(qty: HTMLInputElement): void {
+    qty.stepUp();
+  }
+
+  protected decrement(qty: HTMLInputElement): void {
+    qty.stepDown();
+  }
 }

@@ -19,7 +19,7 @@
   <div class="filter-picker" [class.filter-picker--open]="openFilter === 'isOwned'">
     <button type="button" class="filter-trigger" (click)="toggleFilter('isOwned')">
       <span>{{ getFilterLabel('isOwned') }}</span>
-      <span class="filter-chevron" aria-hidden="true"></span>
+      <span class="dropdown-chevron" aria-hidden="true"></span>
     </button>
 
     <div class="filter-panel" *ngIf="openFilter === 'isOwned'">
@@ -37,7 +37,7 @@
   <div class="filter-picker" [class.filter-picker--open]="openFilter === 'hasImage'">
     <button type="button" class="filter-trigger" (click)="toggleFilter('hasImage')">
       <span>{{ getFilterLabel('hasImage') }}</span>
-      <span class="filter-chevron" aria-hidden="true"></span>
+      <span class="dropdown-chevron" aria-hidden="true"></span>
     </button>
 
     <div class="filter-panel" *ngIf="openFilter === 'hasImage'">
@@ -55,7 +55,7 @@
   <div class="filter-picker" [class.filter-picker--open]="openFilter === 'hasDuplicates'">
     <button type="button" class="filter-trigger" (click)="toggleFilter('hasDuplicates')">
       <span>{{ getFilterLabel('hasDuplicates') }}</span>
-      <span class="filter-chevron" aria-hidden="true"></span>
+      <span class="dropdown-chevron" aria-hidden="true"></span>
     </button>
 
     <div class="filter-panel" *ngIf="openFilter === 'hasDuplicates'">

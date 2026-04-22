@@ -46,6 +46,45 @@ button {
   color: var(--text-primary);
 }
 
+.number-field {
+  position: relative;
+}
+
+.number-field input {
+  padding-right: 3rem;
+}
+
+.number-stepper {
+  position: absolute;
+  top: 0.35rem;
+  right: 0.4rem;
+  bottom: 0.35rem;
+  display: grid;
+  gap: 0.25rem;
+}
+
+.number-step {
+  width: 1.5rem;
+  min-width: 1.5rem;
+  padding: 0;
+  display: grid;
+  place-items: center;
+  border-radius: 0.45rem;
+  background: color-mix(in srgb, var(--field-background-hover) 84%, var(--panel-background) 16%);
+}
+
+.number-step span {
+  width: 0.42rem;
+  height: 0.42rem;
+  border-top: 0.11rem solid var(--accent-color);
+  border-right: 0.11rem solid var(--accent-color);
+  transform: rotate(-45deg) translateY(0.04rem);
+}
+
+.number-step--down span {
+  transform: rotate(135deg) translateY(0.04rem);
+}
+
 .actions {
   display: flex;
   gap: 0.5rem;

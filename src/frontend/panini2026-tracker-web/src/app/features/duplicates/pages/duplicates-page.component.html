@@ -25,7 +25,17 @@
       <span>{{ item.displayName }}</span>
       <span>{{ item.countryName }}</span>
       <span>
-        <input #qty type="number" min="0" [value]="item.quantity">
+        <div class="number-field">
+          <input #qty type="number" min="0" [value]="item.quantity">
+          <div class="number-stepper">
+            <button type="button" class="number-step" (click)="increment(qty)">
+              <span aria-hidden="true"></span>
+            </button>
+            <button type="button" class="number-step number-step--down" (click)="decrement(qty)">
+              <span aria-hidden="true"></span>
+            </button>
+          </div>
+        </div>
       </span>
       <span class="actions">
         <button type="button" (click)="store.save(item.stickerId, +qty.value)">Guardar</button>

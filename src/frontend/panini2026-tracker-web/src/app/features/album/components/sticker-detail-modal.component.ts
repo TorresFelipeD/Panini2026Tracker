@@ -39,4 +39,12 @@ export class StickerDetailModalComponent implements OnChanges {
       notes: this.notes
     });
   }
+
+  protected incrementDuplicates(): void {
+    this.duplicateCount += 1;
+  }
+
+  protected decrementDuplicates(): void {
+    this.duplicateCount = Math.max(0, this.duplicateCount - 1);
+  }
 }
