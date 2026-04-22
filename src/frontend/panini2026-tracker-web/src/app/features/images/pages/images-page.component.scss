@@ -28,8 +28,9 @@
   min-height: 3.5rem;
   border-radius: 0.9rem;
   border: 1px solid var(--border-color);
-  background: rgba(9, 15, 24, 0.28);
+  background: var(--field-background);
   color: var(--text-primary);
+  transition: border-color 160ms ease, box-shadow 160ms ease, background-color 160ms ease;
 }
 
 .picker-trigger,
@@ -52,13 +53,14 @@
   text-align: left;
 }
 
-.picker--open .picker-trigger {
-  box-shadow: none;
-}
-
 .picker--open {
   border-color: color-mix(in srgb, var(--accent-color) 45%, var(--border-color) 55%);
   box-shadow: 0 0 0 0.15rem color-mix(in srgb, var(--accent-color) 12%, transparent);
+}
+
+.picker:hover,
+.upload-box:hover {
+  background: var(--field-background-hover);
 }
 
 .picker-trigger span:first-child {
@@ -71,7 +73,6 @@
 .picker-chevron {
   color: var(--accent-color);
   font-size: 1.2rem;
-  transform: translateY(-0.05rem);
 }
 
 .picker-panel {
@@ -83,7 +84,7 @@
   padding: 0.8rem;
   border-radius: 1rem;
   border: 1px solid color-mix(in srgb, var(--accent-color) 18%, var(--border-color) 82%);
-  background: color-mix(in srgb, var(--panel-background) 92%, #081116 8%);
+  background: color-mix(in srgb, var(--panel-background) 88%, var(--field-background-hover) 12%);
   box-shadow: 0 1.2rem 2.7rem rgba(0, 0, 0, 0.22);
   backdrop-filter: blur(18px);
 }
@@ -107,7 +108,7 @@
   padding: 0.8rem 0.9rem;
   border: 1px solid transparent;
   border-radius: 0.85rem;
-  background: rgba(255, 255, 255, 0.03);
+  background: color-mix(in srgb, var(--panel-background) 84%, var(--field-background-hover) 16%);
   color: var(--text-primary);
   text-align: left;
   cursor: pointer;
@@ -125,7 +126,7 @@
 
 .picker-option:hover {
   border-color: color-mix(in srgb, var(--accent-color) 22%, var(--border-color) 78%);
-  background: rgba(106, 241, 207, 0.08);
+  background: color-mix(in srgb, var(--accent-color) 10%, var(--panel-background) 90%);
 }
 
 .picker-empty {
@@ -210,13 +211,12 @@
 .uploader .secondary {
   width: auto;
   white-space: nowrap;
-  background: rgba(122, 132, 153, 0.18);
+  background: color-mix(in srgb, var(--field-background-hover) 88%, var(--panel-background) 12%);
   border-color: var(--border-color);
   color: var(--text-primary);
 }
 
 .gallery {
-  position: relative;
   z-index: 1;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
