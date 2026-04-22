@@ -3,6 +3,7 @@ import { computed, inject, Injectable, signal } from '@angular/core';
 import { AlbumOverview, StickerDetail } from '../models/app.models';
 import { APP_CONFIG } from '../tokens/app-config.token';
 import { resolveImageUrl } from '../utils/image-url';
+import { ToastService } from './toast.service';
 
 export interface AlbumFilters {
   search: string;
@@ -24,6 +25,7 @@ const defaultFilters: AlbumFilters = {
 export class AlbumStoreService {
   private readonly http = inject(HttpClient);
   private readonly config = inject(APP_CONFIG);
+  private readonly toastService = inject(ToastService);
 
   readonly filters = signal<AlbumFilters>(defaultFilters);
   readonly overview = signal<AlbumOverview | null>(null);
@@ -87,6 +89,10 @@ export class AlbumStoreService {
           imageUrl: resolveImageUrl(this.config.apiBaseUrl, value.imageUrl)
         });
         this.load();
+        this.toastService.success(`Lámina ${value.stickerCode} actualizada correctamente.`);
+      },
+      error: () => {
+        this.toastService.error('No se pudieron guardar los cambios de la lámina.');
       }
     });
   }

@@ -2,11 +2,13 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
 import { APP_CONFIG } from '../tokens/app-config.token';
 import { SystemLogItem } from '../models/app.models';
+import { ToastService } from './toast.service';
 
 @Injectable({ providedIn: 'root' })
 export class LogsStoreService {
   private readonly http = inject(HttpClient);
   private readonly config = inject(APP_CONFIG);
+  private readonly toastService = inject(ToastService);
 
   readonly items = signal<SystemLogItem[]>([]);
   readonly category = signal('');
@@ -43,7 +45,15 @@ export class LogsStoreService {
       level: this.level(),
       search: this.search()
     }).subscribe({
-      next: () => this.load()
+      next: value => {
+        this.load();
+        this.toastService.success(
+          value > 0 ? `${value} log(s) eliminados correctamente.` : 'No había logs para eliminar con esos filtros.'
+        );
+      },
+      error: () => {
+        this.toastService.error('No se pudieron eliminar los logs.');
+      }
     });
   }
 }

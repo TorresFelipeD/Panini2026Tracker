@@ -2,11 +2,13 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
 import { APP_CONFIG } from '../tokens/app-config.token';
 import { DuplicateItem } from '../models/app.models';
+import { ToastService } from './toast.service';
 
 @Injectable({ providedIn: 'root' })
 export class DuplicatesStoreService {
   private readonly http = inject(HttpClient);
   private readonly config = inject(APP_CONFIG);
+  private readonly toastService = inject(ToastService);
 
   readonly items = signal<DuplicateItem[]>([]);
   readonly search = signal('');
@@ -34,13 +36,25 @@ export class DuplicatesStoreService {
 
   save(stickerId: string, quantity: number): void {
     this.http.put(`${this.config.apiBaseUrl}/duplicates/${stickerId}`, { quantity }).subscribe({
-      next: () => this.load()
+      next: () => {
+        this.load();
+        this.toastService.success(`Cantidad de repetidas actualizada a ${Math.max(0, quantity)}.`);
+      },
+      error: () => {
+        this.toastService.error('No se pudo actualizar la cantidad de repetidas.');
+      }
     });
   }
 
   remove(stickerId: string): void {
     this.http.delete(`${this.config.apiBaseUrl}/duplicates/${stickerId}`).subscribe({
-      next: () => this.load()
+      next: () => {
+        this.load();
+        this.toastService.success('Repetida eliminada correctamente.');
+      },
+      error: () => {
+        this.toastService.error('No se pudo eliminar la repetida.');
+      }
     });
   }
 }

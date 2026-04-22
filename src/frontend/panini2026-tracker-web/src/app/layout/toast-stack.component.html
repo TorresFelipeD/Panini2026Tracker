@@ -1,0 +1,6 @@
+<div class="toast-stack" *ngIf="toastService.items().length">
+  <article class="toast" *ngFor="let item of toastService.items()" [class]="'toast toast--' + item.variant">
+    <p>{{ item.message }}</p>
+    <button type="button" (click)="toastService.dismiss(item.id)" aria-label="Cerrar notificación">×</button>
+  </article>
+</div>
