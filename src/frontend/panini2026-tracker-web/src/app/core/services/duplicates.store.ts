@@ -12,25 +12,25 @@ export class DuplicatesStoreService {
 
   readonly items = signal<DuplicateItem[]>([]);
   readonly search = signal('');
-  readonly countryCode = signal('');
+  readonly countryCodes = signal<string[]>([]);
 
   load(): void {
     let params = new HttpParams();
     if (this.search()) {
       params = params.set('search', this.search());
     }
-    if (this.countryCode()) {
-      params = params.set('countryCode', this.countryCode());
-    }
+    this.countryCodes().forEach(countryCode => {
+      params = params.append('countryCodes', countryCode);
+    });
 
     this.http.get<DuplicateItem[]>(`${this.config.apiBaseUrl}/duplicates`, { params }).subscribe({
       next: value => this.items.set(value)
     });
   }
 
-  updateFilter(search: string, countryCode: string): void {
+  updateFilter(search: string, countryCodes: string[]): void {
     this.search.set(search);
-    this.countryCode.set(countryCode);
+    this.countryCodes.set(countryCodes);
     this.load();
   }
 

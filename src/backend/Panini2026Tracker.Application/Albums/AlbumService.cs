@@ -81,7 +81,7 @@ public sealed class AlbumService : IAlbumService
             .ToLowerInvariant();
 
         return (string.IsNullOrWhiteSpace(filter.Search) || blob.Contains(filter.Search.Trim().ToLowerInvariant()))
-            && (string.IsNullOrWhiteSpace(filter.CountryCode) || sticker.Country.Code.Equals(filter.CountryCode.Trim(), StringComparison.OrdinalIgnoreCase))
+            && (filter.CountryCodes.Count == 0 || filter.CountryCodes.Contains(sticker.Country.Code, StringComparer.OrdinalIgnoreCase))
             && (!filter.IsOwned.HasValue || owned == filter.IsOwned.Value)
             && (!filter.HasImage.HasValue || hasImage == filter.HasImage.Value)
             && (!filter.HasDuplicates.HasValue || hasDuplicates == filter.HasDuplicates.Value);

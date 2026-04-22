@@ -7,9 +7,32 @@
   </header>
 
   <div class="toolbar">
-    <input [(ngModel)]="search" (ngModelChange)="store.updateFilter(search, countryCode)" placeholder="Buscar repetidas">
-    <input [(ngModel)]="countryCode" (ngModelChange)="store.updateFilter(search, countryCode)" placeholder="Filtrar por país">
+    <input [(ngModel)]="search" (ngModelChange)="store.updateFilter(search, countryCodes)" placeholder="Buscar repetidas">
+    <div class="filter-picker" [class.filter-picker--open]="countryPickerOpen">
+      <button type="button" class="filter-trigger" (click)="toggleCountryPicker()">
+        <span>{{ countryLabel }}</span>
+        <span class="dropdown-chevron" aria-hidden="true"></span>
+      </button>
+
+      <div class="filter-panel dropdown-scroll" *ngIf="countryPickerOpen">
+        <button
+          type="button"
+          class="filter-option"
+          *ngFor="let option of countryOptions"
+          [class.filter-option--active]="countryCodes.includes(option.value)"
+          (click)="toggleCountry(option.value)">
+          {{ option.label }}
+        </button>
+      </div>
+    </div>
   </div>
+
+  <button
+    type="button"
+    class="filter-backdrop"
+    *ngIf="countryPickerOpen"
+    (click)="closeCountryPicker()"
+    aria-label="Cerrar selector de país"></button>
 
   <div class="table">
     <div class="row row--head">

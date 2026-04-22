@@ -46,6 +46,68 @@ button {
   color: var(--text-primary);
 }
 
+.filter-picker {
+  position: relative;
+  width: 100%;
+}
+
+.filter-trigger {
+  width: 100%;
+  min-height: 3.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  text-align: left;
+}
+
+.filter-picker--open .filter-trigger {
+  border-color: color-mix(in srgb, var(--accent-color) 45%, var(--border-color) 55%);
+  box-shadow: 0 0 0 0.15rem color-mix(in srgb, var(--accent-color) 12%, transparent);
+}
+
+.filter-panel {
+  position: absolute;
+  top: calc(100% + 0.55rem);
+  left: 0;
+  right: 0;
+  z-index: 30;
+  display: grid;
+  gap: 0.35rem;
+  padding: 0.55rem;
+  max-height: 16rem;
+  overflow: auto;
+  border-radius: 1rem;
+  border: 1px solid color-mix(in srgb, var(--accent-color) 18%, var(--border-color) 82%);
+  background: color-mix(in srgb, var(--panel-background) 88%, var(--field-background-hover) 12%);
+  box-shadow: 0 1rem 2.4rem rgba(0, 0, 0, 0.16);
+  backdrop-filter: blur(14px);
+}
+
+.filter-option {
+  width: 100%;
+  padding: 0.8rem 0.85rem;
+  border: 1px solid transparent;
+  border-radius: 0.85rem;
+  background: color-mix(in srgb, var(--panel-background) 84%, var(--field-background-hover) 16%);
+  color: var(--text-primary);
+  text-align: left;
+}
+
+.filter-option:hover,
+.filter-option--active {
+  border-color: color-mix(in srgb, var(--accent-color) 22%, var(--border-color) 78%);
+  background: color-mix(in srgb, var(--accent-color) 10%, var(--panel-background) 90%);
+}
+
+.filter-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  border: 0;
+  background: transparent;
+}
+
 .number-field {
   position: relative;
 }

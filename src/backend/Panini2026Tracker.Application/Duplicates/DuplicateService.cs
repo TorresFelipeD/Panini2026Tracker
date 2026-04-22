@@ -32,8 +32,8 @@ public sealed class DuplicateService : IDuplicateService
         return countries
             .SelectMany(country => country.Stickers)
             .Where(sticker => (sticker.DuplicateEntry?.Quantity ?? 0) > 0)
-            .Where(sticker => string.IsNullOrWhiteSpace(filter.CountryCode)
-                || sticker.Country.Code.Equals(filter.CountryCode.Trim(), StringComparison.OrdinalIgnoreCase))
+            .Where(sticker => filter.CountryCodes.Count == 0
+                || filter.CountryCodes.Contains(sticker.Country.Code, StringComparer.OrdinalIgnoreCase))
             .Where(sticker => string.IsNullOrWhiteSpace(filter.Search)
                 || $"{sticker.StickerCode} {sticker.DisplayName} {sticker.Country.Name}".Contains(filter.Search.Trim(), StringComparison.OrdinalIgnoreCase))
             .OrderBy(sticker => sticker.Country.Name)

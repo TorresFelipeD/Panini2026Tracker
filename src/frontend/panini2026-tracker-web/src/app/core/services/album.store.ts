@@ -7,7 +7,7 @@ import { ToastService } from './toast.service';
 
 export interface AlbumFilters {
   search: string;
-  countryCode: string;
+  countryCodes: string[];
   isOwned: string;
   hasImage: string;
   hasDuplicates: string;
@@ -15,7 +15,7 @@ export interface AlbumFilters {
 
 const defaultFilters: AlbumFilters = {
   search: '',
-  countryCode: '',
+  countryCodes: [],
   isOwned: '',
   hasImage: '',
   hasDuplicates: ''
@@ -29,6 +29,7 @@ export class AlbumStoreService {
 
   readonly filters = signal<AlbumFilters>(defaultFilters);
   readonly overview = signal<AlbumOverview | null>(null);
+  readonly availableCountries = signal<{ countryCode: string; countryName: string }[]>([]);
   readonly selectedSticker = signal<StickerDetail | null>(null);
   readonly loading = signal(false);
 
@@ -40,7 +41,11 @@ export class AlbumStoreService {
     const filters = this.filters();
 
     Object.entries(filters).forEach(([key, value]) => {
-      if (value !== '') {
+      if (Array.isArray(value)) {
+        value.forEach(item => {
+          params = params.append(key, item);
+        });
+      } else if (value !== '') {
         params = params.set(key, value);
       }
     });
@@ -57,9 +62,32 @@ export class AlbumStoreService {
             }))
           }))
         });
+        if (this.availableCountries().length === 0) {
+          this.availableCountries.set(
+            value.countries
+              .map(country => ({ countryCode: country.countryCode, countryName: country.countryName }))
+              .sort((a, b) => a.countryName.localeCompare(b.countryName))
+          );
+        }
         this.loading.set(false);
       },
       error: () => this.loading.set(false)
+    });
+  }
+
+  loadCountryCatalog(): void {
+    if (this.availableCountries().length > 0) {
+      return;
+    }
+
+    this.http.get<AlbumOverview>(`${this.config.apiBaseUrl}/album`).subscribe({
+      next: value => {
+        this.availableCountries.set(
+          value.countries
+            .map(country => ({ countryCode: country.countryCode, countryName: country.countryName }))
+            .sort((a, b) => a.countryName.localeCompare(b.countryName))
+        );
+      }
     });
   }
 

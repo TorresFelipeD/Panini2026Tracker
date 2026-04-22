@@ -2,7 +2,7 @@ namespace Panini2026Tracker.Application.Albums;
 
 public sealed record AlbumFilter(
     string? Search,
-    string? CountryCode,
+    IReadOnlyCollection<string> CountryCodes,
     bool? IsOwned,
     bool? HasImage,
     bool? HasDuplicates);

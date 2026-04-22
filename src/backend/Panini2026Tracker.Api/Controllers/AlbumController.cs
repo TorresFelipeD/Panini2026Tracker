@@ -17,13 +17,13 @@ public sealed class AlbumController : ControllerBase
     [HttpGet]
     public async Task<ActionResult<AlbumOverviewDto>> GetAsync(
         [FromQuery] string? search,
-        [FromQuery] string? countryCode,
+        [FromQuery] string[]? countryCodes,
         [FromQuery] bool? isOwned,
         [FromQuery] bool? hasImage,
         [FromQuery] bool? hasDuplicates,
         CancellationToken cancellationToken)
     {
-        var result = await _albumService.GetOverviewAsync(new AlbumFilter(search, countryCode, isOwned, hasImage, hasDuplicates), cancellationToken);
+        var result = await _albumService.GetOverviewAsync(new AlbumFilter(search, countryCodes ?? [], isOwned, hasImage, hasDuplicates), cancellationToken);
         return Ok(result);
     }
 }

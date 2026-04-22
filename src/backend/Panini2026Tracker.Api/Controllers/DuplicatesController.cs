@@ -16,9 +16,9 @@ public sealed class DuplicatesController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult<IReadOnlyCollection<DuplicateItemDto>>> GetAsync([FromQuery] string? search, [FromQuery] string? countryCode, CancellationToken cancellationToken)
+    public async Task<ActionResult<IReadOnlyCollection<DuplicateItemDto>>> GetAsync([FromQuery] string? search, [FromQuery] string[]? countryCodes, CancellationToken cancellationToken)
     {
-        var result = await _duplicateService.GetAllAsync(new DuplicateFilter(search, countryCode), cancellationToken);
+        var result = await _duplicateService.GetAllAsync(new DuplicateFilter(search, countryCodes ?? []), cancellationToken);
         return Ok(result);
     }
 

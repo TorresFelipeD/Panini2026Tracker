@@ -9,7 +9,7 @@ public sealed record DuplicateItemDto(
     int Quantity,
     bool IsOwned);
 
-public sealed record DuplicateFilter(string? Search, string? CountryCode);
+public sealed record DuplicateFilter(string? Search, IReadOnlyCollection<string> CountryCodes);
 
 public sealed record UpdateDuplicateCommand(int Quantity);
 
