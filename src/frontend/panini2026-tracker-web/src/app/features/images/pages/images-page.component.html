@@ -8,12 +8,30 @@
 
   <div class="uploader">
     <div class="uploader-fields">
-      <select [(ngModel)]="stickerId">
-        <option value="">Selecciona una lámina</option>
-        <option *ngFor="let sticker of albumStore.allStickers()" [value]="sticker.stickerId">
-          {{ sticker.stickerCode }} · {{ sticker.displayName }} · {{ sticker.countryName }}
-        </option>
-      </select>
+      <div class="picker" [class.picker--open]="pickerOpen">
+        <button type="button" class="picker-trigger" (click)="togglePicker()">
+          <span>{{ selectedStickerLabel }}</span>
+          <span class="picker-chevron" aria-hidden="true">⌄</span>
+        </button>
+
+        <div class="picker-panel" *ngIf="pickerOpen">
+          <input
+            type="text"
+            [(ngModel)]="pickerSearch"
+            placeholder="Buscar por código, lámina o país">
+
+          <div class="picker-options">
+            <button type="button" class="picker-option" *ngFor="let sticker of filteredStickers" (click)="selectSticker(sticker)">
+              <strong>{{ sticker.stickerCode }}</strong>
+              <span>{{ sticker.displayName }} · {{ sticker.countryName }}</span>
+            </button>
+
+            <div class="picker-empty" *ngIf="!filteredStickers.length">
+              No se encontraron láminas con ese criterio.
+            </div>
+          </div>
+        </div>
+      </div>
 
       <div class="upload-box">
         <input #fileInput type="file" accept="image/*" class="sr-only-file" (change)="onFileSelected($event)">
@@ -27,6 +45,8 @@
     <p class="upload-help">Selecciona una imagen y luego confirma la carga para asociarla a la lámina elegida.</p>
     <button type="button" class="primary upload-submit" [disabled]="!stickerId || !selectedFile" (click)="upload(fileInput)">Cargar imagen</button>
   </div>
+
+  <button type="button" class="picker-backdrop" *ngIf="pickerOpen" (click)="closePicker()" aria-label="Cerrar selector"></button>
 
   <div class="gallery">
     <article class="image-card" *ngFor="let item of imagesStore.items()">

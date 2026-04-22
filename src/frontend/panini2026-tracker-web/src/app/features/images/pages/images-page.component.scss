@@ -21,20 +21,130 @@
   gap: 1rem;
 }
 
-.uploader select,
+.picker,
 .upload-box {
+  position: relative;
   width: 100%;
   min-height: 3.5rem;
-  padding: 0.8rem 1rem;
   border-radius: 0.9rem;
   border: 1px solid var(--border-color);
   background: rgba(9, 15, 24, 0.28);
   color: var(--text-primary);
 }
 
+.picker-trigger,
+.picker-panel input {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  border-radius: 0.9rem;
+  border: 0;
+  background: transparent;
+  color: var(--text-primary);
+}
+
+.picker-trigger {
+  min-height: 3.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  cursor: pointer;
+  text-align: left;
+}
+
+.picker--open .picker-trigger {
+  box-shadow: none;
+}
+
+.picker--open {
+  border-color: color-mix(in srgb, var(--accent-color) 45%, var(--border-color) 55%);
+  box-shadow: 0 0 0 0.15rem color-mix(in srgb, var(--accent-color) 12%, transparent);
+}
+
+.picker-trigger span:first-child {
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.picker-chevron {
+  color: var(--accent-color);
+  font-size: 1.2rem;
+  transform: translateY(-0.05rem);
+}
+
+.picker-panel {
+  position: absolute;
+  top: calc(100% + 0.55rem);
+  left: 0;
+  right: 0;
+  z-index: 30;
+  padding: 0.8rem;
+  border-radius: 1rem;
+  border: 1px solid color-mix(in srgb, var(--accent-color) 18%, var(--border-color) 82%);
+  background: color-mix(in srgb, var(--panel-background) 92%, #081116 8%);
+  box-shadow: 0 1.2rem 2.7rem rgba(0, 0, 0, 0.22);
+  backdrop-filter: blur(18px);
+}
+
+.picker-panel input {
+  margin-bottom: 0.7rem;
+}
+
+.picker-options {
+  max-height: 18rem;
+  overflow: auto;
+  display: grid;
+  gap: 0.45rem;
+}
+
+.picker-option {
+  width: 100%;
+  display: grid;
+  gap: 0.15rem;
+  padding: 0.8rem 0.9rem;
+  border: 1px solid transparent;
+  border-radius: 0.85rem;
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--text-primary);
+  text-align: left;
+  cursor: pointer;
+}
+
+.picker-option strong {
+  color: var(--accent-color);
+  font-size: 0.92rem;
+}
+
+.picker-option span {
+  color: var(--text-secondary);
+  line-height: 1.35;
+}
+
+.picker-option:hover {
+  border-color: color-mix(in srgb, var(--accent-color) 22%, var(--border-color) 78%);
+  background: rgba(106, 241, 207, 0.08);
+}
+
+.picker-empty {
+  padding: 1rem 0.9rem;
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+}
+
 .upload-box {
   display: grid;
   align-items: center;
+  padding: 0.35rem 0.9rem;
+}
+
+.picker-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  border: 0;
+  background: transparent;
 }
 
 .sr-only-file {
@@ -105,6 +215,8 @@
 }
 
 .gallery {
+  position: relative;
+  z-index: 1;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
   gap: 1rem;
