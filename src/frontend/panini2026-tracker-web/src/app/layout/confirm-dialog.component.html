@@ -1,0 +1,37 @@
+<div
+  class="confirm-dialog-backdrop"
+  *ngIf="confirmDialogService.current() as dialog"
+  (click)="confirmDialogService.dismiss()">
+  <section
+    class="confirm-dialog"
+    [class.confirm-dialog--danger]="dialog.variant === 'danger'"
+    role="alertdialog"
+    aria-modal="true"
+    [attr.aria-labelledby]="'confirm-dialog-title-' + dialog.id"
+    [attr.aria-describedby]="'confirm-dialog-message-' + dialog.id"
+    (click)="$event.stopPropagation()">
+    <div class="confirm-dialog__header">
+      <span class="confirm-dialog__icon" aria-hidden="true">
+        {{ dialog.variant === 'danger' ? '!' : '?' }}
+      </span>
+
+      <div>
+        <h2 [id]="'confirm-dialog-title-' + dialog.id">{{ dialog.title }}</h2>
+        <p [id]="'confirm-dialog-message-' + dialog.id">{{ dialog.message }}</p>
+      </div>
+    </div>
+
+    <div class="confirm-dialog__actions">
+      <button type="button" class="confirm-dialog__button confirm-dialog__button--ghost" (click)="confirmDialogService.dismiss()">
+        {{ dialog.cancelLabel }}
+      </button>
+      <button
+        type="button"
+        class="confirm-dialog__button"
+        [class.confirm-dialog__button--danger]="dialog.variant === 'danger'"
+        (click)="confirmDialogService.accept()">
+        {{ dialog.confirmLabel }}
+      </button>
+    </div>
+  </section>
+</div>

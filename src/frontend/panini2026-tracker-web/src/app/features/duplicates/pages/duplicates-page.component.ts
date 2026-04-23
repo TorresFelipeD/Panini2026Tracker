@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AlbumStoreService } from '../../../core/services/album.store';
+import { ConfirmDialogService } from '../../../core/services/confirm-dialog.service';
 import { DuplicatesStoreService } from '../../../core/services/duplicates.store';
 import { getCountryFlagUrl } from '../../../core/utils/country-flag';
 
@@ -15,6 +16,7 @@ import { getCountryFlagUrl } from '../../../core/utils/country-flag';
 export class DuplicatesPageComponent {
   protected readonly albumStore = inject(AlbumStoreService);
   protected readonly store = inject(DuplicatesStoreService);
+  private readonly confirmDialogService = inject(ConfirmDialogService);
   protected search = '';
   protected countryCodes: string[] = [];
   protected countrySearch = '';
@@ -83,8 +85,14 @@ export class DuplicatesPageComponent {
     this.store.updateFilter(this.search, this.countryCodes);
   }
 
-  protected remove(stickerId: string, displayName: string): void {
-    const confirmed = window.confirm(`¿Seguro que quieres eliminar la repetida de "${displayName}"?`);
+  protected async remove(stickerId: string, displayName: string): Promise<void> {
+    const confirmed = await this.confirmDialogService.confirm({
+      title: 'Eliminar repetida',
+      message: `¿Seguro que quieres eliminar la repetida de "${displayName}"?`,
+      confirmLabel: 'Eliminar',
+      cancelLabel: 'Cancelar',
+      variant: 'danger'
+    });
     if (!confirmed) {
       return;
     }

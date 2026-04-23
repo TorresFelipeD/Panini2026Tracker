@@ -1,6 +1,7 @@
 import { CommonModule, DatePipe } from '@angular/common';
 import { Component, computed, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { ConfirmDialogService } from '../../../core/services/confirm-dialog.service';
 import { LogsStoreService } from '../../../core/services/logs.store';
 
 @Component({
@@ -15,6 +16,7 @@ export class LogsPageComponent {
   private readonly defaultLevels = ['info', 'warning', 'error'];
 
   protected readonly store = inject(LogsStoreService);
+  private readonly confirmDialogService = inject(ConfirmDialogService);
   protected readonly filterOptions = {
     category: [{ value: '', label: 'Todas las categorías' }],
     level: [{ value: '', label: 'Todos los niveles' }]
@@ -34,8 +36,16 @@ export class LogsPageComponent {
     this.store.load();
   }
 
-  protected confirmDelete(): void {
-    if (window.confirm('¿Deseas eliminar los logs que coinciden con los filtros actuales?')) {
+  protected async confirmDelete(): Promise<void> {
+    const confirmed = await this.confirmDialogService.confirm({
+      title: 'Eliminar logs filtrados',
+      message: '¿Deseas eliminar los logs que coinciden con los filtros actuales? Esta acción no se puede deshacer.',
+      confirmLabel: 'Eliminar',
+      cancelLabel: 'Cancelar',
+      variant: 'danger'
+    });
+
+    if (confirmed) {
       this.store.deleteFiltered();
     }
   }

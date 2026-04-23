@@ -3,6 +3,7 @@ import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { StickerCard } from '../../../core/models/app.models';
 import { AlbumStoreService } from '../../../core/services/album.store';
+import { ConfirmDialogService } from '../../../core/services/confirm-dialog.service';
 import { ImagesStoreService } from '../../../core/services/images.store';
 
 @Component({
@@ -15,6 +16,7 @@ import { ImagesStoreService } from '../../../core/services/images.store';
 export class ImagesPageComponent {
   protected readonly albumStore = inject(AlbumStoreService);
   protected readonly imagesStore = inject(ImagesStoreService);
+  private readonly confirmDialogService = inject(ConfirmDialogService);
 
   protected stickerId = '';
   protected selectedFile: File | null = null;
@@ -45,16 +47,20 @@ export class ImagesPageComponent {
     this.pickerOpen = false;
   }
 
-  protected upload(input: HTMLInputElement): void {
+  protected async upload(input: HTMLInputElement): Promise<void> {
     if (!this.selectedFile || !this.stickerId) {
       return;
     }
 
     const existingImage = this.imagesStore.items().find(item => item.stickerId === this.stickerId);
     if (existingImage) {
-      const confirmed = window.confirm(
-        `La lámina "${existingImage.displayName}" ya tiene una imagen. ¿Quieres sobreescribirla?`
-      );
+      const confirmed = await this.confirmDialogService.confirm({
+        title: 'Sobrescribir imagen',
+        message: `La lámina "${existingImage.displayName}" ya tiene una imagen asociada. ¿Quieres reemplazarla?`,
+        confirmLabel: 'Sobrescribir',
+        cancelLabel: 'Cancelar',
+        variant: 'danger'
+      });
 
       if (!confirmed) {
         return;
@@ -67,8 +73,14 @@ export class ImagesPageComponent {
     input.value = '';
   }
 
-  protected remove(stickerId: string, displayName: string): void {
-    const confirmed = window.confirm(`¿Seguro que quieres eliminar la imagen de "${displayName}"?`);
+  protected async remove(stickerId: string, displayName: string): Promise<void> {
+    const confirmed = await this.confirmDialogService.confirm({
+      title: 'Eliminar imagen',
+      message: `¿Seguro que quieres eliminar la imagen de "${displayName}"?`,
+      confirmLabel: 'Eliminar',
+      cancelLabel: 'Cancelar',
+      variant: 'danger'
+    });
     if (!confirmed) {
       return;
     }

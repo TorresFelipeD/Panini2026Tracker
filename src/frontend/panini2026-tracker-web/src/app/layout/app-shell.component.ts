@@ -5,12 +5,13 @@ import { NavigationEnd, Router, RouterLink, RouterLinkActive, RouterOutlet } fro
 import { filter } from 'rxjs';
 import { MetaService } from '../core/services/meta.service';
 import { ThemeService } from '../core/services/theme.service';
+import { ConfirmDialogComponent } from './confirm-dialog.component';
 import { ToastStackComponent } from './toast-stack.component';
 
 @Component({
   selector: 'app-shell',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, RouterLink, RouterLinkActive, ToastStackComponent],
+  imports: [CommonModule, RouterOutlet, RouterLink, RouterLinkActive, ToastStackComponent, ConfirmDialogComponent],
   templateUrl: './app-shell.component.html',
   styleUrl: './app-shell.component.scss'
 })
