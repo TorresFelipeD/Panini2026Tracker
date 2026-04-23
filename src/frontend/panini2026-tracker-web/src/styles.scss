@@ -186,11 +186,13 @@ select option {
   padding: 0;
   border: 0;
   display: grid;
-  gap: 0.6rem;
+  gap: 0.9rem;
 }
 
 .status-field legend {
+  display: block;
   padding: 0;
+  margin-bottom: 0.4rem;
   color: var(--text-secondary);
 }
 
