@@ -10,7 +10,6 @@
 }
 
 header,
-.toolbar,
 .log-item__meta {
   display: flex;
   gap: 1rem;
@@ -22,10 +21,26 @@ header {
 }
 
 .toolbar {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
   margin: 1rem 0;
 }
 
-.toolbar input,
+.field {
+  display: grid;
+  gap: 0.45rem;
+}
+
+.field span {
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--text-secondary);
+}
+
+.field input,
+.field select,
 button {
   width: 100%;
   padding: 0.8rem 1rem;
@@ -33,6 +48,14 @@ button {
   border: 1px solid var(--border-color);
   background: rgba(9, 15, 24, 0.28);
   color: var(--text-primary);
+}
+
+.field select {
+  padding-right: 3rem;
+}
+
+.field--search {
+  grid-column: span 1;
 }
 
 .log-item {
@@ -51,8 +74,11 @@ button {
 }
 
 @media (max-width: 900px) {
-  header,
-  .toolbar {
+  header {
     flex-direction: column;
+  }
+
+  .toolbar {
+    grid-template-columns: 1fr;
   }
 }

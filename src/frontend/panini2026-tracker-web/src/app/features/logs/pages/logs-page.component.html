@@ -8,9 +8,33 @@
   </header>
 
   <div class="toolbar">
-    <input [(ngModel)]="category" (ngModelChange)="store.updateFilters(category, level, search)" placeholder="Categoría">
-    <input [(ngModel)]="level" (ngModelChange)="store.updateFilters(category, level, search)" placeholder="Nivel">
-    <input [(ngModel)]="search" (ngModelChange)="store.updateFilters(category, level, search)" placeholder="Buscar en detalles">
+    <label class="field">
+      <span>Categoría</span>
+      <select
+        [(ngModel)]="category"
+        (ngModelChange)="onFiltersChange()">
+        <option value="">Todas las categorías</option>
+        <option *ngFor="let option of categories()" [value]="option">{{ option }}</option>
+      </select>
+    </label>
+
+    <label class="field">
+      <span>Nivel</span>
+      <select
+        [(ngModel)]="level"
+        (ngModelChange)="onFiltersChange()">
+        <option value="">Todos los niveles</option>
+        <option *ngFor="let option of levels()" [value]="option">{{ option }}</option>
+      </select>
+    </label>
+
+    <label class="field field--search">
+      <span>Detalle</span>
+      <input
+        [(ngModel)]="search"
+        (ngModelChange)="onFiltersChange()"
+        placeholder="Buscar en detalles">
+    </label>
   </div>
 
   <article class="log-item" *ngFor="let item of store.items()">

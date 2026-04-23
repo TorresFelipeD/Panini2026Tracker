@@ -14,6 +14,8 @@ export class LogsStoreService {
   readonly category = signal('');
   readonly level = signal('');
   readonly search = signal('');
+  readonly availableCategories = signal<string[]>([]);
+  readonly availableLevels = signal<string[]>([]);
 
   load(): void {
     let params = new HttpParams();
@@ -28,7 +30,11 @@ export class LogsStoreService {
     }
 
     this.http.get<SystemLogItem[]>(`${this.config.apiBaseUrl}/logs`, { params }).subscribe({
-      next: value => this.items.set(value)
+      next: value => {
+        this.items.set(value);
+        this.availableCategories.update(current => this.mergeOptions(current, value.map(item => item.category)));
+        this.availableLevels.update(current => this.mergeOptions(current, value.map(item => item.level)));
+      }
     });
   }
 
@@ -55,5 +61,9 @@ export class LogsStoreService {
         this.toastService.error('No se pudieron eliminar los logs.');
       }
     });
+  }
+
+  private mergeOptions(current: string[], incoming: string[]): string[] {
+    return [...new Set([...current, ...incoming.filter(Boolean)])].sort((a, b) => a.localeCompare(b));
   }
 }
