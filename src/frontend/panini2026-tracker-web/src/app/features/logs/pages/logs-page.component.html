@@ -4,7 +4,10 @@
       <h2>Logs del sistema</h2>
       <p>Auditoría funcional con filtros y eliminación confirmada.</p>
     </div>
-    <button type="button" class="danger" (click)="confirmDelete()">Eliminar filtrados</button>
+    <button type="button" class="danger" (click)="confirmDelete()">
+      <span class="danger__icon" aria-hidden="true">!</span>
+      <span>Eliminar Logs</span>
+    </button>
   </header>
 
   <div class="toolbar">
