@@ -142,6 +142,46 @@ button {
   flex-wrap: wrap;
 }
 
+.log-item__badges {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.log-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 1.9rem;
+  padding: 0.3rem 0.75rem;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--border-color) 72%, transparent);
+  background: color-mix(in srgb, var(--field-background-hover) 72%, var(--panel-background) 28%);
+  color: var(--text-secondary);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+.log-badge--info {
+  border-color: rgba(89, 210, 193, 0.24);
+  background: rgba(44, 123, 113, 0.22);
+  color: #9bf0de;
+}
+
+.log-badge--warning {
+  border-color: rgba(245, 188, 92, 0.24);
+  background: rgba(126, 92, 26, 0.24);
+  color: #ffd891;
+}
+
+.log-badge--error {
+  border-color: rgba(255, 111, 111, 0.24);
+  background: rgba(122, 29, 29, 0.24);
+  color: #ffc2c2;
+}
+
 .danger {
   width: auto;
   display: inline-flex;

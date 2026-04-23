@@ -65,4 +65,8 @@ export class LogsPageComponent {
   protected onFiltersChange(): void {
     this.store.updateFilters(this.category, this.level, this.search);
   }
+
+  protected getLevelBadgeClass(level: string): string {
+    return `log-badge--${level.toLowerCase() || 'default'}`;
+  }
 }

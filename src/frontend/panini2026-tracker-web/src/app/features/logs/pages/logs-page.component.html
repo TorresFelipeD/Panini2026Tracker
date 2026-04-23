@@ -88,7 +88,10 @@
   <article class="log-item" *ngFor="let item of store.items()">
     <div class="log-item__meta">
       <strong>{{ item.action }}</strong>
-      <span>{{ item.category }} · {{ item.level }}</span>
+      <div class="log-item__badges">
+        <span class="log-badge">{{ item.category }}</span>
+        <span class="log-badge" [class]="getLevelBadgeClass(item.level)">{{ item.level }}</span>
+      </div>
       <span>{{ item.createdAtUtc | date:'medium' }}</span>
     </div>
     <p>{{ item.details }}</p>
