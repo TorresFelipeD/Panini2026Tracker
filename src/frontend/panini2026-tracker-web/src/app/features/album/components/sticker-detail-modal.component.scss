@@ -70,8 +70,13 @@ footer {
 }
 
 .modal-close {
-  width: auto;
-  background: var(--field-background);
+  width: 3rem;
+  min-width: 3rem;
+  max-width: 3rem;
+  height: 3rem;
+  padding: 0;
+  flex: 0 0 auto;
+  align-self: flex-start;
 }
 
 .modal-grid {
@@ -255,6 +260,6 @@ dd {
   }
 
   .modal-close {
-    width: 100%;
+    width: 3rem;
   }
 }

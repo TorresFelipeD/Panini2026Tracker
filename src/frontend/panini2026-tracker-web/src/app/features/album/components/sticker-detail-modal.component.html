@@ -7,7 +7,13 @@
         <h2>{{ selected.displayName }}</h2>
         <span class="modal-code">{{ selected.stickerCode }}</span>
       </div>
-      <button type="button" class="modal-close" (click)="close.emit()">Cerrar</button>
+      <button
+        type="button"
+        class="modal-close"
+        aria-label="Cerrar detalle de lámina"
+        (click)="close.emit()">
+        <span class="modal-close__icon" aria-hidden="true"></span>
+      </button>
     </header>
 
     <div class="modal-grid">
