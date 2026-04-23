@@ -46,6 +46,11 @@ button {
   color: var(--text-primary);
 }
 
+.actions button:hover {
+  background: color-mix(in srgb, var(--field-background-hover) 82%, var(--panel-background) 18%);
+  border-color: color-mix(in srgb, var(--accent-color) 18%, var(--border-color) 82%);
+}
+
 .filter-picker {
   position: relative;
   width: 100%;
