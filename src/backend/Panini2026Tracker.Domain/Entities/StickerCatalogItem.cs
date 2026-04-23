@@ -44,4 +44,24 @@ public sealed class StickerCatalogItem : BaseEntity
         DisplayOrder = displayOrder;
         CountryId = countryId;
     }
+
+    public void UpdateCatalogData(
+        string displayName,
+        string type,
+        string? imageReference,
+        string? additionalInfoJson,
+        string? metadataJson,
+        bool isProvisional,
+        int displayOrder,
+        Guid countryId)
+    {
+        DisplayName = displayName.Trim();
+        Type = type.Trim().ToLowerInvariant();
+        ImageReference = imageReference?.Trim();
+        AdditionalInfoJson = additionalInfoJson;
+        MetadataJson = metadataJson;
+        IsProvisional = isProvisional;
+        DisplayOrder = displayOrder;
+        CountryId = countryId;
+    }
 }

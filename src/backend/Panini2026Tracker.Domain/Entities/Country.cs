@@ -26,4 +26,11 @@ public sealed class Country : BaseEntity
     {
         FlagCode = flagCode.Trim().ToLowerInvariant();
     }
+
+    public void UpdateCatalogData(string name, string flagCode, int displayOrder)
+    {
+        Name = name.Trim();
+        FlagCode = flagCode.Trim().ToLowerInvariant();
+        DisplayOrder = displayOrder;
+    }
 }

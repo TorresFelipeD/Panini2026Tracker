@@ -34,48 +34,84 @@ public sealed class DatabaseSeeder
         await _dbContext.Database.MigrateAsync(cancellationToken);
         await EnsureCountryFlagCodeColumnAsync(cancellationToken);
         var seed = await _seedReader.ReadAsync(cancellationToken);
+        var hadSeedData = await _catalogRepository.HasSeedDataAsync(cancellationToken);
 
-        if (await _catalogRepository.HasSeedDataAsync(cancellationToken))
+        var existingCountries = await _dbContext.Countries.ToListAsync(cancellationToken);
+        var countryMap = existingCountries.ToDictionary(country => country.Code, StringComparer.OrdinalIgnoreCase);
+        var addedCountries = new List<Country>();
+
+        foreach (var seedCountry in seed.Countries)
         {
-            var existingCountries = await _dbContext.Countries.ToListAsync(cancellationToken);
-            foreach (var seedCountry in seed.Countries)
+            if (countryMap.TryGetValue(seedCountry.Code, out var existingCountry))
             {
-                var existingCountry = existingCountries.FirstOrDefault(country =>
-                    country.Code.Equals(seedCountry.Code, StringComparison.OrdinalIgnoreCase));
-
-                if (existingCountry is not null
-                    && !string.Equals(existingCountry.FlagCode, seedCountry.FlagCode, StringComparison.Ordinal))
-                {
-                    existingCountry.UpdateFlagCode(seedCountry.FlagCode);
-                }
+                existingCountry.UpdateCatalogData(seedCountry.Name, seedCountry.FlagCode, seedCountry.DisplayOrder);
+                continue;
             }
 
-            await _unitOfWork.SaveChangesAsync(cancellationToken);
-            return;
+            var newCountry = new Country(seedCountry.Code, seedCountry.Name, seedCountry.FlagCode, seedCountry.DisplayOrder);
+            addedCountries.Add(newCountry);
+            countryMap[newCountry.Code] = newCountry;
         }
 
-        var countries = seed.Countries
-            .Select(country => new Country(country.Code, country.Name, country.FlagCode, country.DisplayOrder))
-            .ToArray();
+        if (addedCountries.Count > 0)
+        {
+            await _catalogRepository.AddCountriesAsync(addedCountries, cancellationToken);
+        }
 
-        await _catalogRepository.AddCountriesAsync(countries, cancellationToken);
+        await _unitOfWork.SaveChangesAsync(cancellationToken);
 
-        var countryMap = countries.ToDictionary(country => country.Code, StringComparer.OrdinalIgnoreCase);
-        var stickers = seed.Countries
-            .SelectMany(country => country.Stickers.Select(sticker => new StickerCatalogItem(
-                sticker.StickerCode,
-                sticker.DisplayName,
-                sticker.Type,
-                sticker.ImageReference,
-                sticker.AdditionalInfo is null ? null : JsonSerializer.Serialize(sticker.AdditionalInfo, JsonDefaults.SerializerOptions),
-                sticker.Metadata is null ? null : JsonSerializer.Serialize(sticker.Metadata, JsonDefaults.SerializerOptions),
-                sticker.IsProvisional,
-                sticker.DisplayOrder,
-                countryMap[country.Code].Id)))
-            .ToArray();
+        var existingStickers = await _dbContext.StickerCatalogItems.ToListAsync(cancellationToken);
+        var stickerMap = existingStickers.ToDictionary(sticker => sticker.StickerCode, StringComparer.OrdinalIgnoreCase);
+        var addedStickers = new List<StickerCatalogItem>();
 
-        await _catalogRepository.AddStickersAsync(stickers, cancellationToken);
-        await _logRepository.AddAsync(new SystemLog("seed", "catalog.seeded", $"Seeded {stickers.Length} stickers across {countries.Length} countries.", "info", DateTime.UtcNow), cancellationToken);
+        foreach (var seedCountry in seed.Countries)
+        {
+            var countryId = countryMap[seedCountry.Code].Id;
+
+            foreach (var seedSticker in seedCountry.Stickers)
+            {
+                var additionalInfoJson = seedSticker.AdditionalInfo is null
+                    ? null
+                    : JsonSerializer.Serialize(seedSticker.AdditionalInfo, JsonDefaults.SerializerOptions);
+                var metadataJson = seedSticker.Metadata is null
+                    ? null
+                    : JsonSerializer.Serialize(seedSticker.Metadata, JsonDefaults.SerializerOptions);
+
+                if (stickerMap.TryGetValue(seedSticker.StickerCode, out var existingSticker))
+                {
+                    existingSticker.UpdateCatalogData(
+                        seedSticker.DisplayName,
+                        seedSticker.Type,
+                        seedSticker.ImageReference,
+                        additionalInfoJson,
+                        metadataJson,
+                        seedSticker.IsProvisional,
+                        seedSticker.DisplayOrder,
+                        countryId);
+                    continue;
+                }
+
+                addedStickers.Add(new StickerCatalogItem(
+                    seedSticker.StickerCode,
+                    seedSticker.DisplayName,
+                    seedSticker.Type,
+                    seedSticker.ImageReference,
+                    additionalInfoJson,
+                    metadataJson,
+                    seedSticker.IsProvisional,
+                    seedSticker.DisplayOrder,
+                    countryId));
+            }
+        }
+
+        if (addedStickers.Count > 0)
+        {
+            await _catalogRepository.AddStickersAsync(addedStickers, cancellationToken);
+        }
+
+        var action = hadSeedData ? "catalog.synced" : "catalog.seeded";
+        var details = $"Synchronized catalog with {seed.Countries.Count} countries, {seed.Countries.Sum(country => country.Stickers.Count)} stickers, {addedCountries.Count} new countries and {addedStickers.Count} new stickers.";
+        await _logRepository.AddAsync(new SystemLog("seed", action, details, "info", DateTime.UtcNow), cancellationToken);
         await _unitOfWork.SaveChangesAsync(cancellationToken);
     }
 

@@ -110,7 +110,7 @@
       "flagCode": "de",
       "displayOrder": 9,
       "stickers": [
-        { "stickerCode": "GER-001", "displayName": "Escudo de Alemania", "type": "escudo", "imageReference": "catalog/germany/shield.svg", "isProvisional": true, "displayOrder": 1, "additionalInfo": { "nota": "Código provisional" }, "metadata": { "segment": "team-core" } },
+        { "stickerCode": "GER1", "displayName": "Escudo de Alemania y otras cositas", "type": "escudo", "imageReference": "catalog/germany/shield.svg", "isProvisional": true, "displayOrder": 1, "additionalInfo": { "nota": "Código provisional" }, "metadata": { "segment": "team-core" } },
         { "stickerCode": "GER-002", "displayName": "Plantilla oficial", "type": "equipo", "imageReference": null, "isProvisional": true, "displayOrder": 2, "additionalInfo": { "torneo": "Mundial 2026" }, "metadata": { "segment": "team-core" } },
         { "stickerCode": "GER-003", "displayName": "Director técnico", "type": "entrenador", "imageReference": null, "isProvisional": true, "displayOrder": 3, "additionalInfo": { "rol": "Cuerpo técnico" }, "metadata": { "segment": "team-core" } },
         { "stickerCode": "GER-004", "displayName": "Jugador destacado A", "type": "jugador", "imageReference": null, "isProvisional": true, "displayOrder": 4, "additionalInfo": { "posición": "Por confirmar" }, "metadata": { "segment": "squad" } },
