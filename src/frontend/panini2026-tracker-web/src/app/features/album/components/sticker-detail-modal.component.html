@@ -33,13 +33,12 @@
 
         <fieldset class="status-field">
           <legend>Estado</legend>
-          <div class="status-toggle status-toggle--single">
+          <div class="status-toggle status-toggle--single field-grid--single">
             <button
               type="button"
               class="status-toggle__option status-toggle__option--single"
               [class.status-toggle__option--active]="isOwned"
               [attr.aria-pressed]="isOwned"
-              [style.max-width.rem]="20"
               [style.background]="isOwned ? 'var(--accent-color)' : null"
               [style.color]="isOwned ? '#061013' : null"
               [style.border-color]="isOwned ? 'transparent' : null"

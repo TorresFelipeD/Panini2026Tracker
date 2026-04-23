@@ -186,7 +186,7 @@ select option {
   padding: 0;
   border: 0;
   display: grid;
-  gap: 0.45rem;
+  gap: 0.6rem;
 }
 
 .status-field legend {
@@ -216,7 +216,7 @@ select option {
 }
 
 .status-toggle__option--single {
-  width: min(100%, 20rem);
+  width: 100%;
   min-height: 3.7rem;
   justify-items: start;
 }

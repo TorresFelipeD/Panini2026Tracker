@@ -157,6 +157,10 @@ textarea:focus {
   gap: 0.45rem;
 }
 
+.field-grid--single {
+  max-width: calc(50% - 0.5rem);
+}
+
 .number-field {
   position: relative;
 }
