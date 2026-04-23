@@ -10,22 +10,60 @@
   <div class="toolbar">
     <label class="field">
       <span>Categoría</span>
-      <select
-        [(ngModel)]="category"
-        (ngModelChange)="onFiltersChange()">
-        <option value="">Todas las categorías</option>
-        <option *ngFor="let option of categories()" [value]="option">{{ option }}</option>
-      </select>
+      <div class="filter-picker" [class.filter-picker--open]="openFilter === 'category'">
+        <button type="button" class="filter-trigger" (click)="toggleFilter('category')">
+          <span>{{ getFilterLabel('category') }}</span>
+          <span class="dropdown-chevron" aria-hidden="true"></span>
+        </button>
+
+        <div class="filter-panel" *ngIf="openFilter === 'category'">
+          <button
+            type="button"
+            class="filter-option"
+            [class.filter-option--active]="category === ''"
+            (click)="selectFilter('category', '')">
+            {{ filterOptions.category[0].label }}
+          </button>
+
+          <button
+            type="button"
+            class="filter-option"
+            *ngFor="let option of categories()"
+            [class.filter-option--active]="category === option"
+            (click)="selectFilter('category', option)">
+            {{ option }}
+          </button>
+        </div>
+      </div>
     </label>
 
     <label class="field">
       <span>Nivel</span>
-      <select
-        [(ngModel)]="level"
-        (ngModelChange)="onFiltersChange()">
-        <option value="">Todos los niveles</option>
-        <option *ngFor="let option of levels()" [value]="option">{{ option }}</option>
-      </select>
+      <div class="filter-picker" [class.filter-picker--open]="openFilter === 'level'">
+        <button type="button" class="filter-trigger" (click)="toggleFilter('level')">
+          <span>{{ getFilterLabel('level') }}</span>
+          <span class="dropdown-chevron" aria-hidden="true"></span>
+        </button>
+
+        <div class="filter-panel" *ngIf="openFilter === 'level'">
+          <button
+            type="button"
+            class="filter-option"
+            [class.filter-option--active]="level === ''"
+            (click)="selectFilter('level', '')">
+            {{ filterOptions.level[0].label }}
+          </button>
+
+          <button
+            type="button"
+            class="filter-option"
+            *ngFor="let option of levels()"
+            [class.filter-option--active]="level === option"
+            (click)="selectFilter('level', option)">
+            {{ option }}
+          </button>
+        </div>
+      </div>
     </label>
 
     <label class="field field--search">
@@ -36,6 +74,13 @@
         placeholder="Buscar en detalles">
     </label>
   </div>
+
+  <button
+    type="button"
+    class="filter-backdrop"
+    *ngIf="openFilter"
+    (click)="closeFilters()"
+    aria-label="Cerrar filtros"></button>
 
   <article class="log-item" *ngFor="let item of store.items()">
     <div class="log-item__meta">
