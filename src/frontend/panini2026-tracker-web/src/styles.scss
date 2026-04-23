@@ -157,6 +157,84 @@ select option {
   background-clip: padding-box;
 }
 
+.overlay .modal {
+  scrollbar-width: thin;
+  scrollbar-color: color-mix(in srgb, var(--accent-color) 55%, #365061 45%) transparent;
+}
+
+.overlay .modal::-webkit-scrollbar {
+  width: 0.72rem;
+}
+
+.overlay .modal::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.overlay .modal::-webkit-scrollbar-thumb {
+  border-radius: 999px;
+  border: 0.18rem solid transparent;
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--accent-color) 68%, #7fb2a3 32%),
+    color-mix(in srgb, var(--accent-color) 34%, #243847 66%)
+  );
+  background-clip: padding-box;
+}
+
+.status-field {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  display: grid;
+  gap: 0.45rem;
+}
+
+.status-field legend {
+  padding: 0;
+  color: var(--text-secondary);
+}
+
+.status-toggle {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.7rem;
+}
+
+.status-toggle__option {
+  min-height: 4rem;
+  display: grid;
+  gap: 0.12rem;
+  align-content: center;
+  justify-items: start;
+  border-color: color-mix(in srgb, var(--border-color) 85%, transparent);
+  background: color-mix(in srgb, var(--field-background) 92%, var(--panel-background) 8%);
+  text-align: left;
+}
+
+.status-toggle__option:hover {
+  background: color-mix(in srgb, var(--field-background-hover) 82%, var(--panel-background) 18%);
+}
+
+.status-toggle__option--active {
+  border-color: transparent;
+  background: var(--accent-color);
+  color: #061013;
+}
+
+.status-toggle__option--active:hover {
+  background: color-mix(in srgb, var(--accent-color) 88%, white 12%);
+}
+
+.status-toggle__title {
+  font-weight: 700;
+}
+
+.status-toggle__hint {
+  color: inherit;
+  opacity: 0.72;
+  font-size: 0.82rem;
+}
+
 .dropdown-chevron {
   display: inline-flex;
   align-items: center;

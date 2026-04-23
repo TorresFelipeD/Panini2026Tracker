@@ -1,12 +1,13 @@
 <ng-container *ngIf="sticker as selected">
 <div class="overlay" (click)="close.emit()">
   <section class="modal" (click)="$event.stopPropagation()">
-    <header>
-      <div>
-        <p>{{ selected.countryName }}</p>
+    <header class="modal-header">
+      <div class="modal-header__copy">
+        <p class="modal-eyebrow">{{ selected.countryName }}</p>
         <h2>{{ selected.displayName }}</h2>
+        <span class="modal-code">{{ selected.stickerCode }}</span>
       </div>
-      <button type="button" (click)="close.emit()">Cerrar</button>
+      <button type="button" class="modal-close" (click)="close.emit()">Cerrar</button>
     </header>
 
     <div class="modal-grid">
@@ -19,23 +20,42 @@
 
       <form class="details" (ngSubmit)="submit()">
         <div class="field-grid">
-          <label>
+          <label class="field">
             <span>Identificador</span>
             <input [value]="selected.stickerCode" readonly>
           </label>
 
-          <label>
+          <label class="field">
             <span>Tipo</span>
             <input [value]="selected.type" readonly>
           </label>
         </div>
 
-        <div class="toggle-row">
-          <button type="button" [class.active]="isOwned" (click)="isOwned = true">Marcar obtenida</button>
-          <button type="button" [class.active]="!isOwned" (click)="isOwned = false">Marcar faltante</button>
-        </div>
+        <fieldset class="status-field">
+          <legend>Estado</legend>
+          <div class="status-toggle" role="radiogroup" aria-label="Estado de la lámina">
+            <button
+              type="button"
+              class="status-toggle__option"
+              [class.status-toggle__option--active]="isOwned"
+              [attr.aria-pressed]="isOwned"
+              (click)="isOwned = true">
+              <span class="status-toggle__title">Obtenida</span>
+              <span class="status-toggle__hint">Ya está en tu colección</span>
+            </button>
+            <button
+              type="button"
+              class="status-toggle__option"
+              [class.status-toggle__option--active]="!isOwned"
+              [attr.aria-pressed]="!isOwned"
+              (click)="isOwned = false">
+              <span class="status-toggle__title">Faltante</span>
+              <span class="status-toggle__hint">Aún no la tienes</span>
+            </button>
+          </div>
+        </fieldset>
 
-        <label>
+        <label class="field">
           <span>Repetidas</span>
           <div class="number-field">
             <input type="number" min="0" [(ngModel)]="duplicateCount" name="duplicateCount">
@@ -50,7 +70,7 @@
           </div>
         </label>
 
-        <label>
+        <label class="field">
           <span>Observaciones</span>
           <textarea rows="4" [(ngModel)]="notes" name="notes"></textarea>
         </label>

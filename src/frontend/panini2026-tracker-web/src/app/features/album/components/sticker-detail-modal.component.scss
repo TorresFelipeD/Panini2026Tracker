@@ -1,49 +1,96 @@
 .overlay {
   position: fixed;
   inset: 0;
-  background: rgba(4, 10, 18, 0.75);
+  background: rgba(4, 10, 18, 0.72);
   display: grid;
   place-items: center;
-  padding: 1rem;
-  z-index: 30;
+  padding: 1.25rem;
+  z-index: 1250;
+  backdrop-filter: blur(8px);
 }
 
 .modal {
-  width: min(980px, 100%);
-  border-radius: 1.5rem;
-  background: var(--panel-background);
-  border: 1px solid var(--border-color);
-  padding: 1.5rem;
+  width: min(880px, 100%);
+  max-height: min(86vh, 900px);
+  display: grid;
+  grid-template-rows: auto 1fr;
+  overflow: auto;
+  border-radius: 1.6rem;
+  background: color-mix(in srgb, var(--panel-background) 92%, var(--field-background-hover) 8%);
+  border: 1px solid color-mix(in srgb, var(--border-color) 82%, transparent);
+  box-shadow: 0 1.4rem 3rem rgba(0, 0, 0, 0.26);
+  padding: 1.25rem;
 }
 
-header,
+.modal-header,
 footer,
-.field-grid,
-.toggle-row {
+.field-grid {
   display: flex;
   gap: 1rem;
 }
 
-header,
+.modal-header,
 footer {
   justify-content: space-between;
   align-items: center;
 }
 
+.modal-header {
+  padding-bottom: 1rem;
+  border-bottom: 1px solid color-mix(in srgb, var(--border-color) 72%, transparent);
+}
+
+.modal-header__copy {
+  display: grid;
+}
+
+.modal-eyebrow {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.modal-header h2 {
+  margin: 0;
+  font-size: clamp(1.6rem, 2.6vw, 2.15rem);
+  line-height: 1.1;
+}
+
+.modal-code {
+  display: inline-flex;
+  padding: 0.32rem 0.7rem;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--accent-color) 18%, transparent);
+  background: color-mix(in srgb, var(--accent-color) 10%, var(--panel-background) 90%);
+  color: var(--accent-color);
+  font-size: 0.82rem;
+}
+
+.modal-close {
+  width: auto;
+  background: var(--field-background);
+}
+
 .modal-grid {
   display: grid;
-  grid-template-columns: 1fr 1.2fr;
-  gap: 1.5rem;
-  margin-top: 1rem;
+  grid-template-columns: minmax(280px, 0.9fr) minmax(0, 1.1fr);
+  gap: 1.25rem;
+  margin-top: 1.1rem;
+  align-items: start;
 }
 
 .preview img,
 .empty-preview {
   width: 100%;
-  min-height: 280px;
-  border-radius: 1rem;
+  aspect-ratio: 4 / 5;
+  min-height: 0;
+  border-radius: 1.2rem;
   object-fit: cover;
-  background: rgba(122, 132, 153, 0.15);
+  border: 1px solid color-mix(in srgb, var(--border-color) 75%, transparent);
+  background: color-mix(in srgb, var(--field-background) 88%, var(--panel-background) 12%);
   display: grid;
   place-items: center;
 }
@@ -56,16 +103,19 @@ footer {
   filter: grayscale(1) saturate(0.15) brightness(0.95);
 }
 
-.details,
-.info-block dl {
+.details,.info-block dl {
   display: grid;
-  gap: 1rem;
+  gap: 0.95rem;
 }
 
-label span,
+.details {
+  gap: 0.85rem;
+}
+
+.field span,
 .info-block h3,
 dt,
-header p {
+.modal-header p {
   color: var(--text-secondary);
 }
 
@@ -75,9 +125,36 @@ button {
   width: 100%;
   border-radius: 0.9rem;
   border: 1px solid var(--border-color);
-  background: rgba(9, 15, 24, 0.35);
+  background: var(--field-background);
   color: var(--text-primary);
-  padding: 0.8rem 1rem;
+  padding: 0.72rem 0.95rem;
+  transition: border-color 160ms ease, box-shadow 160ms ease, background-color 160ms ease;
+}
+
+input {
+  min-height: 3rem;
+}
+
+textarea {
+  min-height: 6.8rem;
+}
+
+input:hover,
+textarea:hover,
+button:hover {
+  background: var(--field-background-hover);
+}
+
+input:focus,
+textarea:focus {
+  outline: none;
+  border-color: color-mix(in srgb, var(--accent-color) 45%, var(--border-color) 55%);
+  box-shadow: 0 0 0 0.15rem color-mix(in srgb, var(--accent-color) 12%, transparent);
+}
+
+.field {
+  display: grid;
+  gap: 0.45rem;
 }
 
 .number-field {
@@ -90,9 +167,9 @@ button {
 
 .number-stepper {
   position: absolute;
-  top: 0.4rem;
+  top: 0.35rem;
   right: 0.45rem;
-  bottom: 0.4rem;
+  bottom: 0.35rem;
   display: grid;
   gap: 0.25rem;
 }
@@ -119,26 +196,61 @@ button {
   transform: rotate(135deg) translateY(0.04rem);
 }
 
-.toggle-row button.active,
 .primary {
   background: var(--accent-color);
   color: #061013;
   border-color: transparent;
 }
 
-dl div {
-  display: grid;
-  grid-template-columns: 110px 1fr;
-  gap: 1rem;
+.primary:hover {
+  background: color-mix(in srgb, var(--accent-color) 82%, #1d5f58 18%);
+  box-shadow: 0 0 0 0.16rem color-mix(in srgb, var(--accent-color) 22%, transparent);
 }
 
+.info-block h3 {
+  margin: 0;
+}
+
+dl div {
+  display: grid;
+  grid-template-columns: minmax(96px, 120px) 1fr;
+  gap: 0.75rem;
+}
+
+dt,
+dd {
+  margin: 0;
+}
+
+dd {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.primary { font-weight: 700; }
+
 @media (max-width: 900px) {
+  .overlay {
+    padding: 0.75rem;
+  }
+
+  .modal {
+    max-height: 92vh;
+    padding: 1rem;
+  }
+
   .modal-grid {
     grid-template-columns: 1fr;
   }
 
   .field-grid,
-  .toggle-row {
+  .status-toggle,
+  .modal-header {
+    grid-template-columns: 1fr;
     flex-direction: column;
+  }
+
+  .modal-close {
+    width: 100%;
   }
 }
