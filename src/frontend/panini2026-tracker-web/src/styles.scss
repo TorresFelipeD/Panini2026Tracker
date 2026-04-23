@@ -200,6 +200,10 @@ select option {
   gap: 0.7rem;
 }
 
+.status-toggle--single {
+  grid-template-columns: minmax(0, 1fr);
+}
+
 .status-toggle__option {
   min-height: 4rem;
   display: grid;
@@ -209,6 +213,12 @@ select option {
   border-color: color-mix(in srgb, var(--border-color) 85%, transparent);
   background: color-mix(in srgb, var(--field-background) 92%, var(--panel-background) 8%);
   text-align: left;
+}
+
+.status-toggle__option--single {
+  width: min(100%, 20rem);
+  min-height: 3.7rem;
+  justify-items: start;
 }
 
 .status-toggle__option:hover {

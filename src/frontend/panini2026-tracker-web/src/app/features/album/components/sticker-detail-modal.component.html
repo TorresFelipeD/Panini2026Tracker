@@ -33,24 +33,21 @@
 
         <fieldset class="status-field">
           <legend>Estado</legend>
-          <div class="status-toggle" role="radiogroup" aria-label="Estado de la lámina">
+          <div class="status-toggle status-toggle--single">
             <button
               type="button"
-              class="status-toggle__option"
+              class="status-toggle__option status-toggle__option--single"
               [class.status-toggle__option--active]="isOwned"
               [attr.aria-pressed]="isOwned"
-              (click)="isOwned = true">
-              <span class="status-toggle__title">Obtenida</span>
-              <span class="status-toggle__hint">Ya está en tu colección</span>
-            </button>
-            <button
-              type="button"
-              class="status-toggle__option"
-              [class.status-toggle__option--active]="!isOwned"
-              [attr.aria-pressed]="!isOwned"
-              (click)="isOwned = false">
-              <span class="status-toggle__title">Faltante</span>
-              <span class="status-toggle__hint">Aún no la tienes</span>
+              [style.max-width.rem]="20"
+              [style.background]="isOwned ? 'var(--accent-color)' : null"
+              [style.color]="isOwned ? '#061013' : null"
+              [style.border-color]="isOwned ? 'transparent' : null"
+              (click)="isOwned = !isOwned">
+              <span class="status-toggle__title">{{ isOwned ? 'Obtenida' : 'Faltante' }}</span>
+              <span class="status-toggle__hint">
+                {{ isOwned ? 'Ya está en tu colección' : 'Aún no la tienes' }}
+              </span>
             </button>
           </div>
         </fieldset>
