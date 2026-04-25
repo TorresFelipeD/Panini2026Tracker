@@ -25,7 +25,7 @@
             <div class="empty-preview">Sin imagen asociada</div>
           </ng-template>
 
-          <fieldset class="status-field">
+          <fieldset class="status-field" style="text-align:center;">
             <legend>
               Estado
               <span class="field-help__icon" tabindex="0" title="Marca si la lámina ya está en tu colección" aria-label="Marca si la lámina ya está en tu colección">
@@ -36,17 +36,40 @@
               <button type="button" class="status-toggle__option status-toggle__option--single"
                 [class.status-toggle__option--active]="isOwned" [attr.aria-pressed]="isOwned"
                 [style.background]="isOwned ? 'var(--accent-color)' : null" [style.color]="isOwned ? '#061013' : null"
-                [style.border-color]="isOwned ? 'transparent' : null" (click)="isOwned = !isOwned">
-                <span class="status-toggle__title">{{ isOwned ? 'Obtenida' : 'Faltante' }}</span>
-                <span class="status-toggle__hint">
-                  {{ isOwned ? 'Ya está en tu colección' : 'Aún no la tienes' }}
+                [style.border-color]="isOwned ? 'transparent' : null"
+                style="display:flex;align-items:center;justify-content:space-between;gap:.9rem;"
+                (click)="isOwned = !isOwned">
+                <span class="status-toggle__copy" style="display:grid;gap:.2rem;text-align:left;">
+                  <span class="status-toggle__title">{{ isOwned ? 'Obtenida' : 'Faltante' }}</span>
+                  <span class="status-toggle__hint">
+                    {{ isOwned ? 'Ya está en tu colección' : 'Aún no la tienes' }}
+                  </span>
+                </span>
+                <span class="status-toggle__icon" aria-hidden="true"
+                  [style.color]="isOwned ? '#28c78b' : '#ef6b73'"
+                  style="flex:0 0 auto;width:1.9rem;height:1.9rem;">
+                  <svg *ngIf="isOwned; else missingStatusIcon" viewBox="0 0 24 24" focusable="false"
+                    style="width:100%;height:100%;">
+                    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"
+                      stroke-linecap="round" stroke-linejoin="round"></circle>
+                    <path d="M8 12.5l2.5 2.5L16 9.5" fill="none" stroke="currentColor" stroke-width="2.1"
+                      stroke-linecap="round" stroke-linejoin="round"></path>
+                  </svg>
+                  <ng-template #missingStatusIcon>
+                    <svg viewBox="0 0 24 24" focusable="false" style="width:100%;height:100%;">
+                      <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"
+                        stroke-linecap="round" stroke-linejoin="round"></circle>
+                      <path d="M9 9l6 6M15 9l-6 6" fill="none" stroke="currentColor" stroke-width="2.1"
+                        stroke-linecap="round" stroke-linejoin="round"></path>
+                    </svg>
+                  </ng-template>
                 </span>
               </button>
             </div>
           </fieldset>
         </div>
 
-        <div class="details">
+        <div class="details" style="gap:.85rem;">
           <div class="player-fields" *ngIf="isPlayer">
             <label class="field">
               <span class="field-label">

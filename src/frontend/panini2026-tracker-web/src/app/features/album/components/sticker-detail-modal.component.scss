@@ -4,20 +4,20 @@
   background: rgba(4, 10, 18, 0.72);
   display: grid;
   place-items: center;
-  padding: 1.25rem;
+  padding: 1.2rem;
   z-index: 1250;
   backdrop-filter: blur(8px);
 }
 
 .modal {
-  width: min(880px, 100%);
-  max-height: min(86vh, 900px);
+  width: min(880px,100%);
+  max-height: min(86vh,900px);
   display: grid;
   grid-template-rows: auto 1fr;
   overflow: auto;
   border-radius: 1.6rem;
-  background: color-mix(in srgb, var(--panel-background) 92%, var(--field-background-hover) 8%);
-  border: 1px solid color-mix(in srgb, var(--border-color) 82%, transparent);
+  background: color-mix(in srgb,var(--panel-background) 92%,var(--field-background-hover) 8%);
+  border: 1px solid color-mix(in srgb,var(--border-color) 82%,transparent);
   box-shadow: 0 1.4rem 3rem rgba(0, 0, 0, 0.26);
   padding: 1.25rem;
 }
@@ -37,14 +37,14 @@ footer {
 
 .modal-header__copy {
   display: grid;
-  gap: 0.45rem;
+  gap: .45rem;
 }
 
 .modal-eyebrow {
   margin: 0;
   color: var(--text-secondary);
   display: inline-flex;
-  gap: 0.45rem;
+  gap: .45rem;
   font-size: 0.78rem;
   font-weight: 700;
   letter-spacing: 0.08em;
@@ -54,11 +54,11 @@ footer {
 .modal-header h2 {
   margin: 0;
   font-size: clamp(1.6rem, 2.6vw, 2.15rem);
-  line-height: 1.08;
+  line-height: 1.06;
 }
 
 .modal-code {
-  padding: 0.32rem 0.7rem;
+  padding: .32rem .7rem;
   border-radius: 999px;
   border: 1px solid color-mix(in srgb, var(--accent-color) 18%, transparent);
   background: color-mix(in srgb, var(--accent-color) 10%, var(--panel-background) 90%);
@@ -75,8 +75,8 @@ footer {
 .modal-grid {
   display: grid;
   grid-template-columns: minmax(220px, 0.78fr) minmax(0, 1.22fr);
-  gap: 1.25rem;
-  margin-top: 1.1rem;
+  gap: 1.2rem;
+  margin-top: 1rem;
   align-items: start;
 }
 
@@ -84,7 +84,6 @@ footer {
 .empty-preview {
   width: 100%;
   aspect-ratio: 4 / 5;
-  min-height: 0;
   border-radius: 1.2rem;
   object-fit: cover;
   border: 1px solid color-mix(in srgb, var(--border-color) 75%, transparent);
@@ -94,11 +93,10 @@ footer {
 }
 
 .preview-image--missing {
-  filter: grayscale(1) saturate(0.15) brightness(0.95);
+  filter: grayscale(1) saturate(.15) brightness(.95);
 }
 .details {
   display: grid;
-  gap: 0.85rem;
 }
 
 .field span,
@@ -141,18 +139,18 @@ textarea:focus {
 
 .field {
   display: grid;
-  gap: 0.45rem;
+  gap: .45rem;
 }
 .player-fields {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0.95rem 1rem;
+  gap: .95rem 1rem;
 }
 
 .field-help__icon {
   width: 1rem;
   height: 1rem;
-  margin-left: 0.35rem;
+  margin-left: .35rem;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -166,10 +164,10 @@ textarea:focus {
 }
 .status-field {
   width: min(100%, 16rem);
-  margin: 0.9rem auto 0;
+  margin: .9rem auto 0;
   border: 0;
-  text-align: center;
 }
+
 .number-field {
   position: relative;
 }
@@ -180,11 +178,11 @@ textarea:focus {
 
 .number-stepper {
   position: absolute;
-  top: 0.35rem;
-  right: 0.45rem;
-  bottom: 0.35rem;
+  top: .35rem;
+  right: .45rem;
+  bottom: .35rem;
   display: grid;
-  gap: 0.25rem;
+  gap: .25rem;
 }
 
 .number-step {
@@ -193,20 +191,20 @@ textarea:focus {
   padding: 0;
   display: grid;
   place-items: center;
-  border-radius: 0.45rem;
+  border-radius: .45rem;
   background: color-mix(in srgb, var(--field-background-hover) 84%, var(--panel-background) 16%);
 }
 
 .number-step span {
-  width: 0.42rem;
-  height: 0.42rem;
-  border-top: 0.11rem solid var(--accent-color);
-  border-right: 0.11rem solid var(--accent-color);
-  transform: rotate(-45deg) translateY(0.04rem);
+  width: .42rem;
+  height: .42rem;
+  border-top: .11rem solid var(--accent-color);
+  border-right: .11rem solid var(--accent-color);
+  transform: rotate(-45deg) translateY(.04rem);
 }
 
 .number-step--down span {
-  transform: rotate(135deg) translateY(0.04rem);
+  transform: rotate(135deg) translateY(.04rem);
 }
 
 .primary {
@@ -218,7 +216,7 @@ textarea:focus {
 
 .primary:hover {
   background: color-mix(in srgb, var(--accent-color) 82%, #1d5f58 18%);
-  box-shadow: 0 0 0 0.16rem color-mix(in srgb, var(--accent-color) 22%, transparent);
+  box-shadow: 0 0 0 .16rem color-mix(in srgb, var(--accent-color) 22%, transparent);
 }
 
 @media (max-width: 900px) {
