@@ -30,11 +30,13 @@
 .combo-chevron{width:.6rem;height:.6rem;border-right:.12rem solid currentColor;border-bottom:.12rem solid currentColor;transform:rotate(45deg) translateY(-.1rem)}
 .modal-overlay{position:fixed;inset:0;z-index:60;padding:1.2rem;background:rgba(4,10,18,.72);display:grid;place-items:center;backdrop-filter:blur(8px)}
 .catalog-modal{width:min(980px,100%);max-height:90vh;padding:1.25rem;display:grid;gap:1rem}
-.logs-modal{width:min(1180px,100%)}
 .catalog-modal__header,.catalog-modal__actions{display:flex;align-items:center;justify-content:space-between;gap:1rem}
 .catalog-modal__actions{flex-wrap:wrap}
-.logs-modal__body{overflow:auto}
-.modal-close{width:3rem;height:3rem;border-radius:1rem;border:1px solid color-mix(in srgb,#ef6b73 38%,var(--border-color) 62%);background:color-mix(in srgb,#4a1b28 62%,var(--panel-background) 38%);color:#ffd7db;font-size:1.5rem}
+.logs-modal__body{scrollbar-width:thin;scrollbar-color:color-mix(in srgb,var(--accent-color) 58%,#6f7f8f 42%) color-mix(in srgb,var(--field-background) 88%,var(--panel-background) 12%)}
+.logs-modal__body::-webkit-scrollbar{width:.72rem}
+.logs-modal__body::-webkit-scrollbar-track{background:color-mix(in srgb,var(--field-background) 88%,var(--panel-background) 12%);border-radius:999px}
+.logs-modal__body::-webkit-scrollbar-thumb{background:linear-gradient(180deg,color-mix(in srgb,var(--accent-color) 65%,#7ea29b 35%),color-mix(in srgb,var(--accent-color) 42%,#4d5d6c 58%));border:.13rem solid color-mix(in srgb,var(--panel-background) 82%,transparent);border-radius:999px}
+.logs-modal__body::-webkit-scrollbar-thumb:hover{background:linear-gradient(180deg,color-mix(in srgb,var(--accent-color) 78%,#8ab8b0 22%),color-mix(in srgb,var(--accent-color) 54%,#556779 46%))}
 textarea{min-height:55vh;padding:1rem;font-family:Consolas,'Courier New',monospace;resize:vertical}
 @media (max-width:1100px){.settings-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.settings-card--hero,.settings-card--wide,.settings-grid--secondary .settings-card{grid-column:span 1}.settings-grid--primary .settings-card--hero:first-child{grid-column:span 2}}
 @media (max-width:900px){.settings-grid{grid-template-columns:1fr}.settings-card--hero,.settings-card--wide,.settings-grid--primary .settings-card--hero:first-child,.settings-grid--secondary .settings-card{grid-column:auto}.catalog-modal__header,.catalog-modal__actions,.card-actions{flex-direction:column;align-items:stretch}}

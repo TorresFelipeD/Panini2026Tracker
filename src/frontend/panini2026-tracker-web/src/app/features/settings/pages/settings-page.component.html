@@ -134,7 +134,15 @@
         <p class="eyebrow">Catálogo del álbum</p>
         <h3>Editor de `album-catalog.json`</h3>
       </div>
-      <button type="button" class="modal-close" aria-label="Cerrar editor" (click)="closeCatalogModal()">×</button>
+      <button
+        type="button"
+        aria-label="Cerrar editor"
+        (click)="closeCatalogModal()"
+        style="width:3rem;height:3rem;padding:0;border-radius:1rem;border:1px solid color-mix(in srgb,#ef6b73 38%,var(--border-color) 62%);background:color-mix(in srgb,#4a1b28 62%,var(--panel-background) 38%);display:grid;place-items:center;">
+        <svg viewBox="0 0 20 20" aria-hidden="true" focusable="false" style="width:1rem;height:1rem;">
+          <path d="M5 5l10 10M15 5L5 15" fill="none" stroke="#ffd7db" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </button>
     </header>
 
     <div class="catalog-modal__actions">
@@ -148,17 +156,28 @@
 </div>
 
 <div class="modal-overlay" *ngIf="logsModalOpen" (click)="closeLogsModal()">
-  <section class="catalog-modal logs-modal" (click)="$event.stopPropagation()">
+  <section
+    class="catalog-modal"
+    (click)="$event.stopPropagation()"
+    style="width:min(1180px,100%);grid-template-rows:auto minmax(0,1fr);overflow:hidden;">
     <header class="catalog-modal__header">
       <div>
         <p class="eyebrow">Logs</p>
         <h3>Auditoría del sistema</h3>
       </div>
-      <button type="button" class="modal-close" aria-label="Cerrar logs" (click)="closeLogsModal()">×</button>
+      <button
+        type="button"
+        aria-label="Cerrar logs"
+        (click)="closeLogsModal()"
+        style="width:3rem;height:3rem;padding:0;border-radius:1rem;border:1px solid color-mix(in srgb,#ef6b73 38%,var(--border-color) 62%);background:color-mix(in srgb,#4a1b28 62%,var(--panel-background) 38%);display:grid;place-items:center;">
+        <svg viewBox="0 0 20 20" aria-hidden="true" focusable="false" style="width:1rem;height:1rem;">
+          <path d="M5 5l10 10M15 5L5 15" fill="none" stroke="#ffd7db" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </button>
     </header>
 
-    <div class="logs-modal__body">
-      <app-logs-page />
+    <div class="logs-modal__body" style="min-height:0;overflow:auto;padding-right:.15rem;">
+      <app-logs-page style="display:block;min-height:0;"></app-logs-page>
     </div>
   </section>
 </div>
