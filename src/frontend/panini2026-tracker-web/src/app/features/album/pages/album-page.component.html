@@ -14,7 +14,21 @@
 </section>
 
 <section class="filters">
-  <input [(ngModel)]="search" (ngModelChange)="applyFilters()" placeholder="Buscar por código, nombre o país">
+  <div style="position:relative;width:100%;">
+    <input
+      [(ngModel)]="search"
+      (ngModelChange)="applyFilters()"
+      placeholder="Buscar por código, nombre o país"
+      style="padding-right:3rem;">
+    <button
+      *ngIf="search"
+      type="button"
+      (click)="search = ''; applyFilters()"
+      aria-label="Limpiar búsqueda"
+      style="position:absolute;top:50%;right:.85rem;transform:translateY(-50%);width:1.8rem;height:1.8rem;padding:0;border:0;border-radius:999px;background:color-mix(in srgb, var(--field-background-hover) 88%, var(--panel-background) 12%);color:var(--text-secondary);display:grid;place-items:center;font-size:1rem;line-height:1;cursor:pointer;">
+      X
+    </button>
+  </div>
   <div class="filter-picker" [class.filter-picker--open]="openFilter === 'countryCode'">
     <button type="button" class="filter-trigger" (click)="toggleFilter('countryCode')">
       <img class="country-flag" *ngIf="countryFlagUrl" [src]="countryFlagUrl" alt="" aria-hidden="true">
