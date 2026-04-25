@@ -151,14 +151,25 @@ textarea:focus {
   gap: 0.95rem 1rem;
 }
 
+.field-label {
+  display: inline-flex;
+  gap: 0.3rem;
+}
+
 .field-help__icon {
-  width: 1rem;
-  height: 1rem;
-  display: grid;
-  place-items: center;
+  width: 1.15rem;
+  height: 1.15rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   border-radius: 999px;
-  border: 1px solid color-mix(in srgb, var(--accent-color) 35%, var(--border-color) 65%);
+  background: color-mix(in srgb, var(--field-background-hover) 84%, var(--panel-background) 16%);
+  border: 1px solid color-mix(in srgb, var(--accent-color) 28%, var(--border-color) 72%);
   color: var(--accent-color);
+  cursor: help;
+  font-size: 0.72rem;
+  font-weight: 700;
+  line-height: 1;
 }
 .status-field {
   width: min(100%, 16rem);
