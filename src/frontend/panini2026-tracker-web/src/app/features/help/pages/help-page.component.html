@@ -1,0 +1,77 @@
+<section class="help-page">
+  <header class="help-hero">
+    <div>
+      <p class="eyebrow">Ayuda</p>
+      <h2>Guía rápida de cada menú</h2>
+      <p class="hero-copy">
+        Encuentra cómo se usa cada sección de la aplicación. Las cards se pueden colapsar y el buscador resalta las palabras encontradas.
+      </p>
+    </div>
+
+    <div class="search-panel">
+      <label class="search-field">
+        <span class="search-label">Buscar en la ayuda</span>
+        <div class="search-input-wrap">
+          <input
+            type="search"
+            placeholder="Ejemplo: progreso, repetidas, respaldo"
+            [ngModel]="searchTerm()"
+            (ngModelChange)="searchTerm.set($event)">
+
+          <button type="button" class="search-clear" *ngIf="searchTerm()" (click)="clearSearch()">
+            Limpiar
+          </button>
+        </div>
+      </label>
+    </div>
+  </header>
+
+  <section class="help-grid" *ngIf="filteredTopics().length; else noResults">
+    <article
+      class="help-card"
+      *ngFor="let topic of filteredTopics(); trackBy: trackByTopic"
+      [class.help-card--matched]="topicHasDirectMatch(topic)">
+      <button
+        type="button"
+        class="help-card__toggle"
+        [attr.aria-expanded]="isExpanded(topic.id)"
+        (click)="toggleTopic(topic.id)">
+        <div class="help-card__heading">
+          <span class="card-kicker">Menú</span>
+          <h3 [innerHTML]="highlightText(topic.label)"></h3>
+          <p [innerHTML]="highlightText(topic.description)"></p>
+        </div>
+
+        <div class="help-card__meta">
+          <span class="help-route" [innerHTML]="highlightText(topic.route)"></span>
+          <span class="help-chevron" [class.help-chevron--open]="isExpanded(topic.id)" aria-hidden="true"></span>
+        </div>
+      </button>
+
+      <div class="help-card__body" *ngIf="isExpanded(topic.id)">
+        <div class="help-section">
+          <span class="help-section__title">Cómo se usa</span>
+          <ol>
+            <li *ngFor="let step of topic.steps" [innerHTML]="highlightText(step)"></li>
+          </ol>
+        </div>
+
+        <div class="help-section">
+          <span class="help-section__title">Consejos</span>
+          <ul>
+            <li *ngFor="let tip of topic.tips" [innerHTML]="highlightText(tip)"></li>
+          </ul>
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <ng-template #noResults>
+    <section class="help-empty">
+      <p class="eyebrow">Sin resultados</p>
+      <h3>No encontramos coincidencias</h3>
+      <p>Prueba con otra palabra o limpia el buscador para volver a ver todas las tarjetas de ayuda.</p>
+      <button type="button" class="button button--primary" (click)="clearSearch()">Mostrar todas</button>
+    </section>
+  </ng-template>
+</section>

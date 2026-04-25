@@ -22,6 +22,10 @@ export const routes: Routes = [
     loadComponent: () => import('./features/settings/pages/settings-page.component').then(m => m.SettingsPageComponent)
   },
   {
+    path: 'ayuda',
+    loadComponent: () => import('./features/help/pages/help-page.component').then(m => m.HelpPageComponent)
+  },
+  {
     path: '**',
     redirectTo: ''
   }
