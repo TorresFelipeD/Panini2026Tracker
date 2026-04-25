@@ -12,8 +12,9 @@
         </button>
       </header>
 
-      <div class="modal-grid">
-        <div class="preview">
+      <form (ngSubmit)="submit()">
+        <div class="modal-grid">
+        <div class="preview" style="width:min(100%,22rem);justify-self:center;">
           <img *ngIf="selected.imageUrl; else noImage" [src]="selected.imageUrl" [alt]="selected.displayName"
             [class.preview-image--missing]="!isOwned">
           <ng-template #noImage>
@@ -36,12 +37,12 @@
           </fieldset>
         </div>
 
-        <form class="details" (ngSubmit)="submit()">
+        <div class="details">
           <div class="player-fields" *ngIf="isPlayer">
             <label class="field">
               <span class="field-label">
                 <span>Fecha de nacimiento</span>
-                <span class="field-help__icon" tabindex="0" title="Ingresa la fecha de nacimiento del jugador. Ejemplo: 16-2-2008" aria-label="Ingresa la fecha de nacimiento del jugador. Ejemplo: 16-2-2008">
+                <span class="field-help__icon" tabindex="0" title="Ejemplo: 16-2-2008" aria-label="Ejemplo: 16-2-2008">
                   ?
                 </span>
               </span>
@@ -51,7 +52,7 @@
             <label class="field">
               <span class="field-label">
                 <span>Estatura</span>
-                <span class="field-help__icon" tabindex="0" title="Ingresa la estatura del jugador con unidad. Ejemplo: 1.77 m" aria-label="Ingresa la estatura del jugador con unidad. Ejemplo: 1.77 m">
+                <span class="field-help__icon" tabindex="0" title="Ejemplo: 1.77 m" aria-label="Ejemplo: 1.77 m">
                   ?
                 </span>
               </span>
@@ -61,7 +62,7 @@
             <label class="field">
               <span class="field-label">
                 <span>Peso</span>
-                <span class="field-help__icon" tabindex="0" title="Ingresa el peso del jugador con unidad. Ejemplo: 76 kg" aria-label="Ingresa el peso del jugador con unidad. Ejemplo: 76 kg">
+                <span class="field-help__icon" tabindex="0" title="Ejemplo: 76 kg" aria-label="Ejemplo: 76 kg">
                   ?
                 </span>
               </span>
@@ -71,7 +72,7 @@
             <label class="field">
               <span class="field-label">
                 <span>Equipo</span>
-                <span class="field-help__icon" tabindex="0" title="Ingresa el club o equipo actual del jugador. Ejemplo: FK Dinamo Moskva (RUS)" aria-label="Ingresa el club o equipo actual del jugador. Ejemplo: FK Dinamo Moskva (RUS)">
+                <span class="field-help__icon" tabindex="0" title="Ejemplo: FK Dinamo Moskva (RUS)" aria-label="Ejemplo: FK Dinamo Moskva (RUS)">
                   ?
                 </span>
               </span>
@@ -98,12 +99,14 @@
             <span>Observaciones</span>
             <textarea rows="2" [(ngModel)]="notes" name="notes"></textarea>
           </label>
-
-          <footer>
-            <button type="submit" class="primary">Guardar cambios</button>
-          </footer>
-        </form>
+        </div>
       </div>
+
+        <footer
+          style="justify-content:center;padding-top:1rem;margin-top:1.1rem;border-top:1px solid color-mix(in srgb, var(--border-color) 72%, transparent);">
+          <button type="submit" class="primary" style="width:min(28rem,100%);">Guardar cambios</button>
+        </footer>
+      </form>
     </section>
   </div>
 </ng-container>
