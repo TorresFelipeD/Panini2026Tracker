@@ -10,6 +10,7 @@
 
 .summary-card,
 .filters,
+.group-filter,
 .country-panel {
   border: 1px solid var(--border-color);
   background: var(--panel-background);
@@ -31,6 +32,67 @@
 .filters {
   margin: 1rem 0;
   grid-template-columns: 2fr repeat(4, 1fr);
+}
+
+.group-filter {
+  display: grid;
+  gap: 1rem;
+  margin: 0 0 1rem;
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--panel-background) 88%, var(--accent-color) 12%), var(--panel-background));
+}
+
+.group-filter__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.group-filter__header span {
+  color: var(--text-secondary);
+  font-weight: 600;
+}
+
+.group-filter__header strong {
+  color: var(--accent-color);
+  font-size: 0.95rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.group-filter__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.group-filter__chip {
+  min-width: 7rem;
+  padding: 0.78rem 1rem;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--border-color) 88%, white 12%);
+  background: color-mix(in srgb, var(--field-background) 92%, var(--panel-background) 8%);
+  color: var(--text-secondary);
+  font-weight: 700;
+  transition: border-color 140ms ease, background 140ms ease, color 140ms ease, transform 140ms ease;
+}
+
+.group-filter__chip:hover {
+  border-color: color-mix(in srgb, var(--accent-color) 28%, var(--border-color) 72%);
+  color: var(--text-primary);
+  transform: translateY(-1px);
+}
+
+.group-filter__chip--active {
+  border-color: color-mix(in srgb, var(--accent-color) 48%, var(--border-color) 52%);
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--accent-color) 22%, var(--panel-background) 78%),
+    color-mix(in srgb, var(--accent-color) 10%, var(--field-background) 90%)
+  );
+  color: var(--text-primary);
+  box-shadow: 0 0.75rem 1.8rem rgba(0, 0, 0, 0.14);
 }
 
 .filters input,

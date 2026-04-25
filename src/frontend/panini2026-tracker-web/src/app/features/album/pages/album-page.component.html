@@ -112,6 +112,24 @@
   </div>
 </section>
 
+<section class="group-filter" aria-label="Filtro por grupo del Mundial 2026">
+  <div class="group-filter__header">
+    <span>Grupos del Mundial 2026</span>
+    <strong>{{ selectedGroup }}</strong>
+  </div>
+
+  <div class="group-filter__list">
+    <button
+      type="button"
+      class="group-filter__chip"
+      *ngFor="let group of worldCupGroups"
+      [class.group-filter__chip--active]="selectedGroup === group"
+      (click)="selectGroup(group)">
+      {{ group }}
+    </button>
+  </div>
+</section>
+
 <button
   type="button"
   class="filter-backdrop"

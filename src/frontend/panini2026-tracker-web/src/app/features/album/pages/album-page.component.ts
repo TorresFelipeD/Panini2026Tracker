@@ -15,6 +15,7 @@ import { StickerDetailModalComponent } from '../components/sticker-detail-modal.
 })
 export class AlbumPageComponent {
   protected readonly store = inject(AlbumStoreService);
+  protected readonly worldCupGroups = ['FCW', ...Array.from({ length: 12 }, (_, index) => `Grupo ${String.fromCharCode(65 + index)}`)];
   protected readonly filterOptions = {
     isOwned: [
       { value: '', label: 'Estado' },
@@ -39,6 +40,7 @@ export class AlbumPageComponent {
   protected isOwned = '';
   protected hasImage = '';
   protected hasDuplicates = '';
+  protected selectedGroup = this.worldCupGroups[0];
   protected openFilter: 'countryCode' | 'isOwned' | 'hasImage' | 'hasDuplicates' | null = null;
 
   constructor() {
@@ -128,5 +130,9 @@ export class AlbumPageComponent {
   protected clearCountries(): void {
     this.countryCodes = [];
     this.applyFilters();
+  }
+
+  protected selectGroup(group: string): void {
+    this.selectedGroup = group;
   }
 }
