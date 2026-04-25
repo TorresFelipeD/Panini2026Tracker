@@ -6,6 +6,7 @@ public sealed record StickerDetailDto(
     string DisplayName,
     string CountryCode,
     string CountryName,
+    string FlagCode,
     string Type,
     bool IsOwned,
     int DuplicateCount,

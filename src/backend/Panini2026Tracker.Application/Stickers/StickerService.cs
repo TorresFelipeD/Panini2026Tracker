@@ -101,6 +101,7 @@ public sealed class StickerService : IStickerService
             sticker.DisplayName,
             sticker.Country.Code,
             sticker.Country.Name,
+            sticker.Country.FlagCode,
             sticker.Type,
             sticker.CollectionEntry?.IsOwned ?? false,
             sticker.DuplicateEntry?.Quantity ?? 0,

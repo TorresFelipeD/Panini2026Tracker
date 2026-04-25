@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { StickerDetail } from '../../../core/models/app.models';
+import { getCountryFlagUrl } from '../../../core/utils/country-flag';
 
 @Component({
   selector: 'app-sticker-detail-modal',
@@ -71,5 +72,9 @@ export class StickerDetailModalComponent implements OnChanges {
 
   protected decrementDuplicates(): void {
     this.duplicateCount = Math.max(0, this.duplicateCount - 1);
+  }
+
+  protected getCountryFlagUrl(flagCode: string): string {
+    return getCountryFlagUrl(flagCode);
   }
 }

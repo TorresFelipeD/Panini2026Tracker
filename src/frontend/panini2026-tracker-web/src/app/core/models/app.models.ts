@@ -42,6 +42,7 @@ export interface StickerDetail {
   displayName: string;
   countryCode: string;
   countryName: string;
+  flagCode: string;
   type: string;
   isOwned: boolean;
   duplicateCount: number;
