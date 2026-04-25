@@ -113,7 +113,14 @@
       </div>
     </article>
 
-    <div class="settings-slot settings-slot--empty" aria-hidden="true"></div>
+    <article class="settings-card">
+      <div class="card-copy">
+        <span class="card-kicker">Logs</span>
+        <h3>Auditoría del sistema</h3>
+        <p>Consulta los logs operativos desde esta misma ventana sin salir de configuración.</p>
+      </div>
+      <button type="button" class="button button--primary button--compact" (click)="openLogsModal()">Abrir logs</button>
+    </article>
   </section>
 
   <input #catalogImportInput type="file" accept=".json,application/json" hidden (change)="onCatalogImported($event)">
@@ -137,5 +144,21 @@
     </div>
 
     <textarea [(ngModel)]="catalogDraft" spellcheck="false"></textarea>
+  </section>
+</div>
+
+<div class="modal-overlay" *ngIf="logsModalOpen" (click)="closeLogsModal()">
+  <section class="catalog-modal logs-modal" (click)="$event.stopPropagation()">
+    <header class="catalog-modal__header">
+      <div>
+        <p class="eyebrow">Logs</p>
+        <h3>Auditoría del sistema</h3>
+      </div>
+      <button type="button" class="modal-close" aria-label="Cerrar logs" (click)="closeLogsModal()">×</button>
+    </header>
+
+    <div class="logs-modal__body">
+      <app-logs-page />
+    </div>
   </section>
 </div>

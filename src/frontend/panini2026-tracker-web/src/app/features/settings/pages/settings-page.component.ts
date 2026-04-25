@@ -5,6 +5,7 @@ import { CURRENT_ALBUM_CATALOG_JSON } from '../../../core/constants/album-catalo
 import { ConfirmDialogService } from '../../../core/services/confirm-dialog.service';
 import { ToastService } from '../../../core/services/toast.service';
 import { getCountryFlagUrl } from '../../../core/utils/country-flag';
+import { LogsPageComponent } from '../../logs/pages/logs-page.component';
 
 type PickerType = 'album' | 'language' | null;
 
@@ -24,7 +25,7 @@ interface LanguageOption {
 @Component({
   selector: 'app-settings-page',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, LogsPageComponent],
   templateUrl: './settings-page.component.html',
   styleUrl: './settings-page.component.scss'
 })
@@ -50,6 +51,7 @@ export class SettingsPageComponent {
   protected selectedLanguage = this.languageOptions[0];
   protected pendingAlbumName = '';
   protected catalogModalOpen = false;
+  protected logsModalOpen = false;
   protected openPicker: PickerType = null;
   protected catalogDraft = this.formatJson(CURRENT_ALBUM_CATALOG_JSON);
   protected importedDatabaseName = '';
@@ -79,6 +81,14 @@ export class SettingsPageComponent {
 
   protected closeCatalogModal(): void {
     this.catalogModalOpen = false;
+  }
+
+  protected openLogsModal(): void {
+    this.logsModalOpen = true;
+  }
+
+  protected closeLogsModal(): void {
+    this.logsModalOpen = false;
   }
 
   protected formatCatalogDraft(): void {
