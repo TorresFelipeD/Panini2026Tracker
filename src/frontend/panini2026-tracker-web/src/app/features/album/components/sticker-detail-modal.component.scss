@@ -107,7 +107,6 @@ footer {
 .preview-image--missing {
   filter: grayscale(1) saturate(0.15) brightness(0.95);
 }
-
 .details,.info-block dl {
   display: grid;
   gap: 0.95rem;
@@ -161,9 +160,18 @@ textarea:focus {
   display: grid;
   gap: 0.45rem;
 }
+.status-field {
+  width: min(100%, 16rem);
+  margin: 0.9rem auto 0;
+  border: 0;
+}
+
+.status-field legend {
+  text-align: center;
+}
 
 .field-grid--single {
-  max-width: calc(50% - 0.5rem);
+  max-width: none;
 }
 
 .number-field {
@@ -209,6 +217,7 @@ textarea:focus {
   background: var(--accent-color);
   color: #061013;
   border-color: transparent;
+  font-weight: 700;
 }
 
 .primary:hover {
@@ -235,8 +244,6 @@ dd {
   font-weight: 600;
   color: var(--text-primary);
 }
-
-.primary { font-weight: 700; }
 
 @media (max-width: 900px) {
   .overlay {

@@ -1,107 +1,101 @@
 <ng-container *ngIf="sticker as selected">
-<div class="overlay" (click)="close.emit()">
-  <section class="modal" (click)="$event.stopPropagation()">
-    <header class="modal-header">
-      <div class="modal-header__copy">
-        <p class="modal-eyebrow">{{ selected.countryName }}</p>
-        <h2>{{ selected.displayName }}</h2>
-        <span class="modal-code">{{ selected.stickerCode }}</span>
-      </div>
-      <button
-        type="button"
-        class="modal-close"
-        aria-label="Cerrar detalle de lámina"
-        (click)="close.emit()">
-        <span class="modal-close__icon" aria-hidden="true"></span>
-      </button>
-    </header>
+  <div class="overlay" (click)="close.emit()">
+    <section class="modal" (click)="$event.stopPropagation()">
+      <header class="modal-header">
+        <div class="modal-header__copy">
+          <p class="modal-eyebrow">{{ selected.countryName }}</p>
+          <h2>{{ selected.displayName }}</h2>
+          <span class="modal-code">{{ selected.stickerCode }}</span>
+        </div>
+        <button type="button" class="modal-close" aria-label="Cerrar detalle de lámina" (click)="close.emit()">
+          <span class="modal-close__icon" aria-hidden="true"></span>
+        </button>
+      </header>
 
-    <div class="modal-grid">
-      <div class="preview">
-        <img *ngIf="selected.imageUrl; else noImage" [src]="selected.imageUrl" [alt]="selected.displayName" [class.preview-image--missing]="!isOwned">
-        <ng-template #noImage>
-          <div class="empty-preview">Sin imagen asociada</div>
-        </ng-template>
-      </div>
+      <div class="modal-grid">
+        <div class="preview">
+          <img *ngIf="selected.imageUrl; else noImage" [src]="selected.imageUrl" [alt]="selected.displayName"
+            [class.preview-image--missing]="!isOwned">
+          <ng-template #noImage>
+            <div class="empty-preview">Sin imagen asociada</div>
+          </ng-template>
 
-      <form class="details" (ngSubmit)="submit()">
-        <div class="field-grid">
+          <fieldset class="status-field">
+            <legend>Estado</legend>
+            <div class="status-toggle status-toggle--single field-grid--single">
+              <button type="button" class="status-toggle__option status-toggle__option--single"
+                [class.status-toggle__option--active]="isOwned" [attr.aria-pressed]="isOwned"
+                [style.background]="isOwned ? 'var(--accent-color)' : null" [style.color]="isOwned ? '#061013' : null"
+                [style.border-color]="isOwned ? 'transparent' : null" (click)="isOwned = !isOwned">
+                <span class="status-toggle__title">{{ isOwned ? 'Obtenida' : 'Faltante' }}</span>
+                <span class="status-toggle__hint">
+                  {{ isOwned ? 'Ya está en tu colección' : 'Aún no la tienes' }}
+                </span>
+              </button>
+            </div>
+          </fieldset>
+        </div>
+
+        <form class="details" (ngSubmit)="submit()">
+          <div class="field-grid">
+            <label class="field">
+              <span>Identificador</span>
+              <input [value]="selected.stickerCode" readonly>
+            </label>
+
+            <label class="field">
+              <span>Tipo</span>
+              <input [value]="selected.type" readonly>
+            </label>
+          </div>
+
+
+
           <label class="field">
-            <span>Identificador</span>
-            <input [value]="selected.stickerCode" readonly>
+            <span>Repetidas</span>
+            <div class="number-field">
+              <input type="number" min="0" [(ngModel)]="duplicateCount" name="duplicateCount">
+              <div class="number-stepper">
+                <button type="button" class="number-step" (click)="incrementDuplicates()">
+                  <span aria-hidden="true"></span>
+                </button>
+                <button type="button" class="number-step number-step--down" (click)="decrementDuplicates()">
+                  <span aria-hidden="true"></span>
+                </button>
+              </div>
+            </div>
           </label>
 
           <label class="field">
-            <span>Tipo</span>
-            <input [value]="selected.type" readonly>
+            <span>Observaciones</span>
+            <textarea rows="2" [(ngModel)]="notes" name="notes"></textarea>
           </label>
-        </div>
 
-        <fieldset class="status-field">
-          <legend>Estado</legend>
-          <div class="status-toggle status-toggle--single field-grid--single">
-            <button
-              type="button"
-              class="status-toggle__option status-toggle__option--single"
-              [class.status-toggle__option--active]="isOwned"
-              [attr.aria-pressed]="isOwned"
-              [style.background]="isOwned ? 'var(--accent-color)' : null"
-              [style.color]="isOwned ? '#061013' : null"
-              [style.border-color]="isOwned ? 'transparent' : null"
-              (click)="isOwned = !isOwned">
-              <span class="status-toggle__title">{{ isOwned ? 'Obtenida' : 'Faltante' }}</span>
-              <span class="status-toggle__hint">
-                {{ isOwned ? 'Ya está en tu colección' : 'Aún no la tienes' }}
-              </span>
-            </button>
+          <div class="info-block" *ngIf="(selected.additionalInfo | keyvalue).length">
+            <h3>Información adicional</h3>
+            <dl>
+              <div *ngFor="let item of selected.additionalInfo | keyvalue">
+                <dt>{{ item.key }}</dt>
+                <dd>{{ item.value }}</dd>
+              </div>
+            </dl>
           </div>
-        </fieldset>
 
-        <label class="field">
-          <span>Repetidas</span>
-          <div class="number-field">
-            <input type="number" min="0" [(ngModel)]="duplicateCount" name="duplicateCount">
-            <div class="number-stepper">
-              <button type="button" class="number-step" (click)="incrementDuplicates()">
-                <span aria-hidden="true"></span>
-              </button>
-              <button type="button" class="number-step number-step--down" (click)="decrementDuplicates()">
-                <span aria-hidden="true"></span>
-              </button>
-            </div>
+          <div class="info-block" *ngIf="(selected.metadata | keyvalue).length">
+            <h3>Metadata</h3>
+            <dl>
+              <div *ngFor="let item of selected.metadata | keyvalue">
+                <dt>{{ item.key }}</dt>
+                <dd>{{ item.value }}</dd>
+              </div>
+            </dl>
           </div>
-        </label>
 
-        <label class="field">
-          <span>Observaciones</span>
-          <textarea rows="2" [(ngModel)]="notes" name="notes"></textarea>
-        </label>
-
-        <div class="info-block" *ngIf="(selected.additionalInfo | keyvalue).length">
-          <h3>Información adicional</h3>
-          <dl>
-            <div *ngFor="let item of selected.additionalInfo | keyvalue">
-              <dt>{{ item.key }}</dt>
-              <dd>{{ item.value }}</dd>
-            </div>
-          </dl>
-        </div>
-
-        <div class="info-block" *ngIf="(selected.metadata | keyvalue).length">
-          <h3>Metadata</h3>
-          <dl>
-            <div *ngFor="let item of selected.metadata | keyvalue">
-              <dt>{{ item.key }}</dt>
-              <dd>{{ item.value }}</dd>
-            </div>
-          </dl>
-        </div>
-
-        <footer>
-          <button type="submit" class="primary">Guardar cambios</button>
-        </footer>
-      </form>
-    </div>
-  </section>
-</div>
+          <footer>
+            <button type="submit" class="primary">Guardar cambios</button>
+          </footer>
+        </form>
+      </div>
+    </section>
+  </div>
 </ng-container>
