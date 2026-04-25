@@ -41,6 +41,7 @@ public sealed class StickerService : IStickerService
     {
         var sticker = await _catalogRepository.GetStickerByIdAsync(stickerId, cancellationToken)
             ?? throw new InvalidOperationException("Sticker not found.");
+        var additionalInfo = new Dictionary<string, string>(DeserializeDictionary(sticker.AdditionalInfoJson));
 
         var now = _dateTimeProvider.UtcNow;
         var collectionEntry = await _collectionRepository.GetByStickerIdAsync(stickerId, cancellationToken);
@@ -72,6 +73,15 @@ public sealed class StickerService : IStickerService
             }
         }
 
+        if (string.Equals(sticker.Type, "jugador", StringComparison.OrdinalIgnoreCase))
+        {
+            additionalInfo["birthday"] = command.Birthday?.Trim() ?? string.Empty;
+            additionalInfo["height"] = command.Height?.Trim() ?? string.Empty;
+            additionalInfo["weight"] = command.Weight?.Trim() ?? string.Empty;
+            additionalInfo["team"] = command.Team?.Trim() ?? string.Empty;
+            sticker.UpdateAdditionalInfo(JsonSerializer.Serialize(additionalInfo, JsonDefaults.SerializerOptions));
+        }
+
         await _logRepository.AddAsync(
             new SystemLog("stickers", "state.updated", $"Sticker {sticker.StickerCode} updated. Owned={command.IsOwned}, Duplicates={command.DuplicateCount}.", "info", now),
             cancellationToken);
@@ -83,6 +93,8 @@ public sealed class StickerService : IStickerService
 
     private static StickerDetailDto Map(StickerCatalogItem sticker)
     {
+        var additionalInfo = DeserializeDictionary(sticker.AdditionalInfoJson);
+
         return new StickerDetailDto(
             sticker.Id,
             sticker.StickerCode,
@@ -95,7 +107,11 @@ public sealed class StickerService : IStickerService
             sticker.CollectionEntry?.Notes,
             ImageUrlBuilder.Build(sticker.StickerImage),
             sticker.IsProvisional,
-            DeserializeDictionary(sticker.AdditionalInfoJson),
+            GetFieldValue(additionalInfo, "birthday"),
+            GetFieldValue(additionalInfo, "height"),
+            GetFieldValue(additionalInfo, "weight"),
+            GetFieldValue(additionalInfo, "team"),
+            RemoveReservedPlayerFields(additionalInfo),
             DeserializeDictionary(sticker.MetadataJson));
     }
 
@@ -108,5 +124,17 @@ public sealed class StickerService : IStickerService
 
         return JsonSerializer.Deserialize<Dictionary<string, string>>(json, JsonDefaults.SerializerOptions)
             ?? new Dictionary<string, string>();
+    }
+
+    private static string GetFieldValue(IReadOnlyDictionary<string, string> source, string key) =>
+        source.TryGetValue(key, out var value) ? value : string.Empty;
+
+    private static IReadOnlyDictionary<string, string> RemoveReservedPlayerFields(IReadOnlyDictionary<string, string> source)
+    {
+        var filtered = source
+            .Where(pair => pair.Key is not ("birthday" or "height" or "weight" or "team"))
+            .ToDictionary(pair => pair.Key, pair => pair.Value);
+
+        return filtered;
     }
 }

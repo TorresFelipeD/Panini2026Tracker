@@ -37,19 +37,47 @@
         </div>
 
         <form class="details" (ngSubmit)="submit()">
-          <div class="field-grid">
+          <div class="player-fields" *ngIf="isPlayer">
             <label class="field">
-              <span>Identificador</span>
-              <input [value]="selected.stickerCode" readonly>
+              <span class="field-label">
+                <span>Fecha de nacimiento</span>
+                <span class="field-help__icon" tabindex="0" title="Ejemplo: 16-2-2008" aria-label="Ejemplo: 16-2-2008">
+                  i
+                </span>
+              </span>
+              <input [(ngModel)]="birthday" name="birthday" placeholder="16-2-2008">
             </label>
 
             <label class="field">
-              <span>Tipo</span>
-              <input [value]="selected.type" readonly>
+              <span class="field-label">
+                <span>Estatura</span>
+                <span class="field-help__icon" tabindex="0" title="Ejemplo: 1.77 m" aria-label="Ejemplo: 1.77 m">
+                  i
+                </span>
+              </span>
+              <input [(ngModel)]="height" name="height" placeholder="1.77 m">
+            </label>
+
+            <label class="field">
+              <span class="field-label">
+                <span>Peso</span>
+                <span class="field-help__icon" tabindex="0" title="Ejemplo: 76 kg" aria-label="Ejemplo: 76 kg">
+                  i
+                </span>
+              </span>
+              <input [(ngModel)]="weight" name="weight" placeholder="76 kg">
+            </label>
+
+            <label class="field">
+              <span class="field-label">
+                <span>Equipo</span>
+                <span class="field-help__icon" tabindex="0" title="Ejemplo: FK Dinamo Moskva (RUS)" aria-label="Ejemplo: FK Dinamo Moskva (RUS)">
+                  i
+                </span>
+              </span>
+              <input [(ngModel)]="team" name="team" placeholder="FK Dinamo Moskva (RUS)">
             </label>
           </div>
-
-
 
           <label class="field">
             <span>Repetidas</span>
@@ -70,26 +98,6 @@
             <span>Observaciones</span>
             <textarea rows="2" [(ngModel)]="notes" name="notes"></textarea>
           </label>
-
-          <div class="info-block" *ngIf="(selected.additionalInfo | keyvalue).length">
-            <h3>Información adicional</h3>
-            <dl>
-              <div *ngFor="let item of selected.additionalInfo | keyvalue">
-                <dt>{{ item.key }}</dt>
-                <dd>{{ item.value }}</dd>
-              </div>
-            </dl>
-          </div>
-
-          <div class="info-block" *ngIf="(selected.metadata | keyvalue).length">
-            <h3>Metadata</h3>
-            <dl>
-              <div *ngFor="let item of selected.metadata | keyvalue">
-                <dt>{{ item.key }}</dt>
-                <dd>{{ item.value }}</dd>
-              </div>
-            </dl>
-          </div>
 
           <footer>
             <button type="submit" class="primary">Guardar cambios</button>

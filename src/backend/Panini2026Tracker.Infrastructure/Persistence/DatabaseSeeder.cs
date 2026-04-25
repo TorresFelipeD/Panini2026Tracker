@@ -61,7 +61,12 @@ public sealed class DatabaseSeeder
         await _unitOfWork.SaveChangesAsync(cancellationToken);
 
         var existingStickers = await _dbContext.StickerCatalogItems.ToListAsync(cancellationToken);
-        var stickerMap = existingStickers.ToDictionary(sticker => sticker.StickerCode, StringComparer.OrdinalIgnoreCase);
+        var stickerMap = existingStickers
+            .GroupBy(sticker => sticker.StickerCode, StringComparer.OrdinalIgnoreCase)
+            .ToDictionary(group => group.Key, group => group.First(), StringComparer.OrdinalIgnoreCase);
+        var stickerSlotMap = existingStickers
+            .GroupBy(sticker => BuildStickerSlotKey(sticker.CountryId, sticker.DisplayOrder), StringComparer.OrdinalIgnoreCase)
+            .ToDictionary(group => group.Key, group => group.First(), StringComparer.OrdinalIgnoreCase);
         var addedStickers = new List<StickerCatalogItem>();
 
         foreach (var seedCountry in seed.Countries)
@@ -70,16 +75,23 @@ public sealed class DatabaseSeeder
 
             foreach (var seedSticker in seedCountry.Stickers)
             {
-                var additionalInfoJson = seedSticker.AdditionalInfo is null
+                var additionalInfo = BuildAdditionalInfo(seedSticker);
+                var additionalInfoJson = additionalInfo.Count == 0
                     ? null
-                    : JsonSerializer.Serialize(seedSticker.AdditionalInfo, JsonDefaults.SerializerOptions);
+                    : JsonSerializer.Serialize(additionalInfo, JsonDefaults.SerializerOptions);
                 var metadataJson = seedSticker.Metadata is null
                     ? null
                     : JsonSerializer.Serialize(seedSticker.Metadata, JsonDefaults.SerializerOptions);
 
-                if (stickerMap.TryGetValue(seedSticker.StickerCode, out var existingSticker))
+                if (!stickerMap.TryGetValue(seedSticker.StickerCode, out var existingSticker))
+                {
+                    stickerSlotMap.TryGetValue(BuildStickerSlotKey(countryId, seedSticker.DisplayOrder), out existingSticker);
+                }
+
+                if (existingSticker is not null)
                 {
                     existingSticker.UpdateCatalogData(
+                        seedSticker.StickerCode,
                         seedSticker.DisplayName,
                         seedSticker.Type,
                         seedSticker.ImageReference,
@@ -88,6 +100,8 @@ public sealed class DatabaseSeeder
                         seedSticker.IsProvisional,
                         seedSticker.DisplayOrder,
                         countryId);
+                    stickerMap[existingSticker.StickerCode] = existingSticker;
+                    stickerSlotMap[BuildStickerSlotKey(countryId, seedSticker.DisplayOrder)] = existingSticker;
                     continue;
                 }
 
@@ -113,6 +127,25 @@ public sealed class DatabaseSeeder
         var details = $"Synchronized catalog with {seed.Countries.Count} countries, {seed.Countries.Sum(country => country.Stickers.Count)} stickers, {addedCountries.Count} new countries and {addedStickers.Count} new stickers.";
         await _logRepository.AddAsync(new SystemLog("seed", action, details, "info", DateTime.UtcNow), cancellationToken);
         await _unitOfWork.SaveChangesAsync(cancellationToken);
+    }
+
+    private static string BuildStickerSlotKey(Guid countryId, int displayOrder) => $"{countryId}:{displayOrder}";
+
+    private static Dictionary<string, string> BuildAdditionalInfo(SeedStickerDto seedSticker)
+    {
+        var result = seedSticker.AdditionalInfo is null
+            ? new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
+            : new Dictionary<string, string>(seedSticker.AdditionalInfo, StringComparer.OrdinalIgnoreCase);
+
+        if (string.Equals(seedSticker.Type, "jugador", StringComparison.OrdinalIgnoreCase))
+        {
+            result["birthday"] = seedSticker.Birthday ?? string.Empty;
+            result["height"] = seedSticker.Height ?? string.Empty;
+            result["weight"] = seedSticker.Weight ?? string.Empty;
+            result["team"] = seedSticker.Team ?? string.Empty;
+        }
+
+        return result;
     }
 
     private async Task EnsureCountryFlagCodeColumnAsync(CancellationToken cancellationToken)

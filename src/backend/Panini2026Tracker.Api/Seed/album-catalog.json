@@ -6,11 +6,11 @@
       "flagCode": "ca",
       "displayOrder": 1,
       "stickers": [
-        { "stickerCode": "CAN-001", "displayName": "Escudo de Canadá", "type": "escudo", "imageReference": "catalog/canada/shield.svg", "isProvisional": true, "displayOrder": 1, "additionalInfo": { "nota": "Código provisional inspirado en álbumes Panini previos" }, "metadata": { "segment": "team-core" } },
-        { "stickerCode": "CAN-002", "displayName": "Plantilla oficial", "type": "equipo", "imageReference": null, "isProvisional": true, "displayOrder": 2, "additionalInfo": { "torneo": "Mundial 2026" }, "metadata": { "segment": "team-core" } },
-        { "stickerCode": "CAN-003", "displayName": "Director técnico", "type": "entrenador", "imageReference": null, "isProvisional": true, "displayOrder": 3, "additionalInfo": { "rol": "Cuerpo técnico" }, "metadata": { "segment": "team-core" } },
-        { "stickerCode": "CAN-004", "displayName": "Jugador destacado A", "type": "jugador", "imageReference": null, "isProvisional": true, "displayOrder": 4, "additionalInfo": { "posición": "Por confirmar" }, "metadata": { "segment": "squad" } },
-        { "stickerCode": "CAN-005", "displayName": "Jugador destacado B", "type": "jugador", "imageReference": null, "isProvisional": true, "displayOrder": 5, "additionalInfo": { "posición": "Por confirmar" }, "metadata": { "segment": "squad" } }
+        { "stickerCode": "CAN1", "displayName": "Escudo de Canadá", "type": "escudo", "imageReference": "catalog/canada/shield.svg", "isProvisional": true, "displayOrder": 1 },
+        { "stickerCode": "CAN2", "displayName": "Plantilla oficial", "type": "equipo", "imageReference": null, "isProvisional": true, "displayOrder": 2 },
+        { "stickerCode": "CAN3", "displayName": "Director técnico", "type": "entrenador", "imageReference": null, "isProvisional": true, "displayOrder": 3 },
+        { "stickerCode": "CAN4", "displayName": "Jugador destacado A", "type": "jugador", "imageReference": null, "isProvisional": true, "displayOrder": 4, "birthday": "", "height": "", "weight": "", "team": "" },
+        { "stickerCode": "CAN5", "displayName": "Jugador destacado B", "type": "jugador", "imageReference": null, "isProvisional": true, "displayOrder": 5, "birthday": "", "height": "", "weight": "", "team": "" }
       ]
     },
     {
@@ -19,11 +19,11 @@
       "flagCode": "mx",
       "displayOrder": 2,
       "stickers": [
-        { "stickerCode": "MEX-001", "displayName": "Escudo de México", "type": "escudo", "imageReference": "catalog/mexico/shield.svg", "isProvisional": true, "displayOrder": 1, "additionalInfo": { "nota": "Código provisional" }, "metadata": { "segment": "team-core" } },
-        { "stickerCode": "MEX-002", "displayName": "Plantilla oficial", "type": "equipo", "imageReference": null, "isProvisional": true, "displayOrder": 2, "additionalInfo": { "torneo": "Mundial 2026" }, "metadata": { "segment": "team-core" } },
-        { "stickerCode": "MEX-003", "displayName": "Director técnico", "type": "entrenador", "imageReference": null, "isProvisional": true, "displayOrder": 3, "additionalInfo": { "rol": "Cuerpo técnico" }, "metadata": { "segment": "team-core" } },
-        { "stickerCode": "MEX-004", "displayName": "Jugador destacado A", "type": "jugador", "imageReference": null, "isProvisional": true, "displayOrder": 4, "additionalInfo": { "posición": "Por confirmar" }, "metadata": { "segment": "squad" } },
-        { "stickerCode": "MEX-005", "displayName": "Jugador destacado B", "type": "jugador", "imageReference": null, "isProvisional": true, "displayOrder": 5, "additionalInfo": { "posición": "Por confirmar" }, "metadata": { "segment": "squad" } }
+        { "stickerCode": "MEX1", "displayName": "Escudo de México", "type": "escudo", "imageReference": "catalog/mexico/shield.svg", "isProvisional": true, "displayOrder": 1 },
+        { "stickerCode": "MEX2", "displayName": "Plantilla oficial", "type": "equipo", "imageReference": null, "isProvisional": true, "displayOrder": 2 },
+        { "stickerCode": "MEX3", "displayName": "Director técnico", "type": "entrenador", "imageReference": null, "isProvisional": true, "displayOrder": 3 },
+        { "stickerCode": "MEX4", "displayName": "Jugador destacado A", "type": "jugador", "imageReference": null, "isProvisional": true, "displayOrder": 4, "birthday": "", "height": "", "weight": "", "team": "" },
+        { "stickerCode": "MEX5", "displayName": "Jugador destacado B", "type": "jugador", "imageReference": null, "isProvisional": true, "displayOrder": 5, "birthday": "", "height": "", "weight": "", "team": "" }
       ]
     },
     {
@@ -32,11 +32,11 @@
       "flagCode": "us",
       "displayOrder": 3,
       "stickers": [
-        { "stickerCode": "USA-001", "displayName": "Escudo de Estados Unidos", "type": "escudo", "imageReference": "catalog/usa/shield.svg", "isProvisional": true, "displayOrder": 1, "additionalInfo": { "nota": "Código provisional" }, "metadata": { "segment": "team-core" } },
-        { "stickerCode": "USA-002", "displayName": "Plantilla oficial", "type": "equipo", "imageReference": null, "isProvisional": true, "displayOrder": 2, "additionalInfo": { "torneo": "Mundial 2026" }, "metadata": { "segment": "team-core" } },
-        { "stickerCode": "USA-003", "displayName": "Director técnico", "type": "entrenador", "imageReference": null, "isProvisional": true, "displayOrder": 3, "additionalInfo": { "rol": "Cuerpo técnico" }, "metadata": { "segment": "team-core" } },
-        { "stickerCode": "USA-004", "displayName": "Jugador destacado A", "type": "jugador", "imageReference": null, "isProvisional": true, "displayOrder": 4, "additionalInfo": { "posición": "Por confirmar" }, "metadata": { "segment": "squad" } },
-        { "stickerCode": "USA-005", "displayName": "Jugador destacado B", "type": "jugador", "imageReference": null, "isProvisional": true, "displayOrder": 5, "additionalInfo": { "posición": "Por confirmar" }, "metadata": { "segment": "squad" } }
+        { "stickerCode": "USA1", "displayName": "Escudo de Estados Unidos", "type": "escudo", "imageReference": "catalog/usa/shield.svg", "isProvisional": true, "displayOrder": 1 },
+        { "stickerCode": "USA2", "displayName": "Plantilla oficial", "type": "equipo", "imageReference": null, "isProvisional": true, "displayOrder": 2 },
+        { "stickerCode": "USA3", "displayName": "Director técnico", "type": "entrenador", "imageReference": null, "isProvisional": true, "displayOrder": 3 },
+        { "stickerCode": "USA4", "displayName": "Jugador destacado A", "type": "jugador", "imageReference": null, "isProvisional": true, "displayOrder": 4, "birthday": "", "height": "", "weight": "", "team": "" },
+        { "stickerCode": "USA5", "displayName": "Jugador destacado B", "type": "jugador", "imageReference": null, "isProvisional": true, "displayOrder": 5, "birthday": "", "height": "", "weight": "", "team": "" }
       ]
     },
     {
@@ -45,11 +45,11 @@
       "flagCode": "ar",
       "displayOrder": 4,
       "stickers": [
-        { "stickerCode": "ARG-001", "displayName": "Escudo de Argentina", "type": "escudo", "imageReference": "catalog/argentina/shield.svg", "isProvisional": true, "displayOrder": 1, "additionalInfo": { "nota": "Código provisional" }, "metadata": { "segment": "team-core" } },
-        { "stickerCode": "ARG-002", "displayName": "Plantilla oficial", "type": "equipo", "imageReference": null, "isProvisional": true, "displayOrder": 2, "additionalInfo": { "torneo": "Mundial 2026" }, "metadata": { "segment": "team-core" } },
-        { "stickerCode": "ARG-003", "displayName": "Director técnico", "type": "entrenador", "imageReference": null, "isProvisional": true, "displayOrder": 3, "additionalInfo": { "rol": "Cuerpo técnico" }, "metadata": { "segment": "team-core" } },
-        { "stickerCode": "ARG-004", "displayName": "Jugador destacado A", "type": "jugador", "imageReference": null, "isProvisional": true, "displayOrder": 4, "additionalInfo": { "posición": "Por confirmar" }, "metadata": { "segment": "squad" } },
-        { "stickerCode": "ARG-005", "displayName": "Jugador destacado B", "type": "jugador", "imageReference": null, "isProvisional": true, "displayOrder": 5, "additionalInfo": { "posición": "Por confirmar" }, "metadata": { "segment": "squad" } }
+        { "stickerCode": "ARG1", "displayName": "Escudo de Argentina", "type": "escudo", "imageReference": "catalog/argentina/shield.svg", "isProvisional": true, "displayOrder": 1 },
+        { "stickerCode": "ARG2", "displayName": "Plantilla oficial", "type": "equipo", "imageReference": null, "isProvisional": true, "displayOrder": 2 },
+        { "stickerCode": "ARG3", "displayName": "Director técnico", "type": "entrenador", "imageReference": null, "isProvisional": true, "displayOrder": 3 },
+        { "stickerCode": "ARG4", "displayName": "Jugador destacado A", "type": "jugador", "imageReference": null, "isProvisional": true, "displayOrder": 4, "birthday": "", "height": "", "weight": "", "team": "" },
+        { "stickerCode": "ARG5", "displayName": "Jugador destacado B", "type": "jugador", "imageReference": null, "isProvisional": true, "displayOrder": 5, "birthday": "", "height": "", "weight": "", "team": "" }
       ]
     },
     {
@@ -58,11 +58,11 @@
       "flagCode": "br",
       "displayOrder": 5,
       "stickers": [
-        { "stickerCode": "BRA-001", "displayName": "Escudo de Brasil", "type": "escudo", "imageReference": "catalog/brasil/shield.svg", "isProvisional": true, "displayOrder": 1, "additionalInfo": { "nota": "Código provisional" }, "metadata": { "segment": "team-core" } },
-        { "stickerCode": "BRA-002", "displayName": "Plantilla oficial", "type": "equipo", "imageReference": null, "isProvisional": true, "displayOrder": 2, "additionalInfo": { "torneo": "Mundial 2026" }, "metadata": { "segment": "team-core" } },
-        { "stickerCode": "BRA-003", "displayName": "Director técnico", "type": "entrenador", "imageReference": null, "isProvisional": true, "displayOrder": 3, "additionalInfo": { "rol": "Cuerpo técnico" }, "metadata": { "segment": "team-core" } },
-        { "stickerCode": "BRA-004", "displayName": "Jugador destacado A", "type": "jugador", "imageReference": null, "isProvisional": true, "displayOrder": 4, "additionalInfo": { "posición": "Por confirmar" }, "metadata": { "segment": "squad" } },
-        { "stickerCode": "BRA-005", "displayName": "Jugador destacado B", "type": "jugador", "imageReference": null, "isProvisional": true, "displayOrder": 5, "additionalInfo": { "posición": "Por confirmar" }, "metadata": { "segment": "squad" } }
+        { "stickerCode": "BRA1", "displayName": "Escudo de Brasil", "type": "escudo", "imageReference": "catalog/brasil/shield.svg", "isProvisional": true, "displayOrder": 1 },
+        { "stickerCode": "BRA2", "displayName": "Plantilla oficial", "type": "equipo", "imageReference": null, "isProvisional": true, "displayOrder": 2 },
+        { "stickerCode": "BRA3", "displayName": "Director técnico", "type": "entrenador", "imageReference": null, "isProvisional": true, "displayOrder": 3 },
+        { "stickerCode": "BRA4", "displayName": "Jugador destacado A", "type": "jugador", "imageReference": null, "isProvisional": true, "displayOrder": 4, "birthday": "", "height": "", "weight": "", "team": "" },
+        { "stickerCode": "BRA5", "displayName": "Jugador destacado B", "type": "jugador", "imageReference": null, "isProvisional": true, "displayOrder": 5, "birthday": "", "height": "", "weight": "", "team": "" }
       ]
     },
     {
@@ -71,11 +71,11 @@
       "flagCode": "gb-eng",
       "displayOrder": 6,
       "stickers": [
-        { "stickerCode": "ENG-001", "displayName": "Escudo de Inglaterra", "type": "escudo", "imageReference": "catalog/england/shield.svg", "isProvisional": true, "displayOrder": 1, "additionalInfo": { "nota": "Código provisional" }, "metadata": { "segment": "team-core" } },
-        { "stickerCode": "ENG-002", "displayName": "Plantilla oficial", "type": "equipo", "imageReference": null, "isProvisional": true, "displayOrder": 2, "additionalInfo": { "torneo": "Mundial 2026" }, "metadata": { "segment": "team-core" } },
-        { "stickerCode": "ENG-003", "displayName": "Director técnico", "type": "entrenador", "imageReference": null, "isProvisional": true, "displayOrder": 3, "additionalInfo": { "rol": "Cuerpo técnico" }, "metadata": { "segment": "team-core" } },
-        { "stickerCode": "ENG-004", "displayName": "Jugador destacado A", "type": "jugador", "imageReference": null, "isProvisional": true, "displayOrder": 4, "additionalInfo": { "posición": "Por confirmar" }, "metadata": { "segment": "squad" } },
-        { "stickerCode": "ENG-005", "displayName": "Jugador destacado B", "type": "jugador", "imageReference": null, "isProvisional": true, "displayOrder": 5, "additionalInfo": { "posición": "Por confirmar" }, "metadata": { "segment": "squad" } }
+        { "stickerCode": "ENG1", "displayName": "Escudo de Inglaterra", "type": "escudo", "imageReference": "catalog/england/shield.svg", "isProvisional": true, "displayOrder": 1 },
+        { "stickerCode": "ENG2", "displayName": "Plantilla oficial", "type": "equipo", "imageReference": null, "isProvisional": true, "displayOrder": 2 },
+        { "stickerCode": "ENG3", "displayName": "Director técnico", "type": "entrenador", "imageReference": null, "isProvisional": true, "displayOrder": 3 },
+        { "stickerCode": "ENG4", "displayName": "Jugador destacado A", "type": "jugador", "imageReference": null, "isProvisional": true, "displayOrder": 4, "birthday": "", "height": "", "weight": "", "team": "" },
+        { "stickerCode": "ENG5", "displayName": "Jugador destacado B", "type": "jugador", "imageReference": null, "isProvisional": true, "displayOrder": 5, "birthday": "", "height": "", "weight": "", "team": "" }
       ]
     },
     {
@@ -84,11 +84,11 @@
       "flagCode": "es",
       "displayOrder": 7,
       "stickers": [
-        { "stickerCode": "ESP-001", "displayName": "Escudo de España", "type": "escudo", "imageReference": "catalog/spain/shield.svg", "isProvisional": true, "displayOrder": 1, "additionalInfo": { "nota": "Código provisional" }, "metadata": { "segment": "team-core" } },
-        { "stickerCode": "ESP-002", "displayName": "Plantilla oficial", "type": "equipo", "imageReference": null, "isProvisional": true, "displayOrder": 2, "additionalInfo": { "torneo": "Mundial 2026" }, "metadata": { "segment": "team-core" } },
-        { "stickerCode": "ESP-003", "displayName": "Director técnico", "type": "entrenador", "imageReference": null, "isProvisional": true, "displayOrder": 3, "additionalInfo": { "rol": "Cuerpo técnico" }, "metadata": { "segment": "team-core" } },
-        { "stickerCode": "ESP-004", "displayName": "Jugador destacado A", "type": "jugador", "imageReference": null, "isProvisional": true, "displayOrder": 4, "additionalInfo": { "posición": "Por confirmar" }, "metadata": { "segment": "squad" } },
-        { "stickerCode": "ESP-005", "displayName": "Jugador destacado B", "type": "jugador", "imageReference": null, "isProvisional": true, "displayOrder": 5, "additionalInfo": { "posición": "Por confirmar" }, "metadata": { "segment": "squad" } }
+        { "stickerCode": "ESP1", "displayName": "Escudo de España", "type": "escudo", "imageReference": "catalog/spain/shield.svg", "isProvisional": true, "displayOrder": 1 },
+        { "stickerCode": "ESP2", "displayName": "Plantilla oficial", "type": "equipo", "imageReference": null, "isProvisional": true, "displayOrder": 2 },
+        { "stickerCode": "ESP3", "displayName": "Director técnico", "type": "entrenador", "imageReference": null, "isProvisional": true, "displayOrder": 3 },
+        { "stickerCode": "ESP4", "displayName": "Jugador destacado A", "type": "jugador", "imageReference": null, "isProvisional": true, "displayOrder": 4, "birthday": "", "height": "", "weight": "", "team": "" },
+        { "stickerCode": "ESP5", "displayName": "Jugador destacado B", "type": "jugador", "imageReference": null, "isProvisional": true, "displayOrder": 5, "birthday": "", "height": "", "weight": "", "team": "" }
       ]
     },
     {
@@ -97,11 +97,11 @@
       "flagCode": "fr",
       "displayOrder": 8,
       "stickers": [
-        { "stickerCode": "FRA-001", "displayName": "Escudo de Francia", "type": "escudo", "imageReference": "catalog/france/shield.svg", "isProvisional": true, "displayOrder": 1, "additionalInfo": { "nota": "Código provisional" }, "metadata": { "segment": "team-core" } },
-        { "stickerCode": "FRA-002", "displayName": "Plantilla oficial", "type": "equipo", "imageReference": null, "isProvisional": true, "displayOrder": 2, "additionalInfo": { "torneo": "Mundial 2026" }, "metadata": { "segment": "team-core" } },
-        { "stickerCode": "FRA-003", "displayName": "Director técnico", "type": "entrenador", "imageReference": null, "isProvisional": true, "displayOrder": 3, "additionalInfo": { "rol": "Cuerpo técnico" }, "metadata": { "segment": "team-core" } },
-        { "stickerCode": "FRA-004", "displayName": "Jugador destacado A", "type": "jugador", "imageReference": null, "isProvisional": true, "displayOrder": 4, "additionalInfo": { "posición": "Por confirmar" }, "metadata": { "segment": "squad" } },
-        { "stickerCode": "FRA-005", "displayName": "Jugador destacado B", "type": "jugador", "imageReference": null, "isProvisional": true, "displayOrder": 5, "additionalInfo": { "posición": "Por confirmar" }, "metadata": { "segment": "squad" } }
+        { "stickerCode": "FRA1", "displayName": "Escudo de Francia", "type": "escudo", "imageReference": "catalog/france/shield.svg", "isProvisional": true, "displayOrder": 1 },
+        { "stickerCode": "FRA2", "displayName": "Plantilla oficial", "type": "equipo", "imageReference": null, "isProvisional": true, "displayOrder": 2 },
+        { "stickerCode": "FRA3", "displayName": "Director técnico", "type": "entrenador", "imageReference": null, "isProvisional": true, "displayOrder": 3 },
+        { "stickerCode": "FRA4", "displayName": "Jugador destacado A", "type": "jugador", "imageReference": null, "isProvisional": true, "displayOrder": 4, "birthday": "", "height": "", "weight": "", "team": "" },
+        { "stickerCode": "FRA5", "displayName": "Jugador destacado B", "type": "jugador", "imageReference": null, "isProvisional": true, "displayOrder": 5, "birthday": "", "height": "", "weight": "", "team": "" }
       ]
     },
     {
@@ -110,11 +110,11 @@
       "flagCode": "de",
       "displayOrder": 9,
       "stickers": [
-        { "stickerCode": "GER1", "displayName": "Escudo de Alemania y otras cositas", "type": "escudo", "imageReference": "catalog/germany/shield.svg", "isProvisional": true, "displayOrder": 1, "additionalInfo": { "nota": "Código provisional" }, "metadata": { "segment": "team-core" } },
-        { "stickerCode": "GER-002", "displayName": "Plantilla oficial", "type": "equipo", "imageReference": null, "isProvisional": true, "displayOrder": 2, "additionalInfo": { "torneo": "Mundial 2026" }, "metadata": { "segment": "team-core" } },
-        { "stickerCode": "GER-003", "displayName": "Director técnico", "type": "entrenador", "imageReference": null, "isProvisional": true, "displayOrder": 3, "additionalInfo": { "rol": "Cuerpo técnico" }, "metadata": { "segment": "team-core" } },
-        { "stickerCode": "GER-004", "displayName": "Jugador destacado A", "type": "jugador", "imageReference": null, "isProvisional": true, "displayOrder": 4, "additionalInfo": { "posición": "Por confirmar" }, "metadata": { "segment": "squad" } },
-        { "stickerCode": "GER-005", "displayName": "Jugador destacado B", "type": "jugador", "imageReference": null, "isProvisional": true, "displayOrder": 5, "additionalInfo": { "posición": "Por confirmar" }, "metadata": { "segment": "squad" } }
+        { "stickerCode": "GER1", "displayName": "Escudo de Alemania y otras cositas", "type": "escudo", "imageReference": "catalog/germany/shield.svg", "isProvisional": true, "displayOrder": 1 },
+        { "stickerCode": "GER2", "displayName": "Plantilla oficial", "type": "equipo", "imageReference": null, "isProvisional": true, "displayOrder": 2 },
+        { "stickerCode": "GER3", "displayName": "Director técnico", "type": "entrenador", "imageReference": null, "isProvisional": true, "displayOrder": 3 },
+        { "stickerCode": "GER4", "displayName": "Jugador destacado A", "type": "jugador", "imageReference": null, "isProvisional": true, "displayOrder": 4, "birthday": "", "height": "", "weight": "", "team": "" },
+        { "stickerCode": "GER5", "displayName": "Jugador destacado B", "type": "jugador", "imageReference": null, "isProvisional": true, "displayOrder": 5, "birthday": "", "height": "", "weight": "", "team": "" }
       ]
     },
     {
@@ -123,11 +123,11 @@
       "flagCode": "jp",
       "displayOrder": 10,
       "stickers": [
-        { "stickerCode": "JPN-001", "displayName": "Escudo de Japón", "type": "escudo", "imageReference": "catalog/japan/shield.svg", "isProvisional": true, "displayOrder": 1, "additionalInfo": { "nota": "Código provisional" }, "metadata": { "segment": "team-core" } },
-        { "stickerCode": "JPN-002", "displayName": "Plantilla oficial", "type": "equipo", "imageReference": null, "isProvisional": true, "displayOrder": 2, "additionalInfo": { "torneo": "Mundial 2026" }, "metadata": { "segment": "team-core" } },
-        { "stickerCode": "JPN-003", "displayName": "Director técnico", "type": "entrenador", "imageReference": null, "isProvisional": true, "displayOrder": 3, "additionalInfo": { "rol": "Cuerpo técnico" }, "metadata": { "segment": "team-core" } },
-        { "stickerCode": "JPN-004", "displayName": "Jugador destacado A", "type": "jugador", "imageReference": null, "isProvisional": true, "displayOrder": 4, "additionalInfo": { "posición": "Por confirmar" }, "metadata": { "segment": "squad" } },
-        { "stickerCode": "JPN-005", "displayName": "Jugador destacado B", "type": "jugador", "imageReference": null, "isProvisional": true, "displayOrder": 5, "additionalInfo": { "posición": "Por confirmar" }, "metadata": { "segment": "squad" } }
+        { "stickerCode": "JPN1", "displayName": "Escudo de Japón", "type": "escudo", "imageReference": "catalog/japan/shield.svg", "isProvisional": true, "displayOrder": 1 },
+        { "stickerCode": "JPN2", "displayName": "Plantilla oficial", "type": "equipo", "imageReference": null, "isProvisional": true, "displayOrder": 2 },
+        { "stickerCode": "JPN3", "displayName": "Director técnico", "type": "entrenador", "imageReference": null, "isProvisional": true, "displayOrder": 3 },
+        { "stickerCode": "JPN4", "displayName": "Jugador destacado A", "type": "jugador", "imageReference": null, "isProvisional": true, "displayOrder": 4, "birthday": "", "height": "", "weight": "", "team": "" },
+        { "stickerCode": "JPN5", "displayName": "Jugador destacado B", "type": "jugador", "imageReference": null, "isProvisional": true, "displayOrder": 5, "birthday": "", "height": "", "weight": "", "team": "" }
       ]
     }
   ]

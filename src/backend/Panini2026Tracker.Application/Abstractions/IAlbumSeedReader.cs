@@ -21,5 +21,9 @@ public sealed record SeedStickerDto(
     string? ImageReference,
     bool IsProvisional,
     int DisplayOrder,
+    string? Birthday,
+    string? Height,
+    string? Weight,
+    string? Team,
     Dictionary<string, string>? AdditionalInfo,
     Dictionary<string, string>? Metadata);

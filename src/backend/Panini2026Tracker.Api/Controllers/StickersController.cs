@@ -25,7 +25,17 @@ public sealed class StickersController : ControllerBase
     [HttpPut("{stickerId:guid}/state")]
     public async Task<ActionResult<StickerDetailDto>> UpdateStateAsync(Guid stickerId, [FromBody] UpdateStickerStateRequest request, CancellationToken cancellationToken)
     {
-        var result = await _stickerService.UpdateStateAsync(stickerId, new UpdateStickerStateCommand(request.IsOwned, request.DuplicateCount, request.Notes), cancellationToken);
+        var result = await _stickerService.UpdateStateAsync(
+            stickerId,
+            new UpdateStickerStateCommand(
+                request.IsOwned,
+                request.DuplicateCount,
+                request.Notes,
+                request.Birthday,
+                request.Height,
+                request.Weight,
+                request.Team),
+            cancellationToken);
         return Ok(result);
     }
 }

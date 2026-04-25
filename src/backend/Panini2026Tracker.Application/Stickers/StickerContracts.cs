@@ -12,10 +12,21 @@ public sealed record StickerDetailDto(
     string? Notes,
     string? ImageUrl,
     bool IsProvisional,
+    string Birthday,
+    string Height,
+    string Weight,
+    string Team,
     IReadOnlyDictionary<string, string> AdditionalInfo,
     IReadOnlyDictionary<string, string> Metadata);
 
-public sealed record UpdateStickerStateCommand(bool IsOwned, int DuplicateCount, string? Notes);
+public sealed record UpdateStickerStateCommand(
+    bool IsOwned,
+    int DuplicateCount,
+    string? Notes,
+    string? Birthday,
+    string? Height,
+    string? Weight,
+    string? Team);
 
 public interface IStickerService
 {

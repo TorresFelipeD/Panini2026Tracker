@@ -48,6 +48,10 @@ export interface StickerDetail {
   notes: string | null;
   imageUrl: string | null;
   isProvisional: boolean;
+  birthday: string;
+  height: string;
+  weight: string;
+  team: string;
   additionalInfo: Record<string, string>;
   metadata: Record<string, string>;
 }

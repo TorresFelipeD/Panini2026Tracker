@@ -109,7 +109,16 @@ export class AlbumStoreService {
     this.selectedSticker.set(null);
   }
 
-  saveSticker(payload: { stickerId: string; isOwned: boolean; duplicateCount: number; notes: string }): void {
+  saveSticker(payload: {
+    stickerId: string;
+    isOwned: boolean;
+    duplicateCount: number;
+    notes: string;
+    birthday: string;
+    height: string;
+    weight: string;
+    team: string;
+  }): void {
     this.http.put<StickerDetail>(`${this.config.apiBaseUrl}/stickers/${payload.stickerId}/state`, payload).subscribe({
       next: value => {
         this.selectedSticker.set({

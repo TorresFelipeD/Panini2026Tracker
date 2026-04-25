@@ -25,6 +25,10 @@ public sealed class JsonAlbumSeedReader : IAlbumSeedReader
                 sticker.ImageReference,
                 sticker.IsProvisional,
                 sticker.DisplayOrder,
+                sticker.Birthday,
+                sticker.Height,
+                sticker.Weight,
+                sticker.Team,
                 sticker.AdditionalInfo,
                 sticker.Metadata)).ToArray())).ToArray());
     }
@@ -51,6 +55,10 @@ public sealed class JsonAlbumSeedReader : IAlbumSeedReader
         public string? ImageReference { get; set; }
         public bool IsProvisional { get; set; }
         public int DisplayOrder { get; set; }
+        public string? Birthday { get; set; }
+        public string? Height { get; set; }
+        public string? Weight { get; set; }
+        public string? Team { get; set; }
         public Dictionary<string, string>? AdditionalInfo { get; set; }
         public Dictionary<string, string>? Metadata { get; set; }
     }
