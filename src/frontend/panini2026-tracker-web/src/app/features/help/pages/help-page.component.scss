@@ -4,16 +4,17 @@
 .help-hero{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(320px,1fr);gap:1rem;align-items:start}
 .eyebrow,.card-kicker,.hero-copy,.help-card__heading p,.search-label,.help-route,.help-section__title,.help-empty p{color:var(--text-secondary)}
 .eyebrow,.card-kicker,.search-label,.help-section__title{text-transform:uppercase;letter-spacing:.08em;font-size:.76rem;font-weight:700}
-.help-hero h2,.help-card h3,.help-empty h3{margin:.35rem 0 0}
+.help-hero h2,.help-card h3,.help-empty h3{margin:.35rem 0 0;color:var(--text-primary)}
 .hero-copy,.help-card__heading p,.help-empty p{margin:.6rem 0 0}
 .search-input-wrap,.help-card__toggle{display:flex;gap:.75rem}
+.search-panel,.search-field,.search-input-wrap{width:100%}
 input,.button,.search-clear{border-radius:1rem;border:1px solid var(--border-color);background:var(--field-background);color:var(--text-primary)}
-input{width:100%;padding:.9rem 1rem}
+input{width:100%;flex:1 1 auto;padding:.9rem 1rem}
 .button,.search-clear{padding:.85rem 1rem;font-weight:700}
 .button--primary{background:var(--accent-color);border-color:transparent;color:#061013}
-.help-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+.help-grid{grid-template-columns:1fr}
 .help-card--matched{border-color:color-mix(in srgb,var(--accent-color) 44%,var(--border-color) 56%)}
-.help-card__toggle{width:100%;padding:0;border:0;background:transparent;align-items:start;justify-content:space-between;text-align:left}
+.help-card__toggle{width:100%;padding:0;border:0;background:transparent;align-items:start;justify-content:space-between;text-align:left;color:var(--text-primary)}
 .help-card__meta{justify-items:end;flex-shrink:0}
 .help-route{padding:.45rem .7rem;border-radius:999px;background:color-mix(in srgb,var(--field-background) 86%,transparent);font-size:.85rem}
 .help-chevron{width:.8rem;height:.8rem;border-right:.14rem solid currentColor;border-bottom:.14rem solid currentColor;transform:rotate(45deg);transition:transform 160ms ease}
@@ -22,5 +23,5 @@ input{width:100%;padding:.9rem 1rem}
 .help-section ol,.help-section ul{margin:0;padding-left:1.2rem;display:grid;gap:.7rem}
 .help-empty{justify-items:start}
 mark{padding:.08rem .28rem;border-radius:.35rem;background:color-mix(in srgb,#f8de72 76%,var(--accent-color) 24%);color:#291900}
-@media (max-width:980px){.help-hero,.help-grid{grid-template-columns:1fr}}
+@media (max-width:980px){.help-hero{grid-template-columns:1fr}}
 @media (max-width:640px){.search-input-wrap,.help-card__toggle{flex-direction:column;align-items:stretch}.help-card__meta{justify-items:start}.search-clear{width:100%}}
