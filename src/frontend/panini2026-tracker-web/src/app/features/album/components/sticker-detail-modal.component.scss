@@ -40,10 +40,6 @@ footer {
   border-bottom: 1px solid color-mix(in srgb, var(--border-color) 72%, transparent);
 }
 
-.modal-header__copy {
-  display: grid;
-}
-
 .modal-eyebrow {
   margin: 0;
   color: var(--text-secondary);
@@ -71,8 +67,6 @@ footer {
 
 .modal-close {
   width: 3rem;
-  min-width: 3rem;
-  max-width: 3rem;
   height: 3rem;
   padding: 0;
   flex: 0 0 auto;
@@ -164,11 +158,10 @@ textarea:focus {
   width: min(100%, 16rem);
   margin: 0.9rem auto 0;
   border: 0;
-}
-
-.status-field legend {
   text-align: center;
 }
+
+.status-toggle__option:hover { filter: brightness(0.92); }
 
 .field-grid--single {
   max-width: none;
@@ -264,9 +257,5 @@ dd {
   .modal-header {
     grid-template-columns: 1fr;
     flex-direction: column;
-  }
-
-  .modal-close {
-    width: 3rem;
   }
 }
