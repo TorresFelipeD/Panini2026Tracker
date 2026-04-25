@@ -2,6 +2,7 @@
 .settings-page,.settings-grid,.stack{gap:1rem}
 .settings-hero,.settings-card,.catalog-modal{border:1px solid var(--border-color);background:var(--panel-background);border-radius:1.5rem}
 .settings-hero,.settings-card{padding:1.25rem}
+.settings-card{box-shadow:0 0 0 1px rgba(255,255,255,.02),0 0 2.4rem rgba(0,0,0,.24),0 .75rem 1.8rem rgba(0,0,0,.18)}
 .eyebrow,.card-kicker,.hero-copy,.card-copy p,.stack small,.combo-copy small{color:var(--text-secondary)}
 .eyebrow,.card-kicker{text-transform:uppercase;letter-spacing:.08em;font-size:.76rem;font-weight:700}
 .settings-hero h2,.settings-card h3,.catalog-modal h3{margin:.35rem 0 0}
