@@ -18,6 +18,10 @@ export const routes: Routes = [
     loadComponent: () => import('./features/images/pages/images-page.component').then(m => m.ImagesPageComponent)
   },
   {
+    path: 'configuraciones',
+    loadComponent: () => import('./features/settings/pages/settings-page.component').then(m => m.SettingsPageComponent)
+  },
+  {
     path: '**',
     redirectTo: ''
   }

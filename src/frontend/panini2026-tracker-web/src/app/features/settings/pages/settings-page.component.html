@@ -1,0 +1,139 @@
+<section class="settings-page" (click)="closePickers()">
+  <header class="settings-hero">
+    <div>
+      <p class="eyebrow">Configuraciones</p>
+      <h2>Administración del álbum y del progreso</h2>
+      <p class="hero-copy">Aquí queda el cascarón para gestionar catálogos, respaldos, idioma y múltiples álbumes.</p>
+    </div>
+  </header>
+
+  <section class="settings-grid">
+    <article class="settings-card settings-card--danger">
+      <div class="card-copy">
+        <span class="card-kicker">Progreso</span>
+        <h3>Restablecer progreso del álbum</h3>
+        <p>Prepara el flujo para limpiar el avance del álbum activo y comenzar un seguimiento nuevo.</p>
+      </div>
+      <button type="button" class="button button--danger" (click)="resetProgress()">Restablecer progreso</button>
+    </article>
+
+    <article class="settings-card settings-card--wide">
+      <div class="card-copy">
+        <span class="card-kicker">Catálogo</span>
+        <h3>Editar `album-catalog.json`</h3>
+        <p>Abre el editor formateado del seed actual, importa un JSON nuevo o descarga el catálogo en edición.</p>
+      </div>
+      <div class="card-actions">
+        <button type="button" class="button button--primary" (click)="openCatalogModal()">Abrir editor</button>
+        <button type="button" class="button" (click)="downloadCatalogDraft()">Descargar JSON</button>
+        <button type="button" class="button" (click)="triggerCatalogImport()">Importar JSON</button>
+      </div>
+    </article>
+
+    <article class="settings-card">
+      <div class="card-copy">
+        <span class="card-kicker">Base de datos</span>
+        <h3>Respaldo e importación</h3>
+        <p>Descarga una copia del progreso actual o carga una nueva base de datos para reemplazo futuro.</p>
+      </div>
+      <div class="stack">
+        <button type="button" class="button button--primary" (click)="downloadDatabase()">Descargar DB</button>
+        <button type="button" class="button" (click)="triggerDatabaseImport()">Importar DB</button>
+        <small *ngIf="importedDatabaseName">Archivo listo: {{ importedDatabaseName }}</small>
+      </div>
+    </article>
+
+    <article class="settings-card">
+      <div class="card-copy">
+        <span class="card-kicker">Álbum</span>
+        <h3>Selector de álbum activo</h3>
+        <p>Elige qué álbum visualizar y deja listo el flujo para crear un progreso nuevo más adelante.</p>
+      </div>
+
+      <div class="combo" (click)="$event.stopPropagation()">
+        <button type="button" class="combo-trigger" (click)="togglePicker('album')">
+          <span class="combo-copy">
+            <strong>{{ selectedAlbum.label }}</strong>
+            <small>{{ selectedAlbum.note }}</small>
+          </span>
+          <span class="combo-chevron" aria-hidden="true"></span>
+        </button>
+
+        <div class="combo-panel" *ngIf="openPicker === 'album'">
+          <button type="button" class="combo-option" *ngFor="let option of albumOptions" (click)="selectAlbum(option)">
+            <span class="combo-copy">
+              <strong>{{ option.label }}</strong>
+              <small>{{ option.note }}</small>
+            </span>
+          </button>
+        </div>
+      </div>
+
+      <div class="stack">
+        <input [(ngModel)]="pendingAlbumName" placeholder="Nombre para un nuevo álbum">
+        <div class="card-actions">
+          <button type="button" class="button" (click)="createAlbum()">Crear álbum</button>
+          <button type="button" class="button button--primary" (click)="applyAlbumSelection()">Ver álbum</button>
+        </div>
+      </div>
+    </article>
+
+    <article class="settings-card">
+      <div class="card-copy">
+        <span class="card-kicker">Idioma</span>
+        <h3>Cambiar idioma de la aplicación</h3>
+        <p>Cascarón visual y funcional de frontend para elegir idioma antes de conectarlo al resto de la app.</p>
+      </div>
+
+      <div class="combo" (click)="$event.stopPropagation()">
+        <button type="button" class="combo-trigger" (click)="togglePicker('language')">
+          <span class="combo-flagged">
+            <img [src]="getCountryFlagUrl(selectedLanguage.flagCode)" alt="" aria-hidden="true">
+            <span class="combo-copy">
+              <strong>{{ selectedLanguage.label }}</strong>
+              <small>{{ selectedLanguage.nativeLabel }}</small>
+            </span>
+          </span>
+          <span class="combo-chevron" aria-hidden="true"></span>
+        </button>
+
+        <div class="combo-panel" *ngIf="openPicker === 'language'">
+          <button type="button" class="combo-option" *ngFor="let option of languageOptions" (click)="selectLanguage(option)">
+            <span class="combo-flagged">
+              <img [src]="getCountryFlagUrl(option.flagCode)" alt="" aria-hidden="true">
+              <span class="combo-copy">
+                <strong>{{ option.label }}</strong>
+                <small>{{ option.nativeLabel }}</small>
+              </span>
+            </span>
+          </button>
+        </div>
+      </div>
+
+      <button type="button" class="button button--primary" (click)="applyLanguageSelection()">Actualizar idioma</button>
+    </article>
+  </section>
+
+  <input #catalogImportInput type="file" accept=".json,application/json" hidden (change)="onCatalogImported($event)">
+  <input #databaseImportInput type="file" accept=".json,.db,.sqlite,.bak" hidden (change)="onDatabaseImported($event)">
+</section>
+
+<div class="modal-overlay" *ngIf="catalogModalOpen" (click)="closeCatalogModal()">
+  <section class="catalog-modal" (click)="$event.stopPropagation()">
+    <header class="catalog-modal__header">
+      <div>
+        <p class="eyebrow">Catálogo del álbum</p>
+        <h3>Editor de `album-catalog.json`</h3>
+      </div>
+      <button type="button" class="modal-close" aria-label="Cerrar editor" (click)="closeCatalogModal()">×</button>
+    </header>
+
+    <div class="catalog-modal__actions">
+      <button type="button" class="button" (click)="formatCatalogDraft()">Formatear JSON</button>
+      <button type="button" class="button" (click)="triggerCatalogImport()">Importar JSON</button>
+      <button type="button" class="button button--primary" (click)="downloadCatalogDraft()">Descargar JSON</button>
+    </div>
+
+    <textarea [(ngModel)]="catalogDraft" spellcheck="false"></textarea>
+  </section>
+</div>

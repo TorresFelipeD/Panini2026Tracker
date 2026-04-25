@@ -23,7 +23,8 @@ export class AppShellComponent {
     { label: 'Álbum', path: '/', exact: true },
     { label: 'Repetidas', path: '/repetidas', exact: false },
     { label: 'Imágenes', path: '/imagenes', exact: false },
-    { label: 'Logs', path: '/logs', exact: false }
+    { label: 'Logs', path: '/logs', exact: false },
+    { label: 'Configuraciones', path: '/configuraciones', exact: false }
   ] as const;
 
   private readonly router = inject(Router);
