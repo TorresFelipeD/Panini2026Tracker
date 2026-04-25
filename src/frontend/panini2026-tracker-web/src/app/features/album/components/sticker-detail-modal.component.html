@@ -22,7 +22,12 @@
           </ng-template>
 
           <fieldset class="status-field">
-            <legend>Estado</legend>
+            <legend>
+              Estado
+              <span class="field-help__icon" tabindex="0" title="Marca si la lámina ya está en tu colección" aria-label="Marca si la lámina ya está en tu colección">
+                ?
+              </span>
+            </legend>
             <div class="status-toggle status-toggle--single field-grid--single">
               <button type="button" class="status-toggle__option status-toggle__option--single"
                 [class.status-toggle__option--active]="isOwned" [attr.aria-pressed]="isOwned"
@@ -81,7 +86,12 @@
           </div>
 
           <label class="field">
-            <span>Repetidas</span>
+            <span>
+              Repetidas
+              <span class="field-help__icon" tabindex="0" title="Indica cuántas láminas repetidas tienes de este sticker" aria-label="Indica cuántas láminas repetidas tienes de este sticker">
+                ?
+              </span>
+            </span>
             <div class="number-field">
               <input type="number" min="0" [(ngModel)]="duplicateCount" name="duplicateCount">
               <div class="number-stepper">
@@ -96,7 +106,12 @@
           </label>
 
           <label class="field">
-            <span>Observaciones</span>
+            <span>
+              Observaciones
+              <span class="field-help__icon" tabindex="0" title="Agrega una nota corta o dato útil sobre esta lámina" aria-label="Agrega una nota corta o dato útil sobre esta lámina">
+                ?
+              </span>
+            </span>
             <textarea rows="2" [(ngModel)]="notes" name="notes"></textarea>
           </label>
         </div>
