@@ -27,6 +27,8 @@ public sealed class AlbumService : IAlbumService
             .Where(sticker => Matches(sticker, filter))
             .ToArray();
 
+        var albumSummary = CreateAlbumSummary(stickers);
+
         var countryDtos = matchedStickers
             .Where(sticker => sticker.CountryId.HasValue && sticker.Country is not null)
             .GroupBy(sticker => sticker.CountryId!.Value)
@@ -55,15 +57,9 @@ public sealed class AlbumService : IAlbumService
             .ToArray();
 
         var specialSections = CreateSpecialSections(matchedStickers);
-        var totalCount = countryDtos.Sum(country => country.Total) + specialSections.Sum(section => section.Total);
-        var ownedCount = countryDtos.Sum(country => country.Owned) + specialSections.Sum(section => section.Owned);
 
         return new AlbumOverviewDto(
-            new AlbumSummaryDto(
-                totalCount,
-                ownedCount,
-                totalCount - ownedCount,
-                totalCount == 0 ? 0 : decimal.Round((decimal)ownedCount / totalCount * 100, 1)),
+            albumSummary,
             countryDtos,
             specialSections);
     }
@@ -167,6 +163,19 @@ public sealed class AlbumService : IAlbumService
             total - owned,
             total == 0 ? 0 : decimal.Round((decimal)owned / total * 100, 1),
             stickers);
+    }
+
+    private static AlbumSummaryDto CreateAlbumSummary(
+        IReadOnlyCollection<Domain.Entities.StickerCatalogItem> stickers)
+    {
+        var total = stickers.Count;
+        var owned = stickers.Count(sticker => sticker.CollectionEntry?.IsOwned ?? false);
+
+        return new AlbumSummaryDto(
+            total,
+            owned,
+            total - owned,
+            total == 0 ? 0 : decimal.Round((decimal)owned / total * 100, 1));
     }
 
     private static StickerCardDto MapStickerCard(Domain.Entities.StickerCatalogItem sticker) =>
