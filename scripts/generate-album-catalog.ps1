@@ -93,8 +93,9 @@ $displayOrder = 1
 foreach ($row in $data) {
 
     $id = $row.Id.Trim()
-    $title = $row.Titulo.Trim()
-    $section = $row.Seccion.Trim()
+    $title = $row.Title.Trim()
+    $section = $row.Section.Trim()
+    $isHorizontal = [bool]::Parse($row.IsHorizontal.Trim())
 
     # ============================
     # FCW
@@ -104,6 +105,7 @@ foreach ($row in $data) {
             stickerCode = $id
             displayName = $title
             displayOrder = [int]($id -replace 'FWC','')
+            isHorizontal = $isHorizontal
         }
         continue
     }
@@ -166,6 +168,7 @@ foreach ($row in $data) {
             displayName = $displayName
             type = $type
             displayOrder = $number
+            isHorizontal = $isHorizontal
             birthday = ""
 			height = ""
 			weight = ""
