@@ -62,13 +62,13 @@
           <h3 style="margin:0 0 .25rem;">Imágenes cargadas</h3>
           <p style="margin:0;color:var(--text-secondary);">Filtra por texto o grupo para encontrar imágenes y eliminarlas más rápido.</p>
         </div>
-        <div style="display:grid;grid-template-columns:minmax(0,1.35fr) minmax(220px,.65fr);gap:.85rem;">
-          <div style="position:relative;width:100%;">
+        <div style="display:grid;grid-template-columns:minmax(0,1.35fr) minmax(260px,.65fr);gap:.85rem;align-items:start;">
+          <div style="position:relative;width:100%;min-height:3.5rem;border-radius:.95rem;border:1px solid var(--border-color);background:var(--field-background);overflow:hidden;">
             <input
               [(ngModel)]="imageSearch"
               (ngModelChange)="onGalleryFiltersChange()"
               placeholder="Buscar por código, nombre o tipo"
-              style="padding-right:3rem;">
+              style="width:100%;min-height:3.5rem;padding:.85rem 3rem .85rem 1rem;border:0;background:transparent;color:var(--text-primary);">
             <button
               *ngIf="imageSearch"
               type="button"
@@ -96,7 +96,21 @@
               <span class="dropdown-chevron" aria-hidden="true"></span>
             </button>
 
-            <div *ngIf="groupFilterOpen" style="position:absolute;top:calc(100% + .55rem);left:0;right:0;z-index:30;display:grid;gap:.35rem;padding:.55rem;max-height:16rem;overflow:auto;border-radius:1rem;border:1px solid color-mix(in srgb, var(--accent-color) 18%, var(--border-color) 82%);background:color-mix(in srgb, var(--panel-background) 88%, var(--field-background-hover) 12%);box-shadow:0 1rem 2.4rem rgba(0,0,0,.16);backdrop-filter:blur(14px);">
+            <div *ngIf="groupFilterOpen" class="dropdown-scroll" style="position:absolute;top:calc(100% + .55rem);left:0;right:0;z-index:30;display:grid;gap:.35rem;padding:.55rem;max-height:16rem;overflow:auto;border-radius:1rem;border:1px solid color-mix(in srgb, var(--accent-color) 18%, var(--border-color) 82%);background:color-mix(in srgb, var(--panel-background) 88%, var(--field-background-hover) 12%);box-shadow:0 1rem 2.4rem rgba(0,0,0,.16);backdrop-filter:blur(14px);">
+              <div class="filter-search">
+                <input
+                  [(ngModel)]="imageGroupSearch"
+                  placeholder="Buscar país o grupo"
+                  style="width:100%;padding:.75rem 2.4rem .75rem .85rem;border-radius:.85rem;border:1px solid var(--border-color);background:color-mix(in srgb, var(--panel-background) 84%, var(--field-background-hover) 16%);color:var(--text-primary);">
+                <button
+                  type="button"
+                  class="filter-search-clear"
+                  *ngIf="imageGroupSearch"
+                  (click)="imageGroupSearch = ''"
+                  aria-label="Limpiar búsqueda de grupo">
+                  ×
+                </button>
+              </div>
               <button
                 type="button"
                 [style.width]="'100%'"
@@ -115,7 +129,7 @@
 
               <button
                 type="button"
-                *ngFor="let option of imageGroupOptions"
+                *ngFor="let option of filteredImageGroupOptions"
                 [style.width]="'100%'"
                 [style.display]="'flex'"
                 [style.align-items]="'center'"
@@ -132,6 +146,10 @@
                   <span>{{ option.label }}</span>
                 </span>
               </button>
+
+              <div class="filter-empty" *ngIf="!filteredImageGroupOptions.length">
+                No se encontraron grupos o países.
+              </div>
             </div>
           </div>
         </div>

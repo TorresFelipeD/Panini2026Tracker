@@ -39,6 +39,7 @@ export class ImagesPageComponent {
   protected pickerSearch = '';
   protected imageSearch = '';
   protected imageGroupFilter = '';
+  protected imageGroupSearch = '';
   protected readonly pageSizeOptions = [5, 10, 20];
   protected pageSize = 5;
   protected currentPage = 1;
@@ -67,6 +68,9 @@ export class ImagesPageComponent {
   protected toggleGroupFilter(): void {
     this.pickerOpen = false;
     this.groupFilterOpen = !this.groupFilterOpen;
+    if (!this.groupFilterOpen) {
+      this.imageGroupSearch = '';
+    }
   }
 
   protected selectSticker(sticker: StickerCard): void {
@@ -81,11 +85,13 @@ export class ImagesPageComponent {
 
   protected closeGroupFilter(): void {
     this.groupFilterOpen = false;
+    this.imageGroupSearch = '';
   }
 
   protected closeOverlays(): void {
     this.pickerOpen = false;
     this.groupFilterOpen = false;
+    this.imageGroupSearch = '';
   }
 
   protected async upload(input: HTMLInputElement): Promise<void> {
@@ -146,6 +152,7 @@ export class ImagesPageComponent {
   protected selectImageGroupFilter(value: string): void {
     this.imageGroupFilter = value;
     this.groupFilterOpen = false;
+    this.imageGroupSearch = '';
     this.onGalleryFiltersChange();
   }
 
@@ -224,6 +231,15 @@ export class ImagesPageComponent {
     }
 
     return Array.from(groups.values()).sort((a, b) => a.label.localeCompare(b.label));
+  }
+
+  protected get filteredImageGroupOptions(): ImageGroupOption[] {
+    const search = this.imageGroupSearch.trim().toLowerCase();
+    if (!search) {
+      return this.imageGroupOptions;
+    }
+
+    return this.imageGroupOptions.filter(option => option.label.toLowerCase().includes(search));
   }
 
   protected get selectedImageGroupLabel(): string {
