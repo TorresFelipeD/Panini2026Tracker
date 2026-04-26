@@ -156,7 +156,7 @@ SUI5;Ricardo Rodriguez;Switzerland
 SUI6;Nico Elvedi;Switzerland
 SUI7;Aurèle Amenda;Switzerland
 SUI8;Silvan Widmer;Switzerland
-SWI9;Granit Xhaka;Switzerland
+SUI9;Granit Xhaka;Switzerland
 SUI10;Denis Zakaria;Switzerland
 SUI11;Remo Freuler;Switzerland
 SUI12;Fabian Rieder;Switzerland
@@ -167,7 +167,7 @@ SUI16;Michel Aebischer;Switzerland
 SUI17;Breel Embolo;Switzerland
 SUI18;Ruben Vargas;Switzerland
 SUI19;Dan Ndoye;Switzerland
-SWI20;Zeki Amdouni;Switzerland
+SUI20;Zeki Amdouni;Switzerland
 BRA1;Emblem;Brazil
 BRA2;Alisson;Brazil
 BRA3;Bento;Brazil
@@ -188,26 +188,26 @@ BRA17;Matheus Cunha;Brazil
 BRA18;Gabriel Martinelli;Brazil
 BRA19;Raphinha;Brazil
 BRA20;Estévão;Brazil
-mar-01;Emblem;Morocco
-mar-02;Yassine Bounou;Morocco
-mar-03;Munir El Kajoui;Morocco
-mar-04;Achraf Hakimi;Morocco
-mar-05;Noussair Mazraoui;Morocco
-mar-06;Nayef Aguerd;Morocco
-mar-07;Roman Saiss;Morocco
-mar-08;Jawad El Yamio;Morocco
-mar-09;Adam Masina;Morocco
-mar-10;Sofyan Amrabat;Morocco
-mar-11;Azzedine Ounahi;Morocco
-mar-12;Eliesse Ben Seghir;Morocco
-mar-13;Team Photo;Morocco
-mar-14;Bilal El Khannouss;Morocco
-mar-15;Ismael Saibari;Morocco
-mar-16;Youssef En-Nesyri;Morocco
-mar-17;Abde Ezzalzouli;Morocco
-mar-18;Soufiane Rahimi;Morocco
-mar-19;Brahim Diaz;Morocco
-mar-20;Ayoub El Kaabi;Morocco
+MAR1;Emblem;Morocco
+MAR2;Yassine Bounou;Morocco
+MAR3;Munir El Kajoui;Morocco
+MAR4;Achraf Hakimi;Morocco
+MAR5;Noussair Mazraoui;Morocco
+MAR6;Nayef Aguerd;Morocco
+MAR7;Roman Saiss;Morocco
+MAR8;Jawad El Yamio;Morocco
+MAR9;Adam Masina;Morocco
+MAR10;Sofyan Amrabat;Morocco
+MAR11;Azzedine Ounahi;Morocco
+MAR12;Eliesse Ben Seghir;Morocco
+MAR13;Team Photo;Morocco
+MAR14;Bilal El Khannouss;Morocco
+MAR15;Ismael Saibari;Morocco
+MAR16;Youssef En-Nesyri;Morocco
+MAR17;Abde Ezzalzouli;Morocco
+MAR18;Soufiane Rahimi;Morocco
+MAR19;Brahim Diaz;Morocco
+MAR20;Ayoub El Kaabi;Morocco
 HAI1;Emblem;Haiti
 HAI2;Johny Placide;Haiti
 HAI3;Carlens Arcus;Haiti
@@ -299,7 +299,7 @@ AUS8;Cameron Burgess;Australia
 AUS9;Lewis Miller;Australia
 AUS10;Milos Degenek;Australia
 AUS11;Jackson Irvine;Australia
-AUS12;Riley McGree;Australia
+AUS12;serge Gnabry;Australia
 AUS13;Team Photo;Australia
 AUS14;Aiden O'Neill;Australia
 AUS15;Connor Metcalfe;Australia
@@ -348,24 +348,6 @@ GER17;Kai Havertz;Germany
 GER18;Leroy Sane;Germany
 GER19;Karim Adeyemi;Germany
 GER20;Nick Woltemade;Germany
-GER2s;Marc-André ter Stegen;Germany
-GER3s;Jonathan Tah;Germany
-GER4s;David Raum;Germany
-GER5s;Nico Schlotterbeck;Germany
-GER6s;Antonio Rüdiger;Germany
-GER7s;Waldemar Anton;Germany
-GER8s;Ridle Baku;Germany
-GER9s;Maximilian Mittelstadt;Germany
-GER10s;Joshua Kimmich;Germany
-GER11s;Florian Wirtz;Germany
-GER12s;Felix Nmecha;Germany
-GER14s;Leon Goretzka;Germany
-GER15s;Jamal Musiala;Germany
-GER16s;Serge Gnabry;Germany
-GER17s;Kai Havertz;Germany
-GER18s;Leroy Sane;Germany
-GER19s;Karim Adeyemi;Germany
-GER20s;Nick Woltemade;Germany
 CUW1;Emblem;Curaçao
 CUW2;Eloy Room;Curaçao
 CUW3;Armando Obispo;Curaçao
@@ -526,24 +508,6 @@ BEL17;Charles De Ketelaere;Belgium
 BEL18;Leandro Trossard;Belgium
 BEL19;Loïs Openda;Belgium
 BEL20;Romelu Lukaku;Belgium
-BEL2s;Thibaut Courtois;Belgium
-BEL3s;Arthur Theate;Belgium
-BEL4s;Timothy Castagne;Belgium
-BEL5s;Zeno Debast;Belgium
-BEL6s;Brandon Mechele;Belgium
-BEL7s;Maxim De Cuyper;Belgium
-BEL8s;Thomas Meunier;Belgium
-BEL9s;Youri Tielemans;Belgium
-BEL10s;Amadou Onana;Belgium
-BEL11s;Nicolas Raskin;Belgium
-BEL12s;Alexis Saelemaekers;Belgium
-BEL14s;Hans Vanaken;Belgium
-BEL15s;Kevin De Bruyne;Belgium
-BEL16s;Jérémy Doku;Belgium
-BEL17s;Charles De Ketelaere;Belgium
-BEL18s;Leandro Trossard;Belgium
-BEL19s;Loïs Openda;Belgium
-BEL20s;Romelu Lukaku;Belgium
 EGY1;Emblem;Egypt
 EGY2;Mohamed El Shenawy;Egypt
 EGY3;Mohamed Hany;Egypt
@@ -655,7 +619,7 @@ KSA8;Hassan Altambakti;Saudi Arabia
 KSA9;Musab Aljuwayr;Saudi Arabia
 KSA10;Ziyad Aljohani;Saudi Arabia
 KSA11;Abdullah Alkhaibari;Saudi Arabia
-KAS12;Nasser Aldawsari;Saudi Arabia
+KSA12;Nasser Aldawsari;Saudi Arabia
 KSA13;Team Photo;Saudi Arabia
 KSA14;Saleh Abu Alshamat;Saudi Arabia
 KSA15;Marwan Alsahafi;Saudi Arabia
