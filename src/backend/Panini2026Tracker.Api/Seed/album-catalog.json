@@ -1,10 +1,7 @@
 {
 	"countries": [
 		{
-			"group": "I",
-			"name": "Iraq",
-			"code": "IRQ",
-			"displayOrder": 35,
+			"flagCode": "iq",
 			"stickers": [
 				{
 					"weight": "",
@@ -207,13 +204,14 @@
 					"stickerCode": "IRQ20"
 				}
 			],
-			"flagCode": "iq"
+			"group": "I",
+			"code": "IRQ",
+			"name": "Iraq",
+			"displayOrder": 35,
+			"displayOrderGroup": 3
 		},
 		{
-			"group": "A",
-			"name": "South Korea",
-			"code": "KOR",
-			"displayOrder": 3,
+			"flagCode": "kr",
 			"stickers": [
 				{
 					"weight": "",
@@ -416,13 +414,14 @@
 					"stickerCode": "KOR20"
 				}
 			],
-			"flagCode": "kr"
+			"group": "A",
+			"code": "KOR",
+			"name": "South Korea",
+			"displayOrder": 3,
+			"displayOrderGroup": 3
 		},
 		{
-			"group": "H",
-			"name": "Uruguay",
-			"code": "URU",
-			"displayOrder": 32,
+			"flagCode": "uy",
 			"stickers": [
 				{
 					"weight": "",
@@ -625,13 +624,14 @@
 					"stickerCode": "URU20"
 				}
 			],
-			"flagCode": "uy"
+			"group": "H",
+			"code": "URU",
+			"name": "Uruguay",
+			"displayOrder": 32,
+			"displayOrderGroup": 4
 		},
 		{
-			"group": "J",
-			"name": "Argentina",
-			"code": "ARG",
-			"displayOrder": 37,
+			"flagCode": "ar",
 			"stickers": [
 				{
 					"weight": "",
@@ -834,13 +834,14 @@
 					"stickerCode": "ARG20"
 				}
 			],
-			"flagCode": "ar"
+			"group": "J",
+			"code": "ARG",
+			"name": "Argentina",
+			"displayOrder": 37,
+			"displayOrderGroup": 1
 		},
 		{
-			"group": "C",
-			"name": "Morocco",
-			"code": "MAR",
-			"displayOrder": 10,
+			"flagCode": "ma",
 			"stickers": [
 				{
 					"weight": "",
@@ -1043,13 +1044,14 @@
 					"stickerCode": "MAR20"
 				}
 			],
-			"flagCode": "ma"
+			"group": "C",
+			"code": "MAR",
+			"name": "Morocco",
+			"displayOrder": 10,
+			"displayOrderGroup": 2
 		},
 		{
-			"group": "G",
-			"name": "Belgium",
-			"code": "BEL",
-			"displayOrder": 25,
+			"flagCode": "be",
 			"stickers": [
 				{
 					"weight": "",
@@ -1252,13 +1254,14 @@
 					"stickerCode": "BEL20"
 				}
 			],
-			"flagCode": "be"
+			"group": "G",
+			"code": "BEL",
+			"name": "Belgium",
+			"displayOrder": 25,
+			"displayOrderGroup": 1
 		},
 		{
-			"group": "A",
-			"name": "Czechia",
-			"code": "CZE",
-			"displayOrder": 4,
+			"flagCode": "cz",
 			"stickers": [
 				{
 					"weight": "",
@@ -1461,13 +1464,14 @@
 					"stickerCode": "CZE20"
 				}
 			],
-			"flagCode": "cz"
+			"group": "A",
+			"code": "CZE",
+			"name": "Czechia",
+			"displayOrder": 4,
+			"displayOrderGroup": 4
 		},
 		{
-			"group": "F",
-			"name": "Sweden",
-			"code": "SWE",
-			"displayOrder": 23,
+			"flagCode": "se",
 			"stickers": [
 				{
 					"weight": "",
@@ -1670,13 +1674,14 @@
 					"stickerCode": "SWE20"
 				}
 			],
-			"flagCode": "se"
+			"group": "F",
+			"code": "SWE",
+			"name": "Sweden",
+			"displayOrder": 23,
+			"displayOrderGroup": 3
 		},
 		{
-			"group": "L",
-			"name": "Croatia",
-			"code": "CRO",
-			"displayOrder": 46,
+			"flagCode": "hr",
 			"stickers": [
 				{
 					"weight": "",
@@ -1879,13 +1884,14 @@
 					"stickerCode": "CRO20"
 				}
 			],
-			"flagCode": "hr"
+			"group": "L",
+			"code": "CRO",
+			"name": "Croatia",
+			"displayOrder": 46,
+			"displayOrderGroup": 2
 		},
 		{
-			"group": "I",
-			"name": "Norway",
-			"code": "NOR",
-			"displayOrder": 36,
+			"flagCode": "no",
 			"stickers": [
 				{
 					"weight": "",
@@ -2088,13 +2094,14 @@
 					"stickerCode": "NOR20"
 				}
 			],
-			"flagCode": "no"
+			"group": "I",
+			"code": "NOR",
+			"name": "Norway",
+			"displayOrder": 36,
+			"displayOrderGroup": 4
 		},
 		{
-			"group": "J",
-			"name": "Austria",
-			"code": "AUT",
-			"displayOrder": 39,
+			"flagCode": "at",
 			"stickers": [
 				{
 					"weight": "",
@@ -2297,13 +2304,14 @@
 					"stickerCode": "AUT20"
 				}
 			],
-			"flagCode": "at"
+			"group": "J",
+			"code": "AUT",
+			"name": "Austria",
+			"displayOrder": 39,
+			"displayOrderGroup": 3
 		},
 		{
-			"group": "I",
-			"name": "France",
-			"code": "FRA",
-			"displayOrder": 33,
+			"flagCode": "fr",
 			"stickers": [
 				{
 					"weight": "",
@@ -2506,13 +2514,14 @@
 					"stickerCode": "FRA20"
 				}
 			],
-			"flagCode": "fr"
+			"group": "I",
+			"code": "FRA",
+			"name": "France",
+			"displayOrder": 33,
+			"displayOrderGroup": 1
 		},
 		{
-			"group": "L",
-			"name": "England",
-			"code": "ENG",
-			"displayOrder": 45,
+			"flagCode": "gb-eng",
 			"stickers": [
 				{
 					"weight": "",
@@ -2715,13 +2724,14 @@
 					"stickerCode": "ENG20"
 				}
 			],
-			"flagCode": "gb-eng"
+			"group": "L",
+			"code": "ENG",
+			"name": "England",
+			"displayOrder": 45,
+			"displayOrderGroup": 1
 		},
 		{
-			"group": "D",
-			"name": "USA",
-			"code": "USA",
-			"displayOrder": 13,
+			"flagCode": "us",
 			"stickers": [
 				{
 					"weight": "",
@@ -2924,13 +2934,14 @@
 					"stickerCode": "USA20"
 				}
 			],
-			"flagCode": "us"
+			"group": "D",
+			"code": "USA",
+			"name": "USA",
+			"displayOrder": 13,
+			"displayOrderGroup": 1
 		},
 		{
-			"group": "J",
-			"name": "Algeria",
-			"code": "ALG",
-			"displayOrder": 38,
+			"flagCode": "dz",
 			"stickers": [
 				{
 					"weight": "",
@@ -3133,13 +3144,14 @@
 					"stickerCode": "ALG20"
 				}
 			],
-			"flagCode": "dz"
+			"group": "J",
+			"code": "ALG",
+			"name": "Algeria",
+			"displayOrder": 38,
+			"displayOrderGroup": 2
 		},
 		{
-			"group": "G",
-			"name": "New Zealand",
-			"code": "NZL",
-			"displayOrder": 28,
+			"flagCode": "nz",
 			"stickers": [
 				{
 					"weight": "",
@@ -3342,13 +3354,14 @@
 					"stickerCode": "NZL20"
 				}
 			],
-			"flagCode": "nz"
+			"group": "G",
+			"code": "NZL",
+			"name": "New Zealand",
+			"displayOrder": 28,
+			"displayOrderGroup": 4
 		},
 		{
-			"group": "F",
-			"name": "Tunisia",
-			"code": "TUN",
-			"displayOrder": 24,
+			"flagCode": "tn",
 			"stickers": [
 				{
 					"weight": "",
@@ -3551,13 +3564,14 @@
 					"stickerCode": "TUN20"
 				}
 			],
-			"flagCode": "tn"
+			"group": "F",
+			"code": "TUN",
+			"name": "Tunisia",
+			"displayOrder": 24,
+			"displayOrderGroup": 4
 		},
 		{
-			"group": "E",
-			"name": "Ecuador",
-			"code": "ECU",
-			"displayOrder": 20,
+			"flagCode": "ec",
 			"stickers": [
 				{
 					"weight": "",
@@ -3760,13 +3774,14 @@
 					"stickerCode": "ECU20"
 				}
 			],
-			"flagCode": "ec"
+			"group": "E",
+			"code": "ECU",
+			"name": "Ecuador",
+			"displayOrder": 20,
+			"displayOrderGroup": 4
 		},
 		{
-			"group": "H",
-			"name": "Saudi Arabia",
-			"code": "KSA",
-			"displayOrder": 31,
+			"flagCode": "sa",
 			"stickers": [
 				{
 					"weight": "",
@@ -3969,13 +3984,14 @@
 					"stickerCode": "KSA20"
 				}
 			],
-			"flagCode": "sa"
+			"group": "H",
+			"code": "KSA",
+			"name": "Saudi Arabia",
+			"displayOrder": 31,
+			"displayOrderGroup": 3
 		},
 		{
-			"group": "H",
-			"name": "Cape Verde",
-			"code": "CPV",
-			"displayOrder": 30,
+			"flagCode": "cv",
 			"stickers": [
 				{
 					"weight": "",
@@ -4178,13 +4194,14 @@
 					"stickerCode": "CPV20"
 				}
 			],
-			"flagCode": "cv"
+			"group": "H",
+			"code": "CPV",
+			"name": "Cape Verde",
+			"displayOrder": 30,
+			"displayOrderGroup": 2
 		},
 		{
-			"group": "E",
-			"name": "Germany",
-			"code": "GER",
-			"displayOrder": 17,
+			"flagCode": "de",
 			"stickers": [
 				{
 					"weight": "",
@@ -4387,13 +4404,14 @@
 					"stickerCode": "GER20"
 				}
 			],
-			"flagCode": "de"
+			"group": "E",
+			"code": "GER",
+			"name": "Germany",
+			"displayOrder": 17,
+			"displayOrderGroup": 1
 		},
 		{
-			"group": "K",
-			"name": "Colombia",
-			"code": "COL",
-			"displayOrder": 44,
+			"flagCode": "co",
 			"stickers": [
 				{
 					"weight": "",
@@ -4596,13 +4614,14 @@
 					"stickerCode": "COL20"
 				}
 			],
-			"flagCode": "co"
+			"group": "K",
+			"code": "COL",
+			"name": "Colombia",
+			"displayOrder": 44,
+			"displayOrderGroup": 4
 		},
 		{
-			"group": "L",
-			"name": "Ghana",
-			"code": "GHA",
-			"displayOrder": 47,
+			"flagCode": "gh",
 			"stickers": [
 				{
 					"weight": "",
@@ -4805,13 +4824,14 @@
 					"stickerCode": "GHA20"
 				}
 			],
-			"flagCode": "gh"
+			"group": "L",
+			"code": "GHA",
+			"name": "Ghana",
+			"displayOrder": 47,
+			"displayOrderGroup": 3
 		},
 		{
-			"group": "D",
-			"name": "Australia",
-			"code": "AUS",
-			"displayOrder": 15,
+			"flagCode": "au",
 			"stickers": [
 				{
 					"weight": "",
@@ -5014,13 +5034,14 @@
 					"stickerCode": "AUS20"
 				}
 			],
-			"flagCode": "au"
+			"group": "D",
+			"code": "AUS",
+			"name": "Australia",
+			"displayOrder": 15,
+			"displayOrderGroup": 3
 		},
 		{
-			"group": "C",
-			"name": "Brazil",
-			"code": "BRA",
-			"displayOrder": 9,
+			"flagCode": "br",
 			"stickers": [
 				{
 					"weight": "",
@@ -5223,13 +5244,14 @@
 					"stickerCode": "BRA20"
 				}
 			],
-			"flagCode": "br"
+			"group": "C",
+			"code": "BRA",
+			"name": "Brazil",
+			"displayOrder": 9,
+			"displayOrderGroup": 1
 		},
 		{
-			"group": "G",
-			"name": "Egypt",
-			"code": "EGY",
-			"displayOrder": 26,
+			"flagCode": "eg",
 			"stickers": [
 				{
 					"weight": "",
@@ -5432,13 +5454,14 @@
 					"stickerCode": "EGY20"
 				}
 			],
-			"flagCode": "eg"
+			"group": "G",
+			"code": "EGY",
+			"name": "Egypt",
+			"displayOrder": 26,
+			"displayOrderGroup": 2
 		},
 		{
-			"group": "A",
-			"name": "South Africa",
-			"code": "RSA",
-			"displayOrder": 2,
+			"flagCode": "za",
 			"stickers": [
 				{
 					"weight": "",
@@ -5641,13 +5664,14 @@
 					"stickerCode": "RSA20"
 				}
 			],
-			"flagCode": "za"
+			"group": "A",
+			"code": "RSA",
+			"name": "South Africa",
+			"displayOrder": 2,
+			"displayOrderGroup": 2
 		},
 		{
-			"group": "E",
-			"name": "Ivory Coast",
-			"code": "CIV",
-			"displayOrder": 19,
+			"flagCode": "ci",
 			"stickers": [
 				{
 					"weight": "",
@@ -5850,13 +5874,14 @@
 					"stickerCode": "CIV20"
 				}
 			],
-			"flagCode": "ci"
+			"group": "E",
+			"code": "CIV",
+			"name": "Ivory Coast",
+			"displayOrder": 19,
+			"displayOrderGroup": 3
 		},
 		{
-			"group": "A",
-			"name": "Mexico",
-			"code": "MEX",
-			"displayOrder": 1,
+			"flagCode": "mx",
 			"stickers": [
 				{
 					"weight": "",
@@ -6059,13 +6084,14 @@
 					"stickerCode": "MEX20"
 				}
 			],
-			"flagCode": "mx"
+			"group": "A",
+			"code": "MEX",
+			"name": "Mexico",
+			"displayOrder": 1,
+			"displayOrderGroup": 1
 		},
 		{
-			"group": "C",
-			"name": "Haiti",
-			"code": "HAI",
-			"displayOrder": 11,
+			"flagCode": "ht",
 			"stickers": [
 				{
 					"weight": "",
@@ -6268,13 +6294,14 @@
 					"stickerCode": "HAI20"
 				}
 			],
-			"flagCode": "ht"
+			"group": "C",
+			"code": "HAI",
+			"name": "Haiti",
+			"displayOrder": 11,
+			"displayOrderGroup": 3
 		},
 		{
-			"group": "F",
-			"name": "Japan",
-			"code": "JPN",
-			"displayOrder": 22,
+			"flagCode": "jp",
 			"stickers": [
 				{
 					"weight": "",
@@ -6477,13 +6504,14 @@
 					"stickerCode": "JPN20"
 				}
 			],
-			"flagCode": "jp"
+			"group": "F",
+			"code": "JPN",
+			"name": "Japan",
+			"displayOrder": 22,
+			"displayOrderGroup": 2
 		},
 		{
-			"group": "C",
-			"name": "Scotland",
-			"code": "SCO",
-			"displayOrder": 12,
+			"flagCode": "gb-sct",
 			"stickers": [
 				{
 					"weight": "",
@@ -6686,13 +6714,14 @@
 					"stickerCode": "SCO20"
 				}
 			],
-			"flagCode": "gb-sct"
+			"group": "C",
+			"code": "SCO",
+			"name": "Scotland",
+			"displayOrder": 12,
+			"displayOrderGroup": 4
 		},
 		{
-			"group": "D",
-			"name": "Paraguay",
-			"code": "PAR",
-			"displayOrder": 14,
+			"flagCode": "py",
 			"stickers": [
 				{
 					"weight": "",
@@ -6895,13 +6924,14 @@
 					"stickerCode": "PAR20"
 				}
 			],
-			"flagCode": "py"
+			"group": "D",
+			"code": "PAR",
+			"name": "Paraguay",
+			"displayOrder": 14,
+			"displayOrderGroup": 2
 		},
 		{
-			"group": "D",
-			"name": "Türkiye",
-			"code": "TUR",
-			"displayOrder": 16,
+			"flagCode": "tr",
 			"stickers": [
 				{
 					"weight": "",
@@ -7104,13 +7134,14 @@
 					"stickerCode": "TUR20"
 				}
 			],
-			"flagCode": "tr"
+			"group": "D",
+			"code": "TUR",
+			"name": "Türkiye",
+			"displayOrder": 16,
+			"displayOrderGroup": 4
 		},
 		{
-			"group": "K",
-			"name": "Uzbekistan",
-			"code": "UZB",
-			"displayOrder": 43,
+			"flagCode": "uz",
 			"stickers": [
 				{
 					"weight": "",
@@ -7313,13 +7344,14 @@
 					"stickerCode": "UZB20"
 				}
 			],
-			"flagCode": "uz"
+			"group": "K",
+			"code": "UZB",
+			"name": "Uzbekistan",
+			"displayOrder": 43,
+			"displayOrderGroup": 3
 		},
 		{
-			"group": "F",
-			"name": "Netherlands",
-			"code": "NED",
-			"displayOrder": 21,
+			"flagCode": "nl",
 			"stickers": [
 				{
 					"weight": "",
@@ -7522,13 +7554,14 @@
 					"stickerCode": "NED20"
 				}
 			],
-			"flagCode": "nl"
+			"group": "F",
+			"code": "NED",
+			"name": "Netherlands",
+			"displayOrder": 21,
+			"displayOrderGroup": 1
 		},
 		{
-			"group": "I",
-			"name": "Senegal",
-			"code": "SEN",
-			"displayOrder": 34,
+			"flagCode": "sn",
 			"stickers": [
 				{
 					"weight": "",
@@ -7731,13 +7764,14 @@
 					"stickerCode": "SEN20"
 				}
 			],
-			"flagCode": "sn"
+			"group": "I",
+			"code": "SEN",
+			"name": "Senegal",
+			"displayOrder": 34,
+			"displayOrderGroup": 2
 		},
 		{
-			"group": "K",
-			"name": "Portugal",
-			"code": "POR",
-			"displayOrder": 41,
+			"flagCode": "pt",
 			"stickers": [
 				{
 					"weight": "",
@@ -7940,13 +7974,14 @@
 					"stickerCode": "POR20"
 				}
 			],
-			"flagCode": "pt"
+			"group": "K",
+			"code": "POR",
+			"name": "Portugal",
+			"displayOrder": 41,
+			"displayOrderGroup": 1
 		},
 		{
-			"group": "B",
-			"name": "Bosnia and Herzegovina",
-			"code": "BIH",
-			"displayOrder": 6,
+			"flagCode": "ba",
 			"stickers": [
 				{
 					"weight": "",
@@ -8149,13 +8184,14 @@
 					"stickerCode": "BIH20"
 				}
 			],
-			"flagCode": "ba"
+			"group": "B",
+			"code": "BIH",
+			"name": "Bosnia and Herzegovina",
+			"displayOrder": 6,
+			"displayOrderGroup": 2
 		},
 		{
-			"group": "J",
-			"name": "Jordan",
-			"code": "JOR",
-			"displayOrder": 40,
+			"flagCode": "jo",
 			"stickers": [
 				{
 					"weight": "",
@@ -8358,13 +8394,14 @@
 					"stickerCode": "JOR20"
 				}
 			],
-			"flagCode": "jo"
+			"group": "J",
+			"code": "JOR",
+			"name": "Jordan",
+			"displayOrder": 40,
+			"displayOrderGroup": 4
 		},
 		{
-			"group": "B",
-			"name": "Canada",
-			"code": "CAN",
-			"displayOrder": 5,
+			"flagCode": "ca",
 			"stickers": [
 				{
 					"weight": "",
@@ -8567,13 +8604,14 @@
 					"stickerCode": "CAN20"
 				}
 			],
-			"flagCode": "ca"
+			"group": "B",
+			"code": "CAN",
+			"name": "Canada",
+			"displayOrder": 5,
+			"displayOrderGroup": 1
 		},
 		{
-			"group": "E",
-			"name": "Curaçao",
-			"code": "CUW",
-			"displayOrder": 18,
+			"flagCode": "cw",
 			"stickers": [
 				{
 					"weight": "",
@@ -8776,13 +8814,14 @@
 					"stickerCode": "CUW20"
 				}
 			],
-			"flagCode": "cw"
+			"group": "E",
+			"code": "CUW",
+			"name": "Curaçao",
+			"displayOrder": 18,
+			"displayOrderGroup": 2
 		},
 		{
-			"group": "B",
-			"name": "Switzerland",
-			"code": "SUI",
-			"displayOrder": 8,
+			"flagCode": "ch",
 			"stickers": [
 				{
 					"weight": "",
@@ -8985,13 +9024,14 @@
 					"stickerCode": "SUI20"
 				}
 			],
-			"flagCode": "ch"
+			"group": "B",
+			"code": "SUI",
+			"name": "Switzerland",
+			"displayOrder": 8,
+			"displayOrderGroup": 4
 		},
 		{
-			"group": "H",
-			"name": "Spain",
-			"code": "ESP",
-			"displayOrder": 29,
+			"flagCode": "es",
 			"stickers": [
 				{
 					"weight": "",
@@ -9194,13 +9234,14 @@
 					"stickerCode": "ESP20"
 				}
 			],
-			"flagCode": "es"
+			"group": "H",
+			"code": "ESP",
+			"name": "Spain",
+			"displayOrder": 29,
+			"displayOrderGroup": 1
 		},
 		{
-			"group": "G",
-			"name": "Iran",
-			"code": "IRN",
-			"displayOrder": 27,
+			"flagCode": "ir",
 			"stickers": [
 				{
 					"weight": "",
@@ -9403,13 +9444,14 @@
 					"stickerCode": "IRN20"
 				}
 			],
-			"flagCode": "ir"
+			"group": "G",
+			"code": "IRN",
+			"name": "Iran",
+			"displayOrder": 27,
+			"displayOrderGroup": 3
 		},
 		{
-			"group": "K",
-			"name": "Congo DR",
-			"code": "COD",
-			"displayOrder": 42,
+			"flagCode": "cd",
 			"stickers": [
 				{
 					"weight": "",
@@ -9612,13 +9654,14 @@
 					"stickerCode": "COD20"
 				}
 			],
-			"flagCode": "cd"
+			"group": "K",
+			"code": "COD",
+			"name": "Congo DR",
+			"displayOrder": 42,
+			"displayOrderGroup": 2
 		},
 		{
-			"group": "B",
-			"name": "Qatar",
-			"code": "QAT",
-			"displayOrder": 7,
+			"flagCode": "qa",
 			"stickers": [
 				{
 					"weight": "",
@@ -9821,13 +9864,14 @@
 					"stickerCode": "QAT20"
 				}
 			],
-			"flagCode": "qa"
+			"group": "B",
+			"code": "QAT",
+			"name": "Qatar",
+			"displayOrder": 7,
+			"displayOrderGroup": 3
 		},
 		{
-			"group": "L",
-			"name": "Panama",
-			"code": "PAN",
-			"displayOrder": 48,
+			"flagCode": "pa",
 			"stickers": [
 				{
 					"weight": "",
@@ -10030,7 +10074,11 @@
 					"stickerCode": "PAN20"
 				}
 			],
-			"flagCode": "pa"
+			"group": "L",
+			"code": "PAN",
+			"name": "Panama",
+			"displayOrder": 48,
+			"displayOrderGroup": 4
 		}
 	],
 	"fcw": {

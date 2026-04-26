@@ -19,9 +19,9 @@ $csvPath = (Resolve-Path $csvPath).Path
 # MAPA DE GRUPOS (REAL 2026)
 # ================================
 
-$groupMap = @{
-    "MEX"="A"; "KOR"="A"; "RSA"="A"; "CZE"="A";
-    "CAN"="B"; "SUI"="B"; "QAT"="B"; "BIH"="B";
+$groupMap = [ordered]@{
+    "MEX"="A"; "RSA"="A"; "KOR"="A"; "CZE"="A";
+    "CAN"="B"; "BIH"="B"; "QAT"="B"; "SUI"="B";
     "BRA"="C"; "MAR"="C"; "HAI"="C"; "SCO"="C";
     "USA"="D"; "PAR"="D"; "AUS"="D"; "TUR"="D";
     "GER"="E"; "CUW"="E"; "CIV"="E"; "ECU"="E";
@@ -32,6 +32,20 @@ $groupMap = @{
     "ARG"="J"; "ALG"="J"; "AUT"="J"; "JOR"="J";
     "POR"="K"; "COD"="K"; "UZB"="K"; "COL"="K";
     "ENG"="L"; "CRO"="L"; "GHA"="L"; "PAN"="L";
+}
+
+$groupDisplayOrderMap = @{}
+$groupPositionCounters = @{}
+
+foreach ($entry in $groupMap.GetEnumerator()) {
+    $group = $entry.Value
+
+    if (-not $groupPositionCounters.ContainsKey($group)) {
+        $groupPositionCounters[$group] = 0
+    }
+
+    $groupPositionCounters[$group]++
+    $groupDisplayOrderMap[$entry.Key] = $groupPositionCounters[$group]
 }
 
 # ================================
@@ -107,6 +121,7 @@ foreach ($row in $data) {
                 code = $team
                 name = $section
                 group = $groupMap[$team]
+                displayOrderGroup = if ($groupDisplayOrderMap.ContainsKey($team)) { $groupDisplayOrderMap[$team] } else { 0 }
                 flagCode = if ($flagMap.ContainsKey($team)) { $flagMap[$team] } else { $team.ToLower() }
                 displayOrder = $displayOrder
                 stickers = @()
