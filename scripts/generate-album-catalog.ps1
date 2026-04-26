@@ -57,7 +57,12 @@ $flagMap = @{
 # LEER CSV
 # ================================
 
-$data = Import-Csv -Path $csvPath -Delimiter ';' -Encoding UTF8
+# $data = Import-Csv -Path $csvPath -Delimiter ';' -Encoding UTF8
+# $content = Get-Content $csvPath -Raw -Encoding UTF8
+# $data = $content | ConvertFrom-Csv -Delimiter ';'
+
+$content = Get-Content $csvPath -Raw -Encoding Default
+$data = $content | ConvertFrom-Csv -Delimiter ';'
 
 # ================================
 # PROCESAMIENTO
