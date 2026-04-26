@@ -23,7 +23,7 @@
           <div class="picker-options">
             <button type="button" class="picker-option" *ngFor="let sticker of filteredStickers" (click)="selectSticker(sticker)">
               <strong>{{ sticker.stickerCode }}</strong>
-              <span>{{ sticker.displayName }} · {{ sticker.countryName }}</span>
+              <span>{{ sticker.displayName }} · {{ getStickerBadge(sticker) }}</span>
             </button>
 
             <div class="picker-empty" *ngIf="!filteredStickers.length">
@@ -48,15 +48,71 @@
 
   <button type="button" class="picker-backdrop" *ngIf="pickerOpen" (click)="closePicker()" aria-label="Cerrar selector"></button>
 
-  <div class="gallery">
-    <article class="image-card" *ngFor="let item of imagesStore.items()">
-      <img [src]="item.imageUrl" [alt]="item.displayName">
-      <div>
-        <strong>{{ item.stickerCode }}</strong>
-        <p>{{ item.displayName }}</p>
-        <small>{{ item.countryName }} · {{ item.uploadedAtUtc | date:'medium' }}</small>
-        <button type="button" class="danger" (click)="remove(item.stickerId, item.displayName)">Eliminar imagen</button>
-      </div>
-    </article>
+  <div class="gallery-toolbar" *ngIf="imagesStore.items().length" style="display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;margin:1.25rem 0 .9rem;">
+    <p>{{ imagesStore.items().length }} imágenes asociadas</p>
+    <label class="page-size" style="display:inline-flex;align-items:center;gap:.55rem;color:var(--text-secondary);">
+      <span>Ver</span>
+      <select [(ngModel)]="pageSize" (ngModelChange)="onPageSizeChange()" style="padding:.55rem .75rem;border-radius:.9rem;border:1px solid var(--border-color);background:var(--field-background);color:var(--text-primary);">
+        <option *ngFor="let option of pageSizeOptions" [ngValue]="option">{{ option }}</option>
+      </select>
+      <span>cards</span>
+    </label>
   </div>
+
+  <div class="gallery-groups" *ngIf="imagesStore.items().length; else emptyGallery" style="display:grid;gap:1.4rem;">
+    <section class="gallery-group" *ngFor="let group of pagedGroups" style="display:grid;gap:.85rem;">
+      <header class="gallery-group__header" style="display:flex;align-items:center;justify-content:space-between;gap:1rem;padding-top:.25rem;color:var(--text-secondary);">
+        <div class="gallery-group__title" style="display:inline-flex;align-items:center;gap:.6rem;font-size:.95rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;">
+          <img *ngIf="group.flagUrl" [src]="group.flagUrl" alt="" aria-hidden="true" style="width:1.1rem;height:.82rem;border-radius:.18rem;object-fit:cover;">
+          <span>{{ group.label }}</span>
+        </div>
+      </header>
+
+      <div class="gallery">
+        <article class="image-card" *ngFor="let item of group.items">
+          <img [src]="item.imageUrl" [alt]="item.displayName">
+          <div>
+            <strong>{{ item.stickerCode }}</strong>
+            <p>{{ item.displayName }}</p>
+            <small>{{ group.label }} · {{ item.uploadedAtUtc | date:'medium' }}</small>
+            <button type="button" class="danger" (click)="remove(item.stickerId, item.displayName)">Eliminar imagen</button>
+          </div>
+        </article>
+      </div>
+    </section>
+  </div>
+
+  <ng-template #emptyGallery>
+    <div class="gallery-empty" style="margin-top:1rem;padding:1rem 0;color:var(--text-secondary);">Todavía no hay imágenes asociadas.</div>
+  </ng-template>
+
+  <div class="pagination" *ngIf="imagesStore.items().length > pageSize" style="display:flex;align-items:center;justify-content:center;gap:1rem;flex-wrap:wrap;margin-top:1.4rem;">
+    <button type="button" class="pagination__button" style="min-width:2.75rem;padding:.72rem .9rem;border-radius:.9rem;border:1px solid var(--border-color);background:var(--field-background);color:var(--text-primary);cursor:pointer;" [disabled]="currentPage === 1" (click)="changePage(currentPage - 1)">Anterior</button>
+    <button
+      type="button"
+      class="pagination__button"
+      *ngFor="let page of visiblePageNumbers"
+      [class.pagination__button--active]="page === currentPage"
+      [style.min-width]="'2.75rem'"
+      [style.padding]="'.72rem .9rem'"
+      [style.border-radius]="'.9rem'"
+      [style.border]="page === currentPage ? '1px solid transparent' : '1px solid var(--border-color)'"
+      [style.background]="page === currentPage ? 'var(--accent-color)' : 'var(--field-background)'"
+      [style.color]="page === currentPage ? '#061013' : 'var(--text-primary)'"
+      [style.font-weight]="page === currentPage ? '700' : null"
+      [style.cursor]="'pointer'"
+      (click)="changePage(page)">
+      {{ page }}
+    </button>
+    <button type="button" class="pagination__button" style="min-width:2.75rem;padding:.72rem .9rem;border-radius:.9rem;border:1px solid var(--border-color);background:var(--field-background);color:var(--text-primary);cursor:pointer;" [disabled]="currentPage === totalPages" (click)="changePage(currentPage + 1)">Siguiente</button>
+  </div>
+
+  <button
+    *ngIf="showScrollTop"
+    type="button"
+    aria-label="Volver arriba"
+    style="position:fixed;right:1.35rem;bottom:1.35rem;z-index:45;width:3.35rem;height:3.35rem;padding:0;display:grid;place-items:center;border-radius:999px;border:1px solid var(--border-color);background:var(--field-background);color:var(--text-primary);box-shadow:0 1rem 2rem rgba(0,0,0,.24);backdrop-filter:blur(12px);cursor:pointer;"
+    (click)="scrollToTop()">
+    <span aria-hidden="true" style="width:.7rem;height:.7rem;border-top:.14rem solid var(--accent-color);border-right:.14rem solid var(--accent-color);transform:rotate(-45deg) translate(-.08rem,.08rem);"></span>
+  </button>
 </section>

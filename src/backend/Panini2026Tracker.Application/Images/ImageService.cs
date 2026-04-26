@@ -32,11 +32,11 @@ public sealed class ImageService : IImageService
 
     public async Task<IReadOnlyCollection<StickerImageDto>> GetAllAsync(CancellationToken cancellationToken)
     {
-        var countries = await _catalogRepository.GetCountriesWithStickersAsync(cancellationToken);
-        return countries
-            .SelectMany(country => country.Stickers)
+        var stickers = await _catalogRepository.GetStickersWithRelationsAsync(cancellationToken);
+        return stickers
             .Where(sticker => sticker.StickerImage is not null)
-            .OrderBy(sticker => sticker.Country.Name)
+            .OrderBy(sticker => GetGroupSortKey(sticker))
+            .ThenBy(sticker => sticker.Country?.Name ?? sticker.DisplayName)
             .ThenBy(sticker => sticker.StickerCode)
             .Select(sticker =>
             {
@@ -45,9 +45,11 @@ public sealed class ImageService : IImageService
                 return new StickerImageDto(
                     sticker.Id,
                     sticker.StickerCode,
-                    sticker.Country.Code,
-                    sticker.Country.Name,
+                    sticker.Country?.Code,
+                    sticker.Country?.Name,
+                    sticker.Country?.FlagCode,
                     sticker.DisplayName,
+                    sticker.Type,
                     ImageUrlBuilder.Build(image)!,
                     image.UploadedAtUtc);
             })
@@ -80,9 +82,11 @@ public sealed class ImageService : IImageService
         return new StickerImageDto(
             sticker.Id,
             sticker.StickerCode,
-            sticker.Country.Code,
-            sticker.Country.Name,
+            sticker.Country?.Code,
+            sticker.Country?.Name,
+            sticker.Country?.FlagCode,
             sticker.DisplayName,
+            sticker.Type,
             ImageUrlBuilder.Build(existingImage)!,
             now);
     }
@@ -102,5 +106,15 @@ public sealed class ImageService : IImageService
             new SystemLog("images", "images.deleted", $"Image deleted for sticker {sticker.StickerCode}.", "info", now),
             cancellationToken);
         await _unitOfWork.SaveChangesAsync(cancellationToken);
+    }
+
+    private static int GetGroupSortKey(StickerCatalogItem sticker)
+    {
+        if (sticker.Country is not null)
+        {
+            return 0;
+        }
+
+        return string.Equals(sticker.Type, "fcw", StringComparison.OrdinalIgnoreCase) ? 1 : 2;
     }
 }

@@ -93,9 +93,11 @@ export interface SystemLogItem {
 export interface StickerImageItem {
   stickerId: string;
   stickerCode: string;
-  countryCode: string;
-  countryName: string;
+  countryCode: string | null;
+  countryName: string | null;
+  flagCode: string | null;
   displayName: string;
+  type: string;
   imageUrl: string;
   uploadedAtUtc: string;
 }

@@ -7,6 +7,12 @@ export function resolveImageUrl(apiBaseUrl: string, imageUrl: string | null): st
     return imageUrl;
   }
 
-  const apiOrigin = new URL(apiBaseUrl).origin;
-  return new URL(imageUrl, apiOrigin).toString();
+  const apiOrigin = new URL(apiBaseUrl, window.location.origin).origin;
+  const resolvedUrl = new URL(imageUrl.startsWith('/') ? imageUrl : `/${imageUrl}`, apiOrigin).toString();
+
+  if (resolvedUrl.startsWith(window.location.origin) && imageUrl.includes('/uploads/')) {
+    return new URL(imageUrl.startsWith('/') ? imageUrl : `/${imageUrl}`, apiOrigin).toString();
+  }
+
+  return resolvedUrl;
 }

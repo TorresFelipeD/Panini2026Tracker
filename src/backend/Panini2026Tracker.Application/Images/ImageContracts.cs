@@ -3,9 +3,11 @@ namespace Panini2026Tracker.Application.Images;
 public sealed record StickerImageDto(
     Guid StickerId,
     string StickerCode,
-    string CountryCode,
-    string CountryName,
+    string? CountryCode,
+    string? CountryName,
+    string? FlagCode,
     string DisplayName,
+    string Type,
     string ImageUrl,
     DateTime UploadedAtUtc);
 
