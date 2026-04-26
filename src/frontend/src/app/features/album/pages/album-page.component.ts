@@ -50,6 +50,7 @@ export class AlbumPageComponent {
   }
 
   protected applyFilters(): void {
+    this.restoreDefaultGroupWhenNoFilters();
     this.store.setFilters({
       search: this.search,
       countryCodes: this.countryCodes,
@@ -57,6 +58,18 @@ export class AlbumPageComponent {
       hasImage: this.hasImage,
       hasDuplicates: this.hasDuplicates
     });
+  }
+
+  protected clearAllFilters(): void {
+    this.search = '';
+    this.countryCodes = [];
+    this.countrySearch = '';
+    this.isOwned = '';
+    this.hasImage = '';
+    this.hasDuplicates = '';
+    this.selectedGroup = 'FCW';
+    this.closeFilters();
+    this.applyFilters();
   }
 
   protected toggleFilter(filter: 'countryCode' | 'isOwned' | 'hasImage' | 'hasDuplicates'): void {
@@ -72,6 +85,7 @@ export class AlbumPageComponent {
   ): void {
     this[filter] = value;
     this.openFilter = null;
+    this.restoreDefaultGroupWhenNoFilters();
     this.applyFilters();
   }
 
@@ -125,16 +139,36 @@ export class AlbumPageComponent {
     this.countryCodes = this.countryCodes.includes(code)
       ? this.countryCodes.filter(current => current !== code)
       : [...this.countryCodes, code];
+
+    this.syncSelectedGroupWithCountryFilter();
+    this.restoreDefaultGroupWhenNoFilters();
     this.applyFilters();
   }
 
   protected clearCountries(): void {
     this.countryCodes = [];
+    this.restoreDefaultGroupWhenNoFilters();
     this.applyFilters();
   }
 
   protected selectGroup(group: string): void {
+    if (this.areGroupsDisabled) {
+      return;
+    }
+
     this.selectedGroup = group;
+  }
+
+  protected get hasFilterDrivenView(): boolean {
+    return Boolean(this.search.trim())
+      || this.countryCodes.length > 0
+      || Boolean(this.isOwned)
+      || Boolean(this.hasImage)
+      || Boolean(this.hasDuplicates);
+  }
+
+  protected get areGroupsDisabled(): boolean {
+    return this.countryCodes.length > 1;
   }
 
   protected get visibleCountries(): CountryAlbum[] {
@@ -143,7 +177,7 @@ export class AlbumPageComponent {
       return [];
     }
 
-    if (this.selectedGroup === 'Todos') {
+    if (this.hasFilterDrivenView) {
       return overview.countries;
     }
 
@@ -161,7 +195,7 @@ export class AlbumPageComponent {
       return [];
     }
 
-    if (this.selectedGroup === 'Todos') {
+    if (this.hasFilterDrivenView) {
       return overview.specialSections;
     }
 
@@ -174,5 +208,31 @@ export class AlbumPageComponent {
     }
 
     return [];
+  }
+
+  private syncSelectedGroupWithCountryFilter(): void {
+    if (this.countryCodes.length > 1) {
+      this.selectedGroup = 'FCW';
+      return;
+    }
+
+    if (this.countryCodes.length !== 1) {
+      return;
+    }
+
+    const selectedCountry = this.store.availableCountries()
+      .find(country => country.countryCode === this.countryCodes[0]);
+
+    if (!selectedCountry?.group) {
+      return;
+    }
+
+    this.selectedGroup = `Grupo ${selectedCountry.group}`;
+  }
+
+  private restoreDefaultGroupWhenNoFilters(): void {
+    if (!this.hasFilterDrivenView && this.countryCodes.length === 0) {
+      this.selectedGroup = 'FCW';
+    }
   }
 }

@@ -124,6 +124,9 @@
       </button>
     </div>
   </div>
+  <button type="button" class="filters-clear-all" (click)="clearAllFilters()">
+    Limpiar filtros
+  </button>
 </section>
 
 <section class="group-filter" aria-label="Filtro por grupo del Mundial 2026">
@@ -138,6 +141,8 @@
       class="group-filter__chip"
       *ngFor="let group of worldCupGroups"
       [class.group-filter__chip--active]="selectedGroup === group"
+      [class.group-filter__chip--disabled]="areGroupsDisabled"
+      [disabled]="areGroupsDisabled"
       (click)="selectGroup(group)">
       {{ group }}
     </button>

@@ -31,7 +31,7 @@
 
 .filters {
   margin: 1rem 0;
-  grid-template-columns: 2fr repeat(4, 1fr);
+  grid-template-columns: 2fr repeat(4, 1fr) auto;
 }
 
 .group-filter {
@@ -84,6 +84,21 @@
   transform: translateY(-1px);
 }
 
+.group-filter__chip:disabled,
+.group-filter__chip--disabled {
+  cursor: not-allowed;
+  opacity: 0.48;
+  transform: none;
+  box-shadow: none;
+}
+
+.group-filter__chip:disabled:hover,
+.group-filter__chip--disabled:hover {
+  border-color: color-mix(in srgb, var(--border-color) 88%, white 12%);
+  color: var(--text-secondary);
+  transform: none;
+}
+
 .group-filter__chip--active {
   border-color: color-mix(in srgb, var(--accent-color) 48%, var(--border-color) 52%);
   background: linear-gradient(
@@ -101,7 +116,8 @@
 }
 
 .filters input,
-.filter-trigger {
+.filter-trigger,
+.filters-clear-all {
   width: 100%;
   padding: 0.85rem 1rem;
   border-radius: 1rem;
@@ -121,6 +137,18 @@
   justify-content: space-between;
   gap: 1rem;
   text-align: left;
+}
+
+.filters-clear-all {
+  min-width: 10rem;
+  min-height: 3.2rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.filters-clear-all:hover {
+  background: var(--field-background-hover);
+  border-color: color-mix(in srgb, var(--accent-color) 32%, var(--border-color) 68%);
 }
 
 .filter-picker--open .filter-trigger {
