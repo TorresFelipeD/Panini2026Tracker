@@ -168,7 +168,7 @@ export class AlbumPageComponent {
   }
 
   protected get areGroupsDisabled(): boolean {
-    return this.countryCodes.length > 1;
+    return this.hasFilterDrivenView;
   }
 
   protected get visibleCountries(): CountryAlbum[] {
