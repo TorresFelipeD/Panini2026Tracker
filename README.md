@@ -72,7 +72,7 @@ Frontend esperado:
 
 ## Catálogo inicial
 
-El catálogo inicial no está hardcodeado en la base de datos como fuente principal. Se carga desde [album-catalog.json](/d:/PROYECTOS/Panini2026Tracker/src/backend/Panini2026Tracker.Api/Seed/album-catalog.json), organizado por selecciones y con identificadores provisionales editables.
+El catálogo inicial no está hardcodeado en la base de datos como fuente principal. Se carga desde [album-catalog.json](./src/backend/Panini2026Tracker.Api/Seed/album-catalog.json), organizado por selecciones y con identificadores provisionales editables.
 
 Campos incluidos por lámina:
 
@@ -88,4 +88,4 @@ Campos incluidos por lámina:
 - El frontend quedó desacoplado y listo para evolucionar luego hacia despliegue en Vercel.
 - Las imágenes se almacenan localmente en `wwwroot/uploads`.
 - La base SQLite se crea automáticamente al iniciar el backend si no existe, en `App_Data/panini2026-tracker.db`.
-- La licencia del proyecto es MIT, ver [LICENSE](/d:/PROYECTOS/Panini2026Tracker/LICENSE).
+- La licencia del proyecto es MIT, ver [LICENSE](./LICENSE).
