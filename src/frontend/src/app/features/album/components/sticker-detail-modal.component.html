@@ -1,7 +1,7 @@
 <ng-container *ngIf="sticker as selected">
   <div class="overlay" (click)="close.emit()">
-    <section class="modal" (click)="$event.stopPropagation()">
-      <header class="modal-header">
+    <section class="modal" [style.overflow]="isImageExpanded ? 'hidden' : null" (click)="$event.stopPropagation()">
+      <header class="modal-header" [style.visibility]="isImageExpanded ? 'hidden' : null">
         <div class="modal-header__copy">
           <p class="modal-eyebrow" *ngIf="selected.countryName || selected.flagCode; else genericStickerMeta">
             <img [src]="getCountryFlagUrl(selected.flagCode)" alt="" aria-hidden="true"
@@ -22,14 +22,30 @@
         </button>
       </header>
 
-      <form (ngSubmit)="submit()">
+      <form [style.visibility]="isImageExpanded ? 'hidden' : null" (ngSubmit)="submit()">
         <div class="modal-grid">
         <div class="preview" style="width:min(100%,22rem);justify-self:center;">
-          <img *ngIf="selected.imageUrl; else noImage" [src]="selected.imageUrl" [alt]="selected.displayName"
-            [class.preview-image--missing]="!isOwned">
-          <ng-template #noImage>
-            <div class="empty-preview">{{ selected.stickerCode }}</div>
-          </ng-template>
+          <div style="position:relative;">
+            <img *ngIf="selected.imageUrl; else noImage" [src]="selected.imageUrl" [alt]="selected.displayName"
+              [class.preview-image--missing]="!isOwned">
+            <ng-template #noImage>
+              <div class="empty-preview">{{ selected.stickerCode }}</div>
+            </ng-template>
+
+            <button
+              *ngIf="selected.imageUrl"
+              type="button"
+              [attr.aria-label]="isImageExpanded ? 'Contraer imagen' : 'Expandir imagen'"
+              style="position:absolute;right:.85rem;bottom:.85rem;width:2.9rem;height:2.9rem;padding:0;display:grid;place-items:center;border-radius:999px;border:1px solid color-mix(in srgb, var(--border-color) 65%, transparent);background:rgba(6,16,19,.72);color:#f3fbff;box-shadow:0 .6rem 1.2rem rgba(0,0,0,.24);backdrop-filter:blur(10px);"
+              (click)="toggleImageExpanded()">
+              <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true" style="width:1.15rem;height:1.15rem;">
+                <path d="M8 4H4v4M16 4h4v4M20 16v4h-4M8 20H4v-4" fill="none" stroke="currentColor" stroke-width="1.8"
+                  stroke-linecap="round" stroke-linejoin="round"></path>
+                <path d="M9 9 4 4M15 9l5-5M15 15l5 5M9 15l-5 5" fill="none" stroke="currentColor" stroke-width="1.8"
+                  stroke-linecap="round" stroke-linejoin="round"></path>
+              </svg>
+            </button>
+          </div>
 
           <fieldset class="status-field" style="text-align:center;">
             <legend>
@@ -183,6 +199,29 @@
           <button type="submit" class="primary" style="width:min(28rem,100%);">Guardar cambios</button>
         </footer>
       </form>
+
+      <div
+        *ngIf="isImageExpanded && selected.imageUrl"
+        style="position:absolute;inset:0;z-index:3;display:grid;place-items:center;padding:1.4rem;border-radius:inherit;background:linear-gradient(180deg, rgba(4,10,18,.22), rgba(4,10,18,.76)), color-mix(in srgb, var(--panel-background) 56%, #02060b 44%);"
+        (click)="toggleImageExpanded()">
+        <img
+          [src]="selected.imageUrl"
+          [alt]="selected.displayName"
+          [class.preview-image--missing]="!isOwned"
+          style="width:100%;height:100%;object-fit:contain;border-radius:1.15rem;">
+        <button
+          type="button"
+          aria-label="Contraer imagen"
+          style="position:absolute;right:1.1rem;bottom:1.1rem;width:2.9rem;height:2.9rem;padding:0;display:grid;place-items:center;border-radius:999px;border:1px solid color-mix(in srgb, var(--border-color) 65%, transparent);background:rgba(6,16,19,.72);color:#f3fbff;box-shadow:0 .6rem 1.2rem rgba(0,0,0,.24);backdrop-filter:blur(10px);"
+          (click)="toggleImageExpanded(); $event.stopPropagation()">
+          <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true" style="width:1.15rem;height:1.15rem;">
+            <path d="M10 4H4v6M14 4h6v6M20 14v6h-6M10 20H4v-6" fill="none" stroke="currentColor" stroke-width="1.8"
+              stroke-linecap="round" stroke-linejoin="round"></path>
+            <path d="M4 10 10 4M20 10l-6-6M20 14l-6 6M4 14l6 6" fill="none" stroke="currentColor" stroke-width="1.8"
+              stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+        </button>
+      </div>
     </section>
   </div>
 </ng-container>

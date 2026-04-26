@@ -33,6 +33,7 @@ export class StickerDetailModalComponent implements OnChanges {
   protected height = '';
   protected weight = '';
   protected team = '';
+  protected isImageExpanded = false;
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['sticker'] && this.sticker) {
@@ -43,6 +44,7 @@ export class StickerDetailModalComponent implements OnChanges {
       this.height = this.sticker.height ?? '';
       this.weight = this.sticker.weight ?? '';
       this.team = this.sticker.team ?? '';
+      this.isImageExpanded = false;
     }
   }
 
@@ -77,5 +79,13 @@ export class StickerDetailModalComponent implements OnChanges {
 
   protected getCountryFlagUrl(flagCode: string | null): string {
     return getCountryFlagUrl(flagCode);
+  }
+
+  protected toggleImageExpanded(): void {
+    if (!this.sticker?.imageUrl) {
+      return;
+    }
+
+    this.isImageExpanded = !this.isImageExpanded;
   }
 }
