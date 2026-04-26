@@ -28,9 +28,13 @@
           <fieldset class="status-field" style="text-align:center;">
             <legend>
               Estado
-              <span class="field-help__icon" tabindex="0" title="Marca si la lámina ya está en tu colección" aria-label="Marca si la lámina ya está en tu colección">
+              <button
+                type="button"
+                class="field-help__icon"
+                appTooltip="Marca si la lámina ya está en tu colección"
+                aria-label="Ayuda sobre el estado de la lámina">
                 ?
-              </span>
+              </button>
             </legend>
             <div class="status-toggle status-toggle--single field-grid--single">
               <button type="button" class="status-toggle__option status-toggle__option--single"
@@ -74,9 +78,13 @@
             <label class="field">
               <span class="field-label">
                 <span>Fecha de nacimiento</span>
-                <span class="field-help__icon" tabindex="0" title="Ejemplo: 16-2-2008" aria-label="Ejemplo: 16-2-2008">
+                <button
+                  type="button"
+                  class="field-help__icon"
+                  appTooltip="Ejemplo: 16-2-2008"
+                  aria-label="Ayuda sobre la fecha de nacimiento">
                   ?
-                </span>
+                </button>
               </span>
               <input [(ngModel)]="birthday" name="birthday" placeholder="16-2-2008">
             </label>
@@ -84,9 +92,13 @@
             <label class="field">
               <span class="field-label">
                 <span>Estatura</span>
-                <span class="field-help__icon" tabindex="0" title="Ejemplo: 1.77 m" aria-label="Ejemplo: 1.77 m">
+                <button
+                  type="button"
+                  class="field-help__icon"
+                  appTooltip="Ejemplo: 1.77 m"
+                  aria-label="Ayuda sobre la estatura">
                   ?
-                </span>
+                </button>
               </span>
               <input [(ngModel)]="height" name="height" placeholder="1.77 m">
             </label>
@@ -94,9 +106,13 @@
             <label class="field">
               <span class="field-label">
                 <span>Peso</span>
-                <span class="field-help__icon" tabindex="0" title="Ejemplo: 76 kg" aria-label="Ejemplo: 76 kg">
+                <button
+                  type="button"
+                  class="field-help__icon"
+                  appTooltip="Ejemplo: 76 kg"
+                  aria-label="Ayuda sobre el peso">
                   ?
-                </span>
+                </button>
               </span>
               <input [(ngModel)]="weight" name="weight" placeholder="76 kg">
             </label>
@@ -104,20 +120,28 @@
             <label class="field">
               <span class="field-label">
                 <span>Equipo</span>
-                <span class="field-help__icon" tabindex="0" title="Ejemplo: FK Dinamo Moskva (RUS)" aria-label="Ejemplo: FK Dinamo Moskva (RUS)">
+                <button
+                  type="button"
+                  class="field-help__icon"
+                  appTooltip="Ejemplo: FK Dinamo Moskva (RUS)"
+                  aria-label="Ayuda sobre el equipo">
                   ?
-                </span>
+                </button>
               </span>
               <input [(ngModel)]="team" name="team" placeholder="FK Dinamo Moskva (RUS)">
             </label>
           </div>
 
           <label class="field">
-            <span>
-              Repetidas
-              <span class="field-help__icon" tabindex="0" title="Indica cuántas láminas repetidas tienes de este sticker" aria-label="Indica cuántas láminas repetidas tienes de este sticker">
+            <span class="field-label">
+              <span>Repetidas</span>
+              <button
+                type="button"
+                class="field-help__icon"
+                appTooltip="Indica cuántas láminas repetidas tienes de este sticker"
+                aria-label="Ayuda sobre la cantidad de repetidas">
                 ?
-              </span>
+              </button>
             </span>
             <div class="number-field">
               <input type="number" min="0" [(ngModel)]="duplicateCount" name="duplicateCount">
@@ -133,11 +157,15 @@
           </label>
 
           <label class="field">
-            <span>
-              Observaciones
-              <span class="field-help__icon" tabindex="0" title="Agrega una nota corta o dato útil sobre esta lámina" aria-label="Agrega una nota corta o dato útil sobre esta lámina">
+            <span class="field-label">
+              <span>Observaciones</span>
+              <button
+                type="button"
+                class="field-help__icon"
+                appTooltip="Agrega una nota corta o dato útil sobre esta lámina"
+                aria-label="Ayuda sobre las observaciones">
                 ?
-              </span>
+              </button>
             </span>
             <textarea rows="2" [(ngModel)]="notes" name="notes"></textarea>
           </label>

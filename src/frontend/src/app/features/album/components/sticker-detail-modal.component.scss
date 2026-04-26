@@ -147,21 +147,6 @@ textarea:focus {
   gap: .95rem 1rem;
 }
 
-.field-help__icon {
-  width: 1rem;
-  height: 1rem;
-  margin-left: .35rem;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 999px;
-  border: 1px solid color-mix(in srgb, var(--accent-color) 42%, var(--border-color) 58%);
-  color: var(--accent-color);
-  background: transparent;
-  font-size: 0.66rem;
-  font-weight: 700;
-  line-height: 1;
-}
 .status-field {
   width: min(100%, 16rem);
   margin: .9rem auto 0;

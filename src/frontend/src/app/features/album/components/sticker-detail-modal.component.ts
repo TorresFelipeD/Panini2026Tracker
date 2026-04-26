@@ -2,12 +2,13 @@ import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { StickerDetail } from '../../../core/models/app.models';
+import { TooltipDirective } from '../../../shared/directives/tooltip.directive';
 import { getCountryFlagUrl } from '../../../core/utils/country-flag';
 
 @Component({
   selector: 'app-sticker-detail-modal',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, TooltipDirective],
   templateUrl: './sticker-detail-modal.component.html',
   styleUrl: './sticker-detail-modal.component.scss'
 })
