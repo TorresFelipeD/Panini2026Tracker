@@ -33,7 +33,17 @@ export class AlbumStoreService {
   readonly selectedSticker = signal<StickerDetail | null>(null);
   readonly loading = signal(false);
 
-  readonly allStickers = computed(() => this.overview()?.countries.flatMap(country => country.stickers) ?? []);
+  readonly allStickers = computed(() => {
+    const overview = this.overview();
+    if (!overview) {
+      return [];
+    }
+
+    return [
+      ...overview.countries.flatMap(country => country.stickers),
+      ...overview.specialSections.flatMap(section => section.stickers)
+    ];
+  });
 
   load(): void {
     this.loading.set(true);

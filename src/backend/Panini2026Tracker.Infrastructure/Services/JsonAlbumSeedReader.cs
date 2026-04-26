@@ -13,37 +13,82 @@ public sealed class JsonAlbumSeedReader : IAlbumSeedReader
         var root = await JsonSerializer.DeserializeAsync<JsonSeedRoot>(stream, JsonDefaults.SerializerOptions, cancellationToken)
             ?? throw new InvalidOperationException("Seed catalog could not be loaded.");
 
-        return new SeedCatalogDto(root.Countries.Select(country => new SeedCountryDto(
-            country.Code,
-            country.Name,
-            country.FlagCode,
-            country.DisplayOrder,
-            country.Stickers.Select(sticker => new SeedStickerDto(
-                sticker.StickerCode,
-                sticker.DisplayName,
-                sticker.Type,
-                sticker.ImageReference,
-                sticker.IsProvisional,
-                sticker.DisplayOrder,
-                sticker.Birthday,
-                sticker.Height,
-                sticker.Weight,
-                sticker.Team,
-                sticker.AdditionalInfo,
-                sticker.Metadata)).ToArray())).ToArray());
+        return new SeedCatalogDto(
+            root.Countries.Select(country => new SeedCountryDto(
+                country.Code,
+                country.Group,
+                country.Name,
+                country.FlagCode,
+                country.DisplayOrder,
+                country.Stickers.Select(sticker => MapSticker(sticker, sticker.Type, null)).ToArray())).ToArray(),
+            root.Fcw?.Stickers.Select(sticker => MapSticker(sticker, "fcw", CreateSectionMetadata(root.Fcw.Group))).ToArray()
+                ?? [],
+            root.Extras.Select(sticker => MapSticker(sticker, sticker.Type, CreateSectionMetadata("EXTRA")))
+                .Concat(root.Stickers.Select(sticker => MapSticker(sticker, sticker.Type, CreateSectionMetadata("EXTRA"))))
+                .ToArray());
     }
+
+    private static SeedStickerDto MapSticker(
+        JsonSeedSticker sticker,
+        string? fallbackType,
+        Dictionary<string, string>? extraMetadata)
+    {
+        var metadata = sticker.Metadata is null
+            ? new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
+            : new Dictionary<string, string>(sticker.Metadata, StringComparer.OrdinalIgnoreCase);
+
+        if (extraMetadata is not null)
+        {
+            foreach (var pair in extraMetadata)
+            {
+                metadata[pair.Key] = pair.Value;
+            }
+        }
+
+        return new SeedStickerDto(
+            sticker.StickerCode,
+            sticker.DisplayName,
+            string.IsNullOrWhiteSpace(sticker.Type) ? fallbackType ?? "extra" : sticker.Type,
+            sticker.ImageReference,
+            sticker.IsProvisional,
+            sticker.DisplayOrder,
+            sticker.Birthday,
+            sticker.Height,
+            sticker.Weight,
+            sticker.Team,
+            sticker.AdditionalInfo,
+            metadata.Count == 0 ? null : metadata);
+    }
+
+    private static Dictionary<string, string> CreateSectionMetadata(string? section) =>
+        string.IsNullOrWhiteSpace(section)
+            ? new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
+            : new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
+            {
+                ["section"] = section
+            };
 
     private sealed class JsonSeedRoot
     {
         public List<JsonSeedCountry> Countries { get; set; } = [];
+        public JsonSeedSection? Fcw { get; set; }
+        public List<JsonSeedSticker> Extras { get; set; } = [];
+        public List<JsonSeedSticker> Stickers { get; set; } = [];
     }
 
     private sealed class JsonSeedCountry
     {
         public string Code { get; set; } = string.Empty;
+        public string Group { get; set; } = string.Empty;
         public string Name { get; set; } = string.Empty;
         public string FlagCode { get; set; } = string.Empty;
         public int DisplayOrder { get; set; }
+        public List<JsonSeedSticker> Stickers { get; set; } = [];
+    }
+
+    private sealed class JsonSeedSection
+    {
+        public string Group { get; set; } = string.Empty;
         public List<JsonSeedSticker> Stickers { get; set; } = [];
     }
 

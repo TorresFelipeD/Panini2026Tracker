@@ -75,7 +75,7 @@ export class StickerDetailModalComponent implements OnChanges {
     this.duplicateCount = Math.max(0, this.duplicateCount - 1);
   }
 
-  protected getCountryFlagUrl(flagCode: string): string {
+  protected getCountryFlagUrl(flagCode: string | null): string {
     return getCountryFlagUrl(flagCode);
   }
 }

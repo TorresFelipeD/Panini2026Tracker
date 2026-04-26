@@ -152,7 +152,24 @@
   aria-label="Cerrar filtros"></button>
 
 <section class="country-list" *ngIf="store.overview() as overview">
-  <article class="country-panel" *ngFor="let country of overview.countries">
+  <article class="country-panel" *ngFor="let section of visibleSpecialSections">
+    <header>
+      <div>
+        <h2>{{ section.label }}</h2>
+        <p>{{ section.owned }} / {{ section.total }} obtenidas · {{ section.completionPercentage }}%</p>
+      </div>
+      <span>{{ section.label }}</span>
+    </header>
+
+    <div class="sticker-grid">
+      <app-sticker-card
+        *ngFor="let sticker of section.stickers"
+        [sticker]="sticker"
+        (select)="store.openSticker($event)" />
+    </div>
+  </article>
+
+  <article class="country-panel" *ngFor="let country of visibleCountries">
     <header>
       <div>
         <h2>

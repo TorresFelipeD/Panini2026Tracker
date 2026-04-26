@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { CountryAlbum, SpecialStickerSection } from '../../../core/models/app.models';
 import { AlbumStoreService } from '../../../core/services/album.store';
 import { getCountryFlagUrl } from '../../../core/utils/country-flag';
 import { StickerCardComponent } from '../components/sticker-card.component';
@@ -40,7 +41,7 @@ export class AlbumPageComponent {
   protected isOwned = '';
   protected hasImage = '';
   protected hasDuplicates = '';
-  protected selectedGroup = this.worldCupGroups[0];
+  protected selectedGroup = 'FCW';
   protected openFilter: 'countryCode' | 'isOwned' | 'hasImage' | 'hasDuplicates' | null = null;
 
   constructor() {
@@ -134,5 +135,44 @@ export class AlbumPageComponent {
 
   protected selectGroup(group: string): void {
     this.selectedGroup = group;
+  }
+
+  protected get visibleCountries(): CountryAlbum[] {
+    const overview = this.store.overview();
+    if (!overview) {
+      return [];
+    }
+
+    if (this.selectedGroup === 'Todos') {
+      return overview.countries;
+    }
+
+    if (this.selectedGroup === 'FCW' || this.selectedGroup === 'Otros') {
+      return [];
+    }
+
+    const normalizedGroup = this.selectedGroup.replace('Grupo ', '');
+    return overview.countries.filter(country => country.group === normalizedGroup);
+  }
+
+  protected get visibleSpecialSections(): SpecialStickerSection[] {
+    const overview = this.store.overview();
+    if (!overview) {
+      return [];
+    }
+
+    if (this.selectedGroup === 'Todos') {
+      return overview.specialSections;
+    }
+
+    if (this.selectedGroup === 'FCW') {
+      return overview.specialSections.filter(section => section.key === 'fcw');
+    }
+
+    if (this.selectedGroup === 'Otros') {
+      return overview.specialSections.filter(section => section.key === 'other');
+    }
+
+    return [];
   }
 }

@@ -1,6 +1,7 @@
 export interface AlbumOverview {
   summary: AlbumSummary;
   countries: CountryAlbum[];
+  specialSections: SpecialStickerSection[];
 }
 
 export interface AlbumSummary {
@@ -13,8 +14,19 @@ export interface AlbumSummary {
 export interface CountryAlbum {
   countryId: string;
   countryCode: string;
+  group: string;
   countryName: string;
   flagCode: string;
+  total: number;
+  owned: number;
+  missing: number;
+  completionPercentage: number;
+  stickers: StickerCard[];
+}
+
+export interface SpecialStickerSection {
+  key: string;
+  label: string;
   total: number;
   owned: number;
   missing: number;
@@ -40,9 +52,9 @@ export interface StickerDetail {
   stickerId: string;
   stickerCode: string;
   displayName: string;
-  countryCode: string;
-  countryName: string;
-  flagCode: string;
+  countryCode: string | null;
+  countryName: string | null;
+  flagCode: string | null;
   type: string;
   isOwned: boolean;
   duplicateCount: number;

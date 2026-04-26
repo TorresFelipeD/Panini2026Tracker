@@ -12,9 +12,9 @@ public sealed class StickerCatalogItem : BaseEntity
     public string? MetadataJson { get; private set; }
     public bool IsProvisional { get; private set; }
     public int DisplayOrder { get; private set; }
-    public Guid CountryId { get; private set; }
+    public Guid? CountryId { get; private set; }
 
-    public Country Country { get; private set; } = default!;
+    public Country? Country { get; private set; }
     public StickerCollectionEntry? CollectionEntry { get; private set; }
     public StickerDuplicateEntry? DuplicateEntry { get; private set; }
     public StickerImage? StickerImage { get; private set; }
@@ -32,7 +32,7 @@ public sealed class StickerCatalogItem : BaseEntity
         string? metadataJson,
         bool isProvisional,
         int displayOrder,
-        Guid countryId)
+        Guid? countryId)
     {
         StickerCode = stickerCode.Trim().ToUpperInvariant();
         DisplayName = displayName.Trim();
@@ -54,7 +54,7 @@ public sealed class StickerCatalogItem : BaseEntity
         string? metadataJson,
         bool isProvisional,
         int displayOrder,
-        Guid countryId)
+        Guid? countryId)
     {
         StickerCode = stickerCode.Trim().ToUpperInvariant();
         DisplayName = displayName.Trim();

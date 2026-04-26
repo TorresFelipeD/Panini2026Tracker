@@ -28,6 +28,18 @@ public sealed class AlbumCatalogRepository : IAlbumCatalogRepository
             .ToArrayAsync(cancellationToken);
     }
 
+    public async Task<IReadOnlyCollection<StickerCatalogItem>> GetStickersWithRelationsAsync(CancellationToken cancellationToken)
+    {
+        return await _dbContext.StickerCatalogItems
+            .Include(sticker => sticker.Country)
+            .Include(sticker => sticker.CollectionEntry)
+            .Include(sticker => sticker.DuplicateEntry)
+            .Include(sticker => sticker.StickerImage)
+            .OrderBy(sticker => sticker.DisplayOrder)
+            .ThenBy(sticker => sticker.StickerCode)
+            .ToArrayAsync(cancellationToken);
+    }
+
     public Task<StickerCatalogItem?> GetStickerByIdAsync(Guid stickerId, CancellationToken cancellationToken)
     {
         return _dbContext.StickerCatalogItems

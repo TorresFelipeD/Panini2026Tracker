@@ -5,10 +5,14 @@ public interface IAlbumSeedReader
     Task<SeedCatalogDto> ReadAsync(CancellationToken cancellationToken);
 }
 
-public sealed record SeedCatalogDto(IReadOnlyCollection<SeedCountryDto> Countries);
+public sealed record SeedCatalogDto(
+    IReadOnlyCollection<SeedCountryDto> Countries,
+    IReadOnlyCollection<SeedStickerDto> FcwStickers,
+    IReadOnlyCollection<SeedStickerDto> ExtraStickers);
 
 public sealed record SeedCountryDto(
     string Code,
+    string Group,
     string Name,
     string FlagCode,
     int DisplayOrder,

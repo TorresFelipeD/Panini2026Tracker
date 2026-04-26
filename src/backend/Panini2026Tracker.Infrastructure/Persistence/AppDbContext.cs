@@ -41,7 +41,8 @@ public sealed class AppDbContext : DbContext
             builder.HasOne(sticker => sticker.Country)
                 .WithMany(country => country.Stickers)
                 .HasForeignKey(sticker => sticker.CountryId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.Cascade)
+                .IsRequired(false);
         });
 
         modelBuilder.Entity<StickerCollectionEntry>(builder =>

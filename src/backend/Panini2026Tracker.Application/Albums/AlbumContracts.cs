@@ -9,7 +9,8 @@ public sealed record AlbumFilter(
 
 public sealed record AlbumOverviewDto(
     AlbumSummaryDto Summary,
-    IReadOnlyCollection<CountryAlbumDto> Countries);
+    IReadOnlyCollection<CountryAlbumDto> Countries,
+    IReadOnlyCollection<SpecialStickerSectionDto> SpecialSections);
 
 public sealed record AlbumSummaryDto(
     int Total,
@@ -20,8 +21,18 @@ public sealed record AlbumSummaryDto(
 public sealed record CountryAlbumDto(
     Guid CountryId,
     string CountryCode,
+    string Group,
     string CountryName,
     string FlagCode,
+    int Total,
+    int Owned,
+    int Missing,
+    decimal CompletionPercentage,
+    IReadOnlyCollection<StickerCardDto> Stickers);
+
+public sealed record SpecialStickerSectionDto(
+    string Key,
+    string Label,
     int Total,
     int Owned,
     int Missing,
