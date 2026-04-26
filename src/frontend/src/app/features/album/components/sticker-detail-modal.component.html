@@ -33,7 +33,6 @@
             </ng-template>
 
             <button
-              *ngIf="selected.imageUrl"
               type="button"
               [attr.aria-label]="isImageExpanded ? 'Contraer imagen' : 'Expandir imagen'"
               style="position:absolute;right:.85rem;bottom:.85rem;width:2.9rem;height:2.9rem;padding:0;display:grid;place-items:center;border-radius:999px;border:1px solid color-mix(in srgb, var(--border-color) 65%, transparent);background:rgba(6,16,19,.72);color:#f3fbff;box-shadow:0 .6rem 1.2rem rgba(0,0,0,.24);backdrop-filter:blur(10px);"
@@ -201,14 +200,27 @@
       </form>
 
       <div
-        *ngIf="isImageExpanded && selected.imageUrl"
+        *ngIf="isImageExpanded"
         style="position:absolute;inset:0;z-index:3;display:grid;place-items:center;padding:1.4rem;border-radius:inherit;background:linear-gradient(180deg, rgba(4,10,18,.22), rgba(4,10,18,.76)), color-mix(in srgb, var(--panel-background) 56%, #02060b 44%);"
         (click)="toggleImageExpanded()">
-        <img
-          [src]="selected.imageUrl"
-          [alt]="selected.displayName"
-          [class.preview-image--missing]="!isOwned"
-          style="width:100%;height:100%;object-fit:contain;border-radius:1.15rem;">
+        <div
+          [style.width]="isHorizontalExpanded ? 'min(100%, 56rem)' : 'min(100%, 32rem)'"
+          [style.height]="isHorizontalExpanded ? 'min(100%, 32rem)' : 'min(100%, 56rem)'"
+          [style.aspect-ratio]="isHorizontalExpanded ? '5 / 4' : '4 / 5'">
+          <img
+            *ngIf="selected.imageUrl; else expandedNoImage"
+            [src]="selected.imageUrl"
+            [alt]="selected.displayName"
+            [class.preview-image--missing]="!isOwned"
+            style="width:100%;height:100%;object-fit:cover;border-radius:1.15rem;border:1px solid color-mix(in srgb, var(--border-color) 75%, transparent);background:color-mix(in srgb, var(--field-background) 88%, var(--panel-background) 12%);">
+          <ng-template #expandedNoImage>
+            <div
+              class="empty-preview"
+              style="width:100%;height:100%;aspect-ratio:auto;border-radius:1.15rem;">
+              {{ selected.stickerCode }}
+            </div>
+          </ng-template>
+        </div>
         <button
           type="button"
           aria-label="Contraer imagen"

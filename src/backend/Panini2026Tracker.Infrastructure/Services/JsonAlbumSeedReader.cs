@@ -46,6 +46,8 @@ public sealed class JsonAlbumSeedReader : IAlbumSeedReader
             }
         }
 
+        metadata["isHorizontal"] = sticker.IsHorizontal ? "true" : "false";
+
         return new SeedStickerDto(
             sticker.StickerCode,
             sticker.DisplayName,
@@ -106,6 +108,7 @@ public sealed class JsonAlbumSeedReader : IAlbumSeedReader
         public string? Height { get; set; }
         public string? Weight { get; set; }
         public string? Team { get; set; }
+        public bool IsHorizontal { get; set; }
         public Dictionary<string, string>? AdditionalInfo { get; set; }
         public Dictionary<string, string>? Metadata { get; set; }
     }

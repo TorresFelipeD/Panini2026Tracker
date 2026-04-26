@@ -82,10 +82,14 @@ export class StickerDetailModalComponent implements OnChanges {
   }
 
   protected toggleImageExpanded(): void {
-    if (!this.sticker?.imageUrl) {
+    if (!this.sticker) {
       return;
     }
 
     this.isImageExpanded = !this.isImageExpanded;
+  }
+
+  protected get isHorizontalExpanded(): boolean {
+    return this.sticker?.metadata?.['isHorizontal']?.toLowerCase() === 'true';
   }
 }
