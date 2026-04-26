@@ -82,21 +82,6 @@ export class HelpPageComponent {
         'Haz una copia de seguridad antes de una importación importante.',
         'Desde aquí también puedes revisar logs del sistema.'
       ]
-    },
-    {
-      id: 'help',
-      label: 'Ayuda',
-      route: '/ayuda',
-      description: 'Encuentra una guía rápida de cada menú, con tarjetas desplegables y un buscador para ubicar conceptos.',
-      steps: [
-        'Escribe una palabra en el buscador para filtrar tarjetas relacionadas.',
-        'Abre o cierra cada card para leer cómo se usa cada módulo.',
-        'Cuando busques algo específico, las coincidencias quedan resaltadas dentro del contenido.'
-      ],
-      tips: [
-        'Prueba búsquedas como progreso, repetidas, respaldo o imágenes.',
-        'Si el buscador no encuentra resultados, limpia el texto para volver a ver todas las tarjetas.'
-      ]
     }
   ];
 
