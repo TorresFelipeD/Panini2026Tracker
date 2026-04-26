@@ -20,6 +20,7 @@ public sealed class JsonAlbumSeedReader : IAlbumSeedReader
                 country.Name,
                 country.FlagCode,
                 country.DisplayOrder,
+                country.DisplayOrderGroup,
                 country.Stickers.Select(sticker => MapSticker(sticker, sticker.Type, null)).ToArray())).ToArray(),
             root.Fcw?.Stickers.Select(sticker => MapSticker(sticker, "fcw", CreateSectionMetadata(root.Fcw.Group))).ToArray()
                 ?? [],
@@ -83,6 +84,7 @@ public sealed class JsonAlbumSeedReader : IAlbumSeedReader
         public string Name { get; set; } = string.Empty;
         public string FlagCode { get; set; } = string.Empty;
         public int DisplayOrder { get; set; }
+        public int DisplayOrderGroup { get; set; }
         public List<JsonSeedSticker> Stickers { get; set; } = [];
     }
 

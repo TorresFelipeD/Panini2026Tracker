@@ -15,6 +15,8 @@ export interface CountryAlbum {
   countryId: string;
   countryCode: string;
   group: string;
+  displayOrder: number;
+  displayOrderGroup: number;
   countryName: string;
   flagCode: string;
   total: number;

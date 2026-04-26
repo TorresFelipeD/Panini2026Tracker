@@ -22,6 +22,8 @@ public sealed record CountryAlbumDto(
     Guid CountryId,
     string CountryCode,
     string Group,
+    int DisplayOrder,
+    int DisplayOrderGroup,
     string CountryName,
     string FlagCode,
     int Total,

@@ -20,6 +20,8 @@ public sealed class AlbumService : IAlbumService
         var stickers = await _catalogRepository.GetStickersWithRelationsAsync(cancellationToken);
         var seed = await _seedReader.ReadAsync(cancellationToken);
         var countryGroupMap = seed.Countries.ToDictionary(country => country.Code, country => country.Group, StringComparer.OrdinalIgnoreCase);
+        var countryDisplayOrderMap = seed.Countries.ToDictionary(country => country.Code, country => country.DisplayOrder, StringComparer.OrdinalIgnoreCase);
+        var countryDisplayOrderGroupMap = seed.Countries.ToDictionary(country => country.Code, country => country.DisplayOrderGroup, StringComparer.OrdinalIgnoreCase);
 
         var matchedStickers = stickers
             .Where(sticker => Matches(sticker, filter))
@@ -42,11 +44,14 @@ public sealed class AlbumService : IAlbumService
                     country.Id,
                     country.Code,
                     countryGroupMap.TryGetValue(country.Code, out var countryGroup) ? countryGroup : string.Empty,
+                    countryDisplayOrderMap.TryGetValue(country.Code, out var displayOrder) ? displayOrder : int.MaxValue,
+                    countryDisplayOrderGroupMap.TryGetValue(country.Code, out var displayOrderGroup) ? displayOrderGroup : int.MaxValue,
                     country.Name,
                     country.FlagCode,
                     cards);
             })
-            .OrderBy(country => country.CountryName)
+            .OrderBy(country => country.DisplayOrder)
+            .ThenBy(country => country.CountryName)
             .ToArray();
 
         var specialSections = CreateSpecialSections(matchedStickers);
@@ -90,6 +95,8 @@ public sealed class AlbumService : IAlbumService
         Guid countryId,
         string countryCode,
         string group,
+        int displayOrder,
+        int displayOrderGroup,
         string countryName,
         string flagCode,
         IReadOnlyCollection<StickerCardDto> stickers)
@@ -101,6 +108,8 @@ public sealed class AlbumService : IAlbumService
             countryId,
             countryCode,
             group,
+            displayOrder,
+            displayOrderGroup,
             countryName,
             flagCode,
             total,

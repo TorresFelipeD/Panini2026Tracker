@@ -16,6 +16,7 @@ public sealed record SeedCountryDto(
     string Name,
     string FlagCode,
     int DisplayOrder,
+    int DisplayOrderGroup,
     IReadOnlyCollection<SeedStickerDto> Stickers);
 
 public sealed record SeedStickerDto(

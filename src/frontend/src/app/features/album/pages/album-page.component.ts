@@ -178,7 +178,8 @@ export class AlbumPageComponent {
     }
 
     if (this.hasFilterDrivenView) {
-      return overview.countries;
+      return [...overview.countries]
+        .sort((a, b) => a.displayOrder - b.displayOrder || a.countryName.localeCompare(b.countryName));
     }
 
     if (this.selectedGroup === 'FCW' || this.selectedGroup === 'Otros') {
@@ -186,7 +187,9 @@ export class AlbumPageComponent {
     }
 
     const normalizedGroup = this.selectedGroup.replace('Grupo ', '');
-    return overview.countries.filter(country => country.group === normalizedGroup);
+    return overview.countries
+      .filter(country => country.group === normalizedGroup)
+      .sort((a, b) => a.displayOrderGroup - b.displayOrderGroup || a.displayOrder - b.displayOrder || a.countryName.localeCompare(b.countryName));
   }
 
   protected get visibleSpecialSections(): SpecialStickerSection[] {
@@ -208,6 +211,14 @@ export class AlbumPageComponent {
     }
 
     return [];
+  }
+
+  protected get leadingSpecialSections(): SpecialStickerSection[] {
+    return this.visibleSpecialSections.filter(section => section.key === 'fcw');
+  }
+
+  protected get trailingSpecialSections(): SpecialStickerSection[] {
+    return this.visibleSpecialSections.filter(section => section.key !== 'fcw');
   }
 
   private syncSelectedGroupWithCountryFilter(): void {

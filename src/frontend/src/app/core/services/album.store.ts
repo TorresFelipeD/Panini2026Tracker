@@ -29,7 +29,7 @@ export class AlbumStoreService {
 
   readonly filters = signal<AlbumFilters>(defaultFilters);
   readonly overview = signal<AlbumOverview | null>(null);
-  readonly availableCountries = signal<{ countryCode: string; countryName: string; flagCode: string; group: string }[]>([]);
+  readonly availableCountries = signal<{ countryCode: string; countryName: string; flagCode: string; group: string; displayOrder: number; displayOrderGroup: number }[]>([]);
   readonly selectedSticker = signal<StickerDetail | null>(null);
   readonly loading = signal(false);
 
@@ -79,9 +79,11 @@ export class AlbumStoreService {
                 countryCode: country.countryCode,
                 countryName: country.countryName,
                 flagCode: country.flagCode,
-                group: country.group
+                group: country.group,
+                displayOrder: country.displayOrder,
+                displayOrderGroup: country.displayOrderGroup
               }))
-              .sort((a, b) => a.countryName.localeCompare(b.countryName))
+              .sort((a, b) => a.displayOrder - b.displayOrder || a.countryName.localeCompare(b.countryName))
           );
         }
         this.loading.set(false);
@@ -103,9 +105,11 @@ export class AlbumStoreService {
               countryCode: country.countryCode,
               countryName: country.countryName,
               flagCode: country.flagCode,
-              group: country.group
+              group: country.group,
+              displayOrder: country.displayOrder,
+              displayOrderGroup: country.displayOrderGroup
             }))
-            .sort((a, b) => a.countryName.localeCompare(b.countryName))
+            .sort((a, b) => a.displayOrder - b.displayOrder || a.countryName.localeCompare(b.countryName))
         );
       }
     });
