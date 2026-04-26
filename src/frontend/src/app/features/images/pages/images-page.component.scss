@@ -15,6 +15,18 @@
   margin: 1rem 0;
 }
 
+.gallery-filters {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(260px, 0.65fr);
+  gap: 0.85rem;
+  align-items: start;
+}
+
+.gallery-filters__actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
 .uploader-fields {
   display: grid;
   grid-template-columns: 2fr 1fr;
@@ -257,7 +269,16 @@
 }
 
 @media (max-width: 900px) {
+  .gallery-filters,
   .uploader-fields {
     grid-template-columns: 1fr;
+  }
+
+  .gallery-filters__actions {
+    justify-content: stretch;
+  }
+
+  .gallery-filters__actions button {
+    width: 100%;
   }
 }

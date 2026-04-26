@@ -62,7 +62,7 @@
           <h3 style="margin:0 0 .25rem;">Imágenes cargadas</h3>
           <p style="margin:0;color:var(--text-secondary);">Filtra por texto o grupo para encontrar imágenes y eliminarlas más rápido.</p>
         </div>
-        <div style="display:grid;grid-template-columns:minmax(0,1.35fr) minmax(260px,.65fr);gap:.85rem;align-items:start;">
+        <div class="gallery-filters">
           <div style="position:relative;width:100%;min-height:3.5rem;border-radius:.95rem;border:1px solid var(--border-color);background:var(--field-background);overflow:hidden;">
             <input
               [(ngModel)]="imageSearch"
@@ -154,7 +154,7 @@
           </div>
         </div>
 
-        <div style="display:flex;justify-content:flex-end;">
+        <div class="gallery-filters__actions">
           <button
             type="button"
             (click)="clearGalleryFilters()"
