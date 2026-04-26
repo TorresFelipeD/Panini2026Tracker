@@ -15,7 +15,7 @@ import { StickerDetailModalComponent } from '../components/sticker-detail-modal.
 })
 export class AlbumPageComponent {
   protected readonly store = inject(AlbumStoreService);
-  protected readonly worldCupGroups = ['FCW', ...Array.from({ length: 12 }, (_, index) => `Grupo ${String.fromCharCode(65 + index)}`)];
+  protected readonly worldCupGroups = ['FCW', ...Array.from({ length: 12 }, (_, index) => `Grupo ${String.fromCharCode(65 + index)}`), 'Otros'];
   protected readonly filterOptions = {
     isOwned: [
       { value: '', label: 'Estado' },
