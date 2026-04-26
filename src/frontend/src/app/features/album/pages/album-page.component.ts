@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, HostListener, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CountryAlbum, SpecialStickerSection } from '../../../core/models/app.models';
 import { AlbumStoreService } from '../../../core/services/album.store';
@@ -42,6 +42,7 @@ export class AlbumPageComponent {
   protected hasImage = '';
   protected hasDuplicates = '';
   protected selectedGroup = 'FCW';
+  protected showScrollTopButton = false;
   protected openFilter: 'countryCode' | 'isOwned' | 'hasImage' | 'hasDuplicates' | null = null;
 
   constructor() {
@@ -159,6 +160,10 @@ export class AlbumPageComponent {
     this.selectedGroup = group;
   }
 
+  protected scrollToTop(): void {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
   protected get hasFilterDrivenView(): boolean {
     return Boolean(this.search.trim())
       || this.countryCodes.length > 0
@@ -219,6 +224,11 @@ export class AlbumPageComponent {
 
   protected get trailingSpecialSections(): SpecialStickerSection[] {
     return this.visibleSpecialSections.filter(section => section.key !== 'fcw');
+  }
+
+  @HostListener('window:scroll')
+  protected onWindowScroll(): void {
+    this.showScrollTopButton = window.scrollY > 520;
   }
 
   private syncSelectedGroupWithCountryFilter(): void {

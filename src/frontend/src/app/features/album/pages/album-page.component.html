@@ -216,3 +216,12 @@
   [sticker]="store.selectedSticker()"
   (close)="store.closeSticker()"
   (save)="store.saveSticker($event)" />
+
+<button
+  *ngIf="showScrollTopButton"
+  type="button"
+  class="scroll-top-button"
+  (click)="scrollToTop()"
+  aria-label="Volver arriba">
+  <span aria-hidden="true">↑</span>
+</button>

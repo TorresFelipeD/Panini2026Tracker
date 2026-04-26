@@ -231,9 +231,55 @@
   gap: 1rem;
 }
 
+.scroll-top-button {
+  position: fixed;
+  right: 1.4rem;
+  bottom: 1.4rem;
+  z-index: 45;
+  width: 3.4rem;
+  height: 3.4rem;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--accent-color) 34%, var(--border-color) 66%);
+  background:
+    linear-gradient(180deg, rgba(106, 241, 207, 0.12), rgba(106, 241, 207, 0.03)),
+    color-mix(in srgb, var(--panel-background) 84%, rgba(8, 17, 28, 0.42) 16%);
+  color: color-mix(in srgb, var(--accent-color) 82%, white 18%);
+  box-shadow:
+    0 0.8rem 1.8rem rgba(0, 0, 0, 0.24),
+    0 0 1rem rgba(106, 241, 207, 0.08);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: transform 160ms ease, border-color 160ms ease, box-shadow 160ms ease, background-color 160ms ease;
+}
+
+.scroll-top-button:hover {
+  transform: translateY(-2px);
+  border-color: color-mix(in srgb, var(--accent-color) 55%, var(--border-color) 45%);
+  box-shadow:
+    0 1rem 2rem rgba(0, 0, 0, 0.28),
+    0 0 1.2rem rgba(106, 241, 207, 0.12);
+}
+
+.scroll-top-button span {
+  font-size: 1.35rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
 @media (max-width: 900px) {
   .hero,
   .filters {
     grid-template-columns: 1fr;
+  }
+
+  .scroll-top-button {
+    right: 1rem;
+    bottom: 1rem;
+    width: 3rem;
+    height: 3rem;
   }
 }
