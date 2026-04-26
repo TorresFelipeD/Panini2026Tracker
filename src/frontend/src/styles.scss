@@ -480,3 +480,52 @@ select option {
   box-shadow: 0 0 1rem rgba(106, 241, 207, 0.08);
   transform: translateX(-50%) rotate(45deg);
 }
+
+.under-construction {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.under-construction::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background:
+    linear-gradient(
+      145deg,
+      rgba(7, 17, 28, 0.03),
+      rgba(106, 241, 207, 0.025) 38%,
+      rgba(255, 255, 255, 0.02) 58%,
+      rgba(7, 17, 28, 0.05)
+    );
+  backdrop-filter: blur(1.6px);
+  -webkit-backdrop-filter: blur(1.6px);
+  pointer-events: none;
+}
+
+.under-construction::after {
+  content: 'EN CONSTRUCCIÓN';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 3;
+  transform: translate(-50%, -50%) rotate(-24deg);
+  font-size: clamp(1.55rem, 2.6vw, 2.5rem);
+  font-weight: 800;
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--accent-color) 54%, rgba(255, 255, 255, 0.42) 46%);
+  opacity: 0.14;
+  text-shadow:
+    0 0 1.4rem rgba(106, 241, 207, 0.08),
+    0 0 0.22rem rgba(255, 255, 255, 0.08);
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.under-construction > * {
+  position: relative;
+  z-index: 1;
+}
