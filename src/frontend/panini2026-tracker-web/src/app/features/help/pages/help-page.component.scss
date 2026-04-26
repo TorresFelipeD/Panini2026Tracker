@@ -1,7 +1,7 @@
 .help-page,.help-grid,.help-card,.help-card__body,.help-section,.search-field,.help-empty,.help-card__meta{display:grid}
 .help-page,.help-grid,.help-card,.help-card__body,.help-section,.search-field,.help-empty,.help-card__meta{gap:1rem}
 .help-hero,.help-card,.help-empty{padding:1.25rem;border:1px solid var(--border-color);border-radius:1.5rem;background:var(--panel-background)}
-.help-hero{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(320px,1fr);gap:1rem;align-items:start}
+.help-hero{display:grid;grid-template-columns:1fr;gap:1rem;align-items:start}
 .eyebrow,.card-kicker,.hero-copy,.help-card__heading p,.search-label,.help-route,.help-section__title,.help-empty p{color:var(--text-secondary)}
 .eyebrow,.card-kicker,.search-label,.help-section__title{text-transform:uppercase;letter-spacing:.08em;font-size:.76rem;font-weight:700}
 .help-hero h2,.help-card h3,.help-empty h3{margin:.35rem 0 0;color:var(--text-primary)}
