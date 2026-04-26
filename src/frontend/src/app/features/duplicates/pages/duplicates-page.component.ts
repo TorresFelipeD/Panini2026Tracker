@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, HostListener, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { DuplicateItem } from '../../../core/models/app.models';
 import { AlbumStoreService } from '../../../core/services/album.store';
@@ -30,6 +30,7 @@ export class DuplicatesPageComponent {
   protected countryCodes: string[] = [];
   protected countrySearch = '';
   protected countryPickerOpen = false;
+  protected showScrollTopButton = false;
 
   constructor() {
     this.albumStore.loadCountryCatalog();
@@ -144,5 +145,14 @@ export class DuplicatesPageComponent {
 
   protected decrement(qty: HTMLInputElement): void {
     qty.stepDown();
+  }
+
+  @HostListener('window:scroll')
+  protected onWindowScroll(): void {
+    this.showScrollTopButton = window.scrollY > 520;
+  }
+
+  protected scrollToTop(): void {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 }

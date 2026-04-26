@@ -231,12 +231,21 @@
 
   <button type="button" class="picker-backdrop" *ngIf="pickerOpen || groupFilterOpen" (click)="closeOverlays()" aria-label="Cerrar selector"></button>
 
-  <button
+  <!-- <button
     *ngIf="showScrollTop"
     type="button"
     aria-label="Volver arriba"
     style="position:fixed;right:1.35rem;bottom:1.35rem;z-index:45;width:3.35rem;height:3.35rem;padding:0;display:grid;place-items:center;border-radius:999px;border:1px solid var(--border-color);background:var(--field-background);color:var(--text-primary);box-shadow:0 1rem 2rem rgba(0,0,0,.24);backdrop-filter:blur(12px);cursor:pointer;"
     (click)="scrollToTop()">
+    <span aria-hidden="true" style="width:.7rem;height:.7rem;border-top:.14rem solid var(--accent-color);border-right:.14rem solid var(--accent-color);transform:rotate(-45deg) translate(-.08rem,.08rem);"></span>
+  </button> -->
+
+  <button
+    *ngIf="showScrollTopButton"
+    type="button"
+    class="scroll-top-button"
+    (click)="scrollToTop()"
+    aria-label="Volver arriba">
     <span aria-hidden="true" style="width:.7rem;height:.7rem;border-top:.14rem solid var(--accent-color);border-right:.14rem solid var(--accent-color);transform:rotate(-45deg) translate(-.08rem,.08rem);"></span>
   </button>
 </section>

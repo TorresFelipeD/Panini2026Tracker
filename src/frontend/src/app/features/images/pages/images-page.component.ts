@@ -43,7 +43,7 @@ export class ImagesPageComponent {
   protected readonly pageSizeOptions = [5, 10, 20];
   protected pageSize = 5;
   protected currentPage = 1;
-  protected showScrollTop = false;
+  protected showScrollTopButton = false;
 
   constructor() {
     this.albumStore.load();
@@ -52,7 +52,7 @@ export class ImagesPageComponent {
 
   @HostListener('window:scroll')
   protected onWindowScroll(): void {
-    this.showScrollTop = window.scrollY > 520;
+    this.showScrollTopButton = window.scrollY > 520;
   }
 
   protected onFileSelected(event: Event): void {
