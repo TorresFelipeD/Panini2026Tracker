@@ -14,6 +14,12 @@ interface ImageGroup {
   items: StickerImageItem[];
 }
 
+interface ImageGroupOption {
+  value: string;
+  label: string;
+  flagUrl: string | null;
+}
+
 @Component({
   selector: 'app-images-page',
   standalone: true,
@@ -29,7 +35,10 @@ export class ImagesPageComponent {
   protected stickerId = '';
   protected selectedFile: File | null = null;
   protected pickerOpen = false;
+  protected groupFilterOpen = false;
   protected pickerSearch = '';
+  protected imageSearch = '';
+  protected imageGroupFilter = '';
   protected readonly pageSizeOptions = [5, 10, 20];
   protected pageSize = 5;
   protected currentPage = 1;
@@ -51,7 +60,13 @@ export class ImagesPageComponent {
   }
 
   protected togglePicker(): void {
+    this.groupFilterOpen = false;
     this.pickerOpen = !this.pickerOpen;
+  }
+
+  protected toggleGroupFilter(): void {
+    this.pickerOpen = false;
+    this.groupFilterOpen = !this.groupFilterOpen;
   }
 
   protected selectSticker(sticker: StickerCard): void {
@@ -62,6 +77,15 @@ export class ImagesPageComponent {
 
   protected closePicker(): void {
     this.pickerOpen = false;
+  }
+
+  protected closeGroupFilter(): void {
+    this.groupFilterOpen = false;
+  }
+
+  protected closeOverlays(): void {
+    this.pickerOpen = false;
+    this.groupFilterOpen = false;
   }
 
   protected async upload(input: HTMLInputElement): Promise<void> {
@@ -115,6 +139,16 @@ export class ImagesPageComponent {
     this.currentPage = 1;
   }
 
+  protected onGalleryFiltersChange(): void {
+    this.currentPage = 1;
+  }
+
+  protected selectImageGroupFilter(value: string): void {
+    this.imageGroupFilter = value;
+    this.groupFilterOpen = false;
+    this.onGalleryFiltersChange();
+  }
+
   protected scrollToTop(): void {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
@@ -160,7 +194,7 @@ export class ImagesPageComponent {
   }
 
   protected get totalPages(): number {
-    return Math.max(1, Math.ceil(this.imagesStore.items().length / this.pageSize));
+    return Math.max(1, Math.ceil(this.filteredImageItems.length / this.pageSize));
   }
 
   protected get visiblePageNumbers(): number[] {
@@ -179,6 +213,39 @@ export class ImagesPageComponent {
     return this.getStickerContextLabel(sticker);
   }
 
+  protected get imageGroupOptions(): ImageGroupOption[] {
+    const groups = new Map<string, ImageGroupOption>();
+
+    for (const item of this.imagesStore.items()) {
+      const group = this.getImageGroup(item);
+      if (!groups.has(group.key)) {
+        groups.set(group.key, { value: group.key, label: group.label, flagUrl: group.flagUrl });
+      }
+    }
+
+    return Array.from(groups.values()).sort((a, b) => a.label.localeCompare(b.label));
+  }
+
+  protected get selectedImageGroupLabel(): string {
+    if (!this.imageGroupFilter) {
+      return 'Todos los grupos';
+    }
+
+    return this.imageGroupOptions.find(option => option.value === this.imageGroupFilter)?.label ?? 'Todos los grupos';
+  }
+
+  protected get selectedImageGroupFlagUrl(): string | null {
+    if (!this.imageGroupFilter) {
+      return null;
+    }
+
+    return this.imageGroupOptions.find(option => option.value === this.imageGroupFilter)?.flagUrl ?? null;
+  }
+
+  protected get filteredImagesCount(): number {
+    return this.filteredImageItems.length;
+  }
+
   private get paginatedItems(): StickerImageItem[] {
     const safePage = Math.min(this.currentPage, this.totalPages);
     if (safePage !== this.currentPage) {
@@ -186,7 +253,19 @@ export class ImagesPageComponent {
     }
 
     const start = (safePage - 1) * this.pageSize;
-    return this.imagesStore.items().slice(start, start + this.pageSize);
+    return this.filteredImageItems.slice(start, start + this.pageSize);
+  }
+
+  private get filteredImageItems(): StickerImageItem[] {
+    const search = this.imageSearch.trim().toLowerCase();
+
+    return this.imagesStore.items().filter(item => {
+      const group = this.getImageGroup(item);
+      const matchesGroup = !this.imageGroupFilter || group.key === this.imageGroupFilter;
+      const matchesSearch = !search || `${item.stickerCode} ${item.displayName} ${group.label} ${item.type}`.toLowerCase().includes(search);
+
+      return matchesGroup && matchesSearch;
+    });
   }
 
   private getImageGroup(item: StickerImageItem): Omit<ImageGroup, 'items'> {

@@ -6,106 +6,200 @@
     </div>
   </header>
 
-  <div class="uploader">
-    <div class="uploader-fields">
-      <div class="picker" [class.picker--open]="pickerOpen">
-        <button type="button" class="picker-trigger" (click)="togglePicker()">
-          <span>{{ selectedStickerLabel }}</span>
-          <span class="dropdown-chevron" aria-hidden="true"></span>
-        </button>
-
-        <div class="picker-panel" *ngIf="pickerOpen">
-          <input
-            type="text"
-            [(ngModel)]="pickerSearch"
-            placeholder="Buscar por código, lámina o país">
-
-          <div class="picker-options">
-            <button type="button" class="picker-option" *ngFor="let sticker of filteredStickers" (click)="selectSticker(sticker)">
-              <strong>{{ sticker.stickerCode }}</strong>
-              <span>{{ sticker.displayName }} · {{ getStickerBadge(sticker) }}</span>
-            </button>
-
-            <div class="picker-empty" *ngIf="!filteredStickers.length">
-              No se encontraron láminas con ese criterio.
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="upload-box">
-        <input #fileInput type="file" accept="image/*" class="sr-only-file" (change)="onFileSelected($event)">
-        <div class="upload-file-row">
-          <button type="button" class="secondary" (click)="fileInput.click()">Elegir archivo</button>
-          <span [class.upload-file-name--empty]="!selectedFile">{{ selectedFileName }}</span>
-        </div>
-      </div>
-    </div>
-
-    <p class="upload-help">Selecciona una imagen y luego confirma la carga para asociarla a la lámina elegida.</p>
-    <button type="button" class="primary upload-submit" [disabled]="!stickerId || !selectedFile" (click)="upload(fileInput)">Cargar imagen</button>
-  </div>
-
-  <button type="button" class="picker-backdrop" *ngIf="pickerOpen" (click)="closePicker()" aria-label="Cerrar selector"></button>
-
-  <div class="gallery-toolbar" *ngIf="imagesStore.items().length" style="display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;margin:1.25rem 0 .9rem;">
-    <p>{{ imagesStore.items().length }} imágenes asociadas</p>
-    <label class="page-size" style="display:inline-flex;align-items:center;gap:.55rem;color:var(--text-secondary);">
-      <span>Ver</span>
-      <select [(ngModel)]="pageSize" (ngModelChange)="onPageSizeChange()" style="padding:.55rem .75rem;border-radius:.9rem;border:1px solid var(--border-color);background:var(--field-background);color:var(--text-primary);">
-        <option *ngFor="let option of pageSizeOptions" [ngValue]="option">{{ option }}</option>
-      </select>
-      <span>cards</span>
-    </label>
-  </div>
-
-  <div class="gallery-groups" *ngIf="imagesStore.items().length; else emptyGallery" style="display:grid;gap:1.4rem;">
-    <section class="gallery-group" *ngFor="let group of pagedGroups" style="display:grid;gap:.85rem;">
-      <header class="gallery-group__header" style="display:flex;align-items:center;justify-content:space-between;gap:1rem;padding-top:.25rem;color:var(--text-secondary);">
-        <div class="gallery-group__title" style="display:inline-flex;align-items:center;gap:.6rem;font-size:.95rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;">
-          <img *ngIf="group.flagUrl" [src]="group.flagUrl" alt="" aria-hidden="true" style="width:1.1rem;height:.82rem;border-radius:.18rem;object-fit:cover;">
-          <span>{{ group.label }}</span>
+  <div style="display:grid;gap:1.4rem;margin:1.1rem 0 0;">
+    <section class="panel" style="padding:1.1rem 1.1rem 1.2rem;border-radius:1.25rem;background:color-mix(in srgb, var(--panel-background) 92%, var(--field-background-hover) 8%);">
+      <header style="margin-bottom:.9rem;">
+        <div>
+          <h3 style="margin:0 0 .25rem;">Carga de imagen</h3>
+          <p style="margin:0;color:var(--text-secondary);">Selecciona la lámina y luego carga el archivo.</p>
         </div>
       </header>
 
-      <div class="gallery">
-        <article class="image-card" *ngFor="let item of group.items">
-          <img [src]="item.imageUrl" [alt]="item.displayName">
-          <div>
-            <strong>{{ item.stickerCode }}</strong>
-            <p>{{ item.displayName }}</p>
-            <small>{{ group.label }} · {{ item.uploadedAtUtc | date:'medium' }}</small>
-            <button type="button" class="danger" (click)="remove(item.stickerId, item.displayName)">Eliminar imagen</button>
+      <div class="uploader">
+        <div class="uploader-fields">
+          <div class="picker" [class.picker--open]="pickerOpen">
+            <button type="button" class="picker-trigger" (click)="togglePicker()">
+              <span>{{ selectedStickerLabel }}</span>
+              <span class="dropdown-chevron" aria-hidden="true"></span>
+            </button>
+
+            <div class="picker-panel" *ngIf="pickerOpen">
+              <input
+                type="text"
+                [(ngModel)]="pickerSearch"
+                placeholder="Buscar por código, lámina o país">
+
+              <div class="picker-options">
+                <button type="button" class="picker-option" *ngFor="let sticker of filteredStickers" (click)="selectSticker(sticker)">
+                  <strong>{{ sticker.stickerCode }}</strong>
+                  <span>{{ sticker.displayName }} · {{ getStickerBadge(sticker) }}</span>
+                </button>
+
+                <div class="picker-empty" *ngIf="!filteredStickers.length">
+                  No se encontraron láminas con ese criterio.
+                </div>
+              </div>
+            </div>
           </div>
-        </article>
+
+          <div class="upload-box">
+            <input #fileInput type="file" accept="image/*" class="sr-only-file" (change)="onFileSelected($event)">
+            <div class="upload-file-row">
+              <button type="button" class="secondary" (click)="fileInput.click()">Elegir archivo</button>
+              <span [class.upload-file-name--empty]="!selectedFile">{{ selectedFileName }}</span>
+            </div>
+          </div>
+        </div>
+
+        <p class="upload-help">Selecciona una imagen y luego confirma la carga para asociarla a la lámina elegida.</p>
+        <button type="button" class="primary upload-submit" [disabled]="!stickerId || !selectedFile" (click)="upload(fileInput)">Cargar imagen</button>
+      </div>
+    </section>
+
+    <section class="panel" style="padding:1.1rem 1.1rem 1.2rem;border-radius:1.25rem;background:color-mix(in srgb, var(--panel-background) 92%, var(--field-background-hover) 8%);">
+      <header style="display:grid;gap:.35rem;margin-bottom:1rem;">
+        <div>
+          <h3 style="margin:0 0 .25rem;">Imágenes cargadas</h3>
+          <p style="margin:0;color:var(--text-secondary);">Filtra por texto o grupo para encontrar imágenes y eliminarlas más rápido.</p>
+        </div>
+        <div style="display:grid;grid-template-columns:minmax(0,1.35fr) minmax(220px,.65fr);gap:.85rem;">
+          <div style="position:relative;width:100%;">
+            <input
+              [(ngModel)]="imageSearch"
+              (ngModelChange)="onGalleryFiltersChange()"
+              placeholder="Buscar por código, nombre o tipo"
+              style="padding-right:3rem;">
+            <button
+              *ngIf="imageSearch"
+              type="button"
+              (click)="imageSearch = ''; onGalleryFiltersChange()"
+              aria-label="Limpiar búsqueda"
+              style="position:absolute;top:50%;right:.85rem;transform:translateY(-50%);width:1.8rem;height:1.8rem;padding:0;border:0;border-radius:999px;background:color-mix(in srgb, var(--field-background-hover) 88%, var(--panel-background) 12%);color:var(--text-secondary);display:grid;place-items:center;font-size:1rem;line-height:1;cursor:pointer;">
+              X
+            </button>
+          </div>
+
+          <div
+            [style.position]="'relative'"
+            [style.width]="'100%'"
+            [style.min-height]="'3.5rem'"
+            [style.border-radius]="'.9rem'"
+            [style.border]="groupFilterOpen ? '1px solid color-mix(in srgb, var(--accent-color) 45%, var(--border-color) 55%)' : '1px solid var(--border-color)'"
+            [style.background]="'var(--field-background)'"
+            [style.color]="'var(--text-primary)'"
+            [style.box-shadow]="groupFilterOpen ? '0 0 0 .15rem color-mix(in srgb, var(--accent-color) 12%, transparent)' : null">
+            <button type="button" (click)="toggleGroupFilter()" style="width:100%;min-height:3.5rem;padding:.8rem 1rem;border-radius:.9rem;border:0;background:transparent;color:var(--text-primary);display:flex;align-items:center;justify-content:space-between;gap:1rem;text-align:left;">
+              <span style="min-width:0;display:inline-flex;align-items:center;gap:.55rem;">
+                <img *ngIf="selectedImageGroupFlagUrl" [src]="selectedImageGroupFlagUrl" alt="" aria-hidden="true" style="width:1rem;height:.75rem;border-radius:.18rem;object-fit:cover;">
+                <span>{{ selectedImageGroupLabel }}</span>
+              </span>
+              <span class="dropdown-chevron" aria-hidden="true"></span>
+            </button>
+
+            <div *ngIf="groupFilterOpen" style="position:absolute;top:calc(100% + .55rem);left:0;right:0;z-index:30;display:grid;gap:.35rem;padding:.55rem;max-height:16rem;overflow:auto;border-radius:1rem;border:1px solid color-mix(in srgb, var(--accent-color) 18%, var(--border-color) 82%);background:color-mix(in srgb, var(--panel-background) 88%, var(--field-background-hover) 12%);box-shadow:0 1rem 2.4rem rgba(0,0,0,.16);backdrop-filter:blur(14px);">
+              <button
+                type="button"
+                [style.width]="'100%'"
+                [style.display]="'flex'"
+                [style.align-items]="'center'"
+                [style.gap]="'.75rem'"
+                [style.padding]="'.8rem .85rem'"
+                [style.border-radius]="'.85rem'"
+                [style.border]="!imageGroupFilter ? '1px solid color-mix(in srgb, var(--accent-color) 22%, var(--border-color) 78%)' : '1px solid transparent'"
+                [style.background]="!imageGroupFilter ? 'color-mix(in srgb, var(--accent-color) 10%, var(--panel-background) 90%)' : 'color-mix(in srgb, var(--panel-background) 84%, var(--field-background-hover) 16%)'"
+                [style.color]="'var(--text-primary)'"
+                [style.text-align]="'left'"
+                (click)="selectImageGroupFilter('')">
+                Todos los grupos
+              </button>
+
+              <button
+                type="button"
+                *ngFor="let option of imageGroupOptions"
+                [style.width]="'100%'"
+                [style.display]="'flex'"
+                [style.align-items]="'center'"
+                [style.gap]="'.75rem'"
+                [style.padding]="'.8rem .85rem'"
+                [style.border-radius]="'.85rem'"
+                [style.border]="imageGroupFilter === option.value ? '1px solid color-mix(in srgb, var(--accent-color) 22%, var(--border-color) 78%)' : '1px solid transparent'"
+                [style.background]="imageGroupFilter === option.value ? 'color-mix(in srgb, var(--accent-color) 10%, var(--panel-background) 90%)' : 'color-mix(in srgb, var(--panel-background) 84%, var(--field-background-hover) 16%)'"
+                [style.color]="'var(--text-primary)'"
+                [style.text-align]="'left'"
+                (click)="selectImageGroupFilter(option.value)">
+                <span style="display:inline-flex;align-items:center;gap:.55rem;">
+                  <img *ngIf="option.flagUrl" [src]="option.flagUrl" alt="" aria-hidden="true" style="width:1rem;height:.75rem;border-radius:.18rem;object-fit:cover;">
+                  <span>{{ option.label }}</span>
+                </span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <div class="gallery-toolbar" *ngIf="imagesStore.items().length" style="display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;margin:0 0 .9rem;">
+        <p>{{ imagesStore.items().length }} imágenes asociadas</p>
+        <label class="page-size" style="display:inline-flex;align-items:center;gap:.55rem;color:var(--text-secondary);">
+          <span>Ver</span>
+          <select [(ngModel)]="pageSize" (ngModelChange)="onPageSizeChange()" style="padding:.55rem .75rem;border-radius:.9rem;border:1px solid var(--border-color);background:var(--field-background);color:var(--text-primary);">
+            <option *ngFor="let option of pageSizeOptions" [ngValue]="option">{{ option }}</option>
+          </select>
+          <span>cards</span>
+        </label>
+      </div>
+
+      <div class="gallery-groups" *ngIf="filteredImagesCount; else emptyGallery" style="display:grid;gap:1.4rem;">
+        <section class="gallery-group" *ngFor="let group of pagedGroups" style="display:grid;gap:.85rem;">
+          <header class="gallery-group__header" style="display:flex;align-items:center;justify-content:space-between;gap:1rem;padding-top:.25rem;color:var(--text-secondary);">
+            <div class="gallery-group__title" style="display:inline-flex;align-items:center;gap:.6rem;font-size:.95rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;">
+              <img *ngIf="group.flagUrl" [src]="group.flagUrl" alt="" aria-hidden="true" style="width:1.1rem;height:.82rem;border-radius:.18rem;object-fit:cover;">
+              <span>{{ group.label }}</span>
+            </div>
+          </header>
+
+          <div class="gallery">
+            <article class="image-card" *ngFor="let item of group.items">
+              <img [src]="item.imageUrl" [alt]="item.displayName">
+              <div>
+                <strong>{{ item.stickerCode }}</strong>
+                <p>{{ item.displayName }}</p>
+                <small>{{ group.label }} · {{ item.uploadedAtUtc | date:'medium' }}</small>
+                <button type="button" class="danger" (click)="remove(item.stickerId, item.displayName)">Eliminar imagen</button>
+              </div>
+            </article>
+          </div>
+        </section>
+      </div>
+
+      <ng-template #emptyGallery>
+        <div class="gallery-empty" style="margin-top:1rem;padding:1rem 0;color:var(--text-secondary);">
+          {{ imagesStore.items().length ? 'No hay imágenes que coincidan con los filtros actuales.' : 'Todavía no hay imágenes asociadas.' }}
+        </div>
+      </ng-template>
+
+      <div class="pagination" *ngIf="filteredImagesCount > pageSize" style="display:flex;align-items:center;justify-content:center;gap:1rem;flex-wrap:wrap;margin-top:1.4rem;">
+        <button type="button" class="pagination__button" style="min-width:2.75rem;padding:.72rem .9rem;border-radius:.9rem;border:1px solid var(--border-color);background:var(--field-background);color:var(--text-primary);cursor:pointer;" [disabled]="currentPage === 1" (click)="changePage(currentPage - 1)">Anterior</button>
+        <button
+          type="button"
+          class="pagination__button"
+          *ngFor="let page of visiblePageNumbers"
+          [style.min-width]="'2.75rem'"
+          [style.padding]="'.72rem .9rem'"
+          [style.border-radius]="'.9rem'"
+          [style.border]="page === currentPage ? '1px solid transparent' : '1px solid var(--border-color)'"
+          [style.background]="page === currentPage ? 'var(--accent-color)' : 'var(--field-background)'"
+          [style.color]="page === currentPage ? '#061013' : 'var(--text-primary)'"
+          [style.font-weight]="page === currentPage ? '700' : null"
+          [style.cursor]="'pointer'"
+          (click)="changePage(page)">
+          {{ page }}
+        </button>
+        <button type="button" class="pagination__button" style="min-width:2.75rem;padding:.72rem .9rem;border-radius:.9rem;border:1px solid var(--border-color);background:var(--field-background);color:var(--text-primary);cursor:pointer;" [disabled]="currentPage === totalPages" (click)="changePage(currentPage + 1)">Siguiente</button>
       </div>
     </section>
   </div>
 
-  <ng-template #emptyGallery>
-    <div class="gallery-empty" style="margin-top:1rem;padding:1rem 0;color:var(--text-secondary);">Todavía no hay imágenes asociadas.</div>
-  </ng-template>
-
-  <div class="pagination" *ngIf="imagesStore.items().length > pageSize" style="display:flex;align-items:center;justify-content:center;gap:1rem;flex-wrap:wrap;margin-top:1.4rem;">
-    <button type="button" class="pagination__button" style="min-width:2.75rem;padding:.72rem .9rem;border-radius:.9rem;border:1px solid var(--border-color);background:var(--field-background);color:var(--text-primary);cursor:pointer;" [disabled]="currentPage === 1" (click)="changePage(currentPage - 1)">Anterior</button>
-    <button
-      type="button"
-      class="pagination__button"
-      *ngFor="let page of visiblePageNumbers"
-      [class.pagination__button--active]="page === currentPage"
-      [style.min-width]="'2.75rem'"
-      [style.padding]="'.72rem .9rem'"
-      [style.border-radius]="'.9rem'"
-      [style.border]="page === currentPage ? '1px solid transparent' : '1px solid var(--border-color)'"
-      [style.background]="page === currentPage ? 'var(--accent-color)' : 'var(--field-background)'"
-      [style.color]="page === currentPage ? '#061013' : 'var(--text-primary)'"
-      [style.font-weight]="page === currentPage ? '700' : null"
-      [style.cursor]="'pointer'"
-      (click)="changePage(page)">
-      {{ page }}
-    </button>
-    <button type="button" class="pagination__button" style="min-width:2.75rem;padding:.72rem .9rem;border-radius:.9rem;border:1px solid var(--border-color);background:var(--field-background);color:var(--text-primary);cursor:pointer;" [disabled]="currentPage === totalPages" (click)="changePage(currentPage + 1)">Siguiente</button>
-  </div>
+  <button type="button" class="picker-backdrop" *ngIf="pickerOpen || groupFilterOpen" (click)="closeOverlays()" aria-label="Cerrar selector"></button>
 
   <button
     *ngIf="showScrollTop"
