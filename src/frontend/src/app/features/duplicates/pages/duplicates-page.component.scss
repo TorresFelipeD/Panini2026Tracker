@@ -26,6 +26,36 @@
   gap: 0.75rem;
 }
 
+.duplicate-groups {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.duplicate-group {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.duplicate-group__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.duplicate-group__title,
+.country-cell {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+.duplicate-group__title {
+  color: var(--text-secondary);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
 .row {
   grid-template-columns: 0.8fr 1.5fr 1fr 0.8fr 1fr;
   padding: 0.9rem 1rem;

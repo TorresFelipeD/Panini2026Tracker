@@ -18,7 +18,7 @@
       <div class="filter-panel dropdown-scroll" *ngIf="countryPickerOpen">
         <div class="filter-panel-actions">
           <div class="filter-search">
-            <input [(ngModel)]="countrySearch" placeholder="Buscar país">
+            <input [(ngModel)]="countrySearch" placeholder="Buscar país o grupo">
             <button
               type="button"
               class="filter-search-clear"
@@ -40,13 +40,13 @@
         [class.filter-option--active]="countryCodes.includes(option.value)"
         (click)="toggleCountry(option.value)">
           <span class="country-option-label">
-            <img class="country-flag" [src]="option.flagUrl" alt="" aria-hidden="true">
+            <img class="country-flag" *ngIf="option.flagUrl" [src]="option.flagUrl" alt="" aria-hidden="true">
             <span>{{ option.label }}</span>
           </span>
         </button>
 
         <div class="filter-empty" *ngIf="!countryOptions.length">
-          No se encontraron países.
+          No se encontraron resultados.
         </div>
       </div>
     </div>
@@ -59,36 +59,50 @@
     (click)="closeCountryPicker()"
     aria-label="Cerrar selector de país"></button>
 
-  <div class="table">
-    <div class="row row--head">
-      <span>Código</span>
-      <span>Lámina</span>
-      <span>País</span>
-      <span>Cantidad</span>
-      <span>Acciones</span>
-    </div>
-
-    <div class="row" *ngFor="let item of store.items()">
-      <span>{{ item.stickerCode }}</span>
-      <span>{{ item.displayName }}</span>
-      <span>{{ item.countryName }}</span>
-      <span>
-        <div class="number-field">
-          <input #qty type="number" min="0" [value]="item.quantity">
-          <div class="number-stepper">
-            <button type="button" class="number-step" (click)="increment(qty)">
-              <span aria-hidden="true"></span>
-            </button>
-            <button type="button" class="number-step number-step--down" (click)="decrement(qty)">
-              <span aria-hidden="true"></span>
-            </button>
-          </div>
+  <div class="duplicate-groups">
+    <section class="duplicate-group" *ngFor="let group of groupedItems">
+      <header class="duplicate-group__header">
+        <div class="duplicate-group__title">
+          <img class="country-flag" *ngIf="group.flagUrl" [src]="group.flagUrl" alt="" aria-hidden="true">
+          <span>{{ group.label }}</span>
         </div>
-      </span>
-      <span class="actions">
-        <button type="button" (click)="store.save(item.stickerId, +qty.value)">Guardar</button>
-        <button type="button" class="danger" (click)="remove(item.stickerId, item.displayName)">Eliminar</button>
-      </span>
-    </div>
+      </header>
+
+      <div class="table">
+        <div class="row row--head">
+          <span>Código</span>
+          <span>Lámina</span>
+          <span>País</span>
+          <span>Cantidad</span>
+          <span>Acciones</span>
+        </div>
+
+        <div class="row" *ngFor="let item of group.items">
+          <span>{{ item.stickerCode }}</span>
+          <span>{{ item.displayName }}</span>
+          <span class="country-cell">
+            <img class="country-flag" *ngIf="item.flagCode" [src]="getCountryFlagUrl(item.flagCode)" alt="" aria-hidden="true">
+            <span>{{ item.countryName || (item.type === 'fcw' ? 'FCW' : 'Otros') }}</span>
+          </span>
+          <span>
+            <div class="number-field">
+              <input #qty type="number" min="0" [value]="item.quantity">
+              <div class="number-stepper">
+                <button type="button" class="number-step" (click)="increment(qty)">
+                  <span aria-hidden="true"></span>
+                </button>
+                <button type="button" class="number-step number-step--down" (click)="decrement(qty)">
+                  <span aria-hidden="true"></span>
+                </button>
+              </div>
+            </div>
+          </span>
+          <span class="actions">
+            <button type="button" (click)="store.save(item.stickerId, +qty.value)">Guardar</button>
+            <button type="button" class="danger" (click)="remove(item.stickerId, item.displayName)">Eliminar</button>
+          </span>
+        </div>
+      </div>
+    </section>
   </div>
 </section>

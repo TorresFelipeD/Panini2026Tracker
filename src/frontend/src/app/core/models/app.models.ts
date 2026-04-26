@@ -75,8 +75,10 @@ export interface DuplicateItem {
   stickerId: string;
   stickerCode: string;
   displayName: string;
-  countryCode: string;
-  countryName: string;
+  countryCode: string | null;
+  countryName: string | null;
+  flagCode: string | null;
+  type: string;
   quantity: number;
   isOwned: boolean;
 }

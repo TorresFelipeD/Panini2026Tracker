@@ -4,8 +4,10 @@ public sealed record DuplicateItemDto(
     Guid StickerId,
     string StickerCode,
     string DisplayName,
-    string CountryCode,
-    string CountryName,
+    string? CountryCode,
+    string? CountryName,
+    string? FlagCode,
+    string Type,
     int Quantity,
     bool IsOwned);
 

@@ -1,10 +1,18 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { DuplicateItem } from '../../../core/models/app.models';
 import { AlbumStoreService } from '../../../core/services/album.store';
 import { ConfirmDialogService } from '../../../core/services/confirm-dialog.service';
 import { DuplicatesStoreService } from '../../../core/services/duplicates.store';
 import { getCountryFlagUrl } from '../../../core/utils/country-flag';
+
+interface DuplicateGroup {
+  key: string;
+  label: string;
+  flagUrl: string;
+  items: DuplicateItem[];
+}
 
 @Component({
   selector: 'app-duplicates-page',
@@ -16,6 +24,7 @@ import { getCountryFlagUrl } from '../../../core/utils/country-flag';
 export class DuplicatesPageComponent {
   protected readonly albumStore = inject(AlbumStoreService);
   protected readonly store = inject(DuplicatesStoreService);
+  protected readonly getCountryFlagUrl = getCountryFlagUrl;
   private readonly confirmDialogService = inject(ConfirmDialogService);
   protected search = '';
   protected countryCodes: string[] = [];
@@ -29,11 +38,15 @@ export class DuplicatesPageComponent {
   }
 
   protected get countryOptions(): { value: string; label: string; flagUrl: string }[] {
-    const options = this.albumStore.availableCountries().map(country => ({
-      value: country.countryCode,
-      label: country.countryName,
-      flagUrl: getCountryFlagUrl(country.flagCode)
-    }));
+    const options = [
+      ...this.albumStore.availableCountries().map(country => ({
+        value: country.countryCode,
+        label: country.countryName,
+        flagUrl: getCountryFlagUrl(country.flagCode)
+      })),
+      { value: 'fcw', label: 'FCW', flagUrl: '' },
+      { value: 'otros', label: 'Otros', flagUrl: '' }
+    ];
 
     const search = this.countrySearch.trim().toLowerCase();
     if (!search) {
@@ -41,6 +54,31 @@ export class DuplicatesPageComponent {
     }
 
     return options.filter(option => option.label.toLowerCase().includes(search));
+  }
+
+  protected get groupedItems(): DuplicateGroup[] {
+    const groups = new Map<string, DuplicateGroup>();
+
+    for (const item of this.store.items()) {
+      const key = item.countryCode || (item.type === 'fcw' ? 'fcw' : 'otros');
+      const label = item.countryName || (item.type === 'fcw' ? 'FCW' : 'Otros');
+      const flagUrl = item.flagCode ? getCountryFlagUrl(item.flagCode) : '';
+      const current = groups.get(key);
+
+      if (current) {
+        current.items.push(item);
+        continue;
+      }
+
+      groups.set(key, {
+        key,
+        label,
+        flagUrl,
+        items: [item]
+      });
+    }
+
+    return Array.from(groups.values());
   }
 
   protected get countryLabel(): string {
