@@ -149,6 +149,14 @@ export class ImagesPageComponent {
     this.currentPage = 1;
   }
 
+  protected clearGalleryFilters(): void {
+    this.imageSearch = '';
+    this.imageGroupFilter = '';
+    this.imageGroupSearch = '';
+    this.groupFilterOpen = false;
+    this.onGalleryFiltersChange();
+  }
+
   protected selectImageGroupFilter(value: string): void {
     this.imageGroupFilter = value;
     this.groupFilterOpen = false;

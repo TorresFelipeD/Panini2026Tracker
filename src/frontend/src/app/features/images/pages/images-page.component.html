@@ -153,6 +153,18 @@
             </div>
           </div>
         </div>
+
+        <div style="display:flex;justify-content:flex-end;">
+          <button
+            type="button"
+            (click)="clearGalleryFilters()"
+            [disabled]="!imageSearch && !imageGroupFilter"
+            [style.opacity]="!imageSearch && !imageGroupFilter ? '0.45' : '1'"
+            [style.cursor]="!imageSearch && !imageGroupFilter ? 'not-allowed' : 'pointer'"
+            style="min-width:10rem;min-height:3rem;padding:.8rem 1rem;border-radius:1rem;border:1px solid var(--border-color);background:var(--field-background);color:var(--text-primary);font-weight:700;white-space:nowrap;">
+            Limpiar filtros
+          </button>
+        </div>
       </header>
 
       <div class="gallery-toolbar" *ngIf="imagesStore.items().length" style="display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;margin:0 0 .9rem;">
