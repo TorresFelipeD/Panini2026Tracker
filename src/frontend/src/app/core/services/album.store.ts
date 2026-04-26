@@ -57,6 +57,13 @@ export class AlbumStoreService {
               ...sticker,
               imageUrl: resolveImageUrl(this.config.apiBaseUrl, sticker.imageUrl)
             }))
+          })),
+          specialSections: value.specialSections.map(section => ({
+            ...section,
+            stickers: section.stickers.map(sticker => ({
+              ...sticker,
+              imageUrl: resolveImageUrl(this.config.apiBaseUrl, sticker.imageUrl)
+            }))
           }))
         });
         if (this.availableCountries().length === 0) {
