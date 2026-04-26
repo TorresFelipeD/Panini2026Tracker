@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, HostListener, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { CountryAlbum, SpecialStickerSection } from '../../../core/models/app.models';
+import { CountryAlbum, SpecialStickerSection, StickerCard } from '../../../core/models/app.models';
 import { AlbumStoreService } from '../../../core/services/album.store';
 import { getCountryFlagUrl } from '../../../core/utils/country-flag';
 import { StickerCardComponent } from '../components/sticker-card.component';
@@ -143,6 +143,7 @@ export class AlbumPageComponent {
 
     this.syncSelectedGroupWithCountryFilter();
     this.restoreDefaultGroupWhenNoFilters();
+    this.closeFilters();
     this.applyFilters();
   }
 
@@ -177,13 +178,8 @@ export class AlbumPageComponent {
   }
 
   protected get visibleCountries(): CountryAlbum[] {
-    const overview = this.store.overview();
-    if (!overview) {
-      return [];
-    }
-
     if (this.hasFilterDrivenView) {
-      return [...overview.countries]
+      return [...this.filteredCountries]
         .sort((a, b) => a.displayOrder - b.displayOrder || a.countryName.localeCompare(b.countryName));
     }
 
@@ -192,27 +188,22 @@ export class AlbumPageComponent {
     }
 
     const normalizedGroup = this.selectedGroup.replace('Grupo ', '');
-    return overview.countries
+    return this.filteredCountries
       .filter(country => country.group === normalizedGroup)
       .sort((a, b) => a.displayOrderGroup - b.displayOrderGroup || a.displayOrder - b.displayOrder || a.countryName.localeCompare(b.countryName));
   }
 
   protected get visibleSpecialSections(): SpecialStickerSection[] {
-    const overview = this.store.overview();
-    if (!overview) {
-      return [];
-    }
-
     if (this.hasFilterDrivenView) {
-      return overview.specialSections;
+      return this.filteredSpecialSections;
     }
 
     if (this.selectedGroup === 'FCW') {
-      return overview.specialSections.filter(section => section.key === 'fcw');
+      return this.filteredSpecialSections.filter(section => section.key === 'fcw');
     }
 
     if (this.selectedGroup === 'Otros') {
-      return overview.specialSections.filter(section => section.key === 'other');
+      return this.filteredSpecialSections.filter(section => section.key === 'other');
     }
 
     return [];
@@ -255,5 +246,79 @@ export class AlbumPageComponent {
     if (!this.hasFilterDrivenView && this.countryCodes.length === 0) {
       this.selectedGroup = 'FCW';
     }
+  }
+
+  private get filteredCountries(): CountryAlbum[] {
+    const overview = this.store.overview();
+    if (!overview) {
+      return [];
+    }
+
+    return overview.countries
+      .map(country => {
+        const stickers = country.stickers.filter(sticker => this.matchesSticker(sticker, country));
+        const owned = stickers.filter(sticker => sticker.isOwned).length;
+        const total = stickers.length;
+
+        return {
+          ...country,
+          stickers,
+          owned,
+          total,
+          missing: total - owned,
+          completionPercentage: total === 0 ? 0 : Number(((owned / total) * 100).toFixed(1))
+        };
+      })
+      .filter(country => country.stickers.length > 0);
+  }
+
+  private get filteredSpecialSections(): SpecialStickerSection[] {
+    const overview = this.store.overview();
+    if (!overview) {
+      return [];
+    }
+
+    return overview.specialSections
+      .map(section => {
+        const stickers = section.stickers.filter(sticker => this.matchesSticker(sticker));
+        const owned = stickers.filter(sticker => sticker.isOwned).length;
+        const total = stickers.length;
+
+        return {
+          ...section,
+          stickers,
+          owned,
+          total,
+          missing: total - owned,
+          completionPercentage: total === 0 ? 0 : Number(((owned / total) * 100).toFixed(1))
+        };
+      })
+      .filter(section => section.stickers.length > 0);
+  }
+
+  private matchesSticker(sticker: StickerCard, country?: CountryAlbum): boolean {
+    const normalizedSearch = this.search.trim().toLowerCase();
+    const matchesSearch = !normalizedSearch || [
+      sticker.stickerCode,
+      sticker.displayName,
+      sticker.type,
+      sticker.countryCode,
+      sticker.countryName,
+      country?.group ? `grupo ${country.group}` : ''
+    ]
+      .join(' ')
+      .toLowerCase()
+      .includes(normalizedSearch);
+
+    const matchesCountry = this.countryCodes.length === 0
+      || this.countryCodes.includes(sticker.countryCode);
+    const matchesOwned = this.isOwned === ''
+      || String(sticker.isOwned) === this.isOwned;
+    const matchesImage = this.hasImage === ''
+      || String(sticker.hasImage) === this.hasImage;
+    const matchesDuplicates = this.hasDuplicates === ''
+      || String(sticker.duplicateCount > 0) === this.hasDuplicates;
+
+    return matchesSearch && matchesCountry && matchesOwned && matchesImage && matchesDuplicates;
   }
 }

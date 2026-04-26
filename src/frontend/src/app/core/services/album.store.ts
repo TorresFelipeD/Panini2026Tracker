@@ -1,4 +1,4 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { computed, inject, Injectable, signal } from '@angular/core';
 import { AlbumOverview, StickerDetail } from '../models/app.models';
 import { APP_CONFIG } from '../tokens/app-config.token';
@@ -47,20 +47,7 @@ export class AlbumStoreService {
 
   load(): void {
     this.loading.set(true);
-    let params = new HttpParams();
-    const filters = this.filters();
-
-    Object.entries(filters).forEach(([key, value]) => {
-      if (Array.isArray(value)) {
-        value.forEach(item => {
-          params = params.append(key, item);
-        });
-      } else if (value !== '') {
-        params = params.set(key, value);
-      }
-    });
-
-    this.http.get<AlbumOverview>(`${this.config.apiBaseUrl}/album`, { params }).subscribe({
+    this.http.get<AlbumOverview>(`${this.config.apiBaseUrl}/album`).subscribe({
       next: value => {
         this.overview.set({
           ...value,
@@ -117,7 +104,6 @@ export class AlbumStoreService {
 
   setFilters(filters: Partial<AlbumFilters>): void {
     this.filters.update(current => ({ ...current, ...filters }));
-    this.load();
   }
 
   openSticker(stickerId: string): void {
