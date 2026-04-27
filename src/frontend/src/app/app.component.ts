@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AppShellComponent } from './layout/app-shell.component';
+import { RuntimeSessionService } from './core/services/runtime-session.service';
 
 @Component({
   selector: 'app-root',
@@ -8,4 +9,5 @@ import { AppShellComponent } from './layout/app-shell.component';
   template: '<app-shell />'
 })
 export class AppComponent {
+  constructor(_: RuntimeSessionService) {}
 }

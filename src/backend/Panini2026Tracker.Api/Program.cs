@@ -4,13 +4,19 @@ using Panini2026Tracker.Application.Images;
 using Panini2026Tracker.Application.Logs;
 using Panini2026Tracker.Application.Stickers;
 using Panini2026Tracker.Api.Middleware;
+using Panini2026Tracker.Api.Runtime;
 using Panini2026Tracker.Domain.Entities;
 using Panini2026Tracker.Domain.Repositories;
 using Panini2026Tracker.Infrastructure.Configuration;
 using Panini2026Tracker.Infrastructure.Persistence;
-using Microsoft.Extensions.FileProviders;
 
 var builder = WebApplication.CreateBuilder(args);
+var desktopRuntime = DesktopRuntimeOptions.Create(builder.Environment);
+
+if (desktopRuntime.Enabled)
+{
+    builder.WebHost.UseUrls(desktopRuntime.BaseAddress);
+}
 
 var appConfigCandidates = new[]
 {
@@ -28,6 +34,10 @@ builder.Logging.ClearProviders();
 builder.Logging.AddConsole();
 builder.Logging.AddDebug();
 
+builder.Services.AddSingleton(desktopRuntime);
+builder.Services.AddSingleton<DesktopSessionTracker>();
+builder.Services.AddHostedService<DesktopSessionMonitorService>();
+builder.Services.AddHostedService<DesktopBrowserLauncherService>();
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -73,17 +83,26 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-var uploadsPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads");
+var webRootPath = app.Environment.WebRootPath ?? Path.Combine(app.Environment.ContentRootPath, "wwwroot");
+var uploadsPath = Path.Combine(webRootPath, "uploads");
 Directory.CreateDirectory(uploadsPath);
 
 app.UseMiddleware<ExceptionLoggingMiddleware>();
-app.UseCors("frontend");
-app.UseStaticFiles(new StaticFileOptions
+
+if (app.Environment.IsDevelopment())
 {
-    FileProvider = new PhysicalFileProvider(uploadsPath),
-    RequestPath = "/uploads"
-});
+    app.UseCors("frontend");
+}
+
+app.UseDefaultFiles();
 app.UseStaticFiles();
 app.UseAuthorization();
 app.MapControllers();
+
+var indexHtmlPath = Path.Combine(webRootPath, "index.html");
+if (File.Exists(indexHtmlPath))
+{
+    app.MapFallbackToFile("index.html");
+}
+
 app.Run();

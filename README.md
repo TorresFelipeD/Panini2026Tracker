@@ -15,7 +15,8 @@ Aplicación full stack local para gestionar el progreso de las láminas del álb
 - `src/backend/Panini2026Tracker.Application`: casos de uso y contratos
 - `src/backend/Panini2026Tracker.Domain`: entidades y abstracciones del dominio
 - `src/backend/Panini2026Tracker.Infrastructure`: EF Core, SQLite, seed, repositorios y almacenamiento local
-- `src/frontend/panini2026-tracker-web`: SPA Angular por features
+- `src/frontend`: SPA Angular por features
+- `src/launcher/Panini2026Tracker.Launcher`: ejecutable lanzador para distribución local
 - `src/backend/Panini2026Tracker.Api/Seed/album-catalog.json`: catálogo inicial editable del álbum
 - `app-config.json`: configuración centralizada de metadata mostrada en el footer y leída por backend/frontend
 
@@ -56,7 +57,7 @@ Backend esperado:
 ### 3. Instalar dependencias frontend
 
 ```powershell
-cd .\src\frontend\panini2026-tracker-web
+cd .\src\frontend
 npm install
 ```
 
@@ -69,6 +70,56 @@ npm start
 Frontend esperado:
 
 - `http://localhost:4200`
+
+## Distribución local
+
+### Build Release
+
+```powershell
+dotnet build .\src\backend\Panini2026Tracker.Api\Panini2026Tracker.Api.csproj -c Release
+```
+
+Ese build deja la salida lista en `app-runtime` con esta estructura:
+
+```text
+app-runtime/
+  AlbumMundial2026_Tracker.exe
+  app/
+    Panini2026Tracker.Api.exe
+    app-config.json
+    appsettings.json
+    wwwroot/
+    ...
+```
+
+Comportamiento del ejecutable:
+
+- `AlbumMundial2026_Tracker.exe` es el punto de entrada para distribución.
+- El launcher inicia el backend dentro de `app/`.
+- El backend sirve el frontend compilado desde `app/wwwroot`.
+- Al abrirse en modo distribuido, la aplicación lanza el navegador automáticamente en una URL local.
+- Cuando la sesión del navegador se cierra, el backend también se detiene.
+
+### Empaquetado ZIP
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\package-release.ps1
+```
+
+El script:
+
+- lee la versión desde `app-config.json` en `AppMeta.version`
+- crea la carpeta `release` si no existe
+- genera un ZIP con nombre `AlbumMundial2026_Tracker_v{version}.zip`
+
+Estructura del ZIP:
+
+```text
+AlbumMundial2026_Tracker_v{version}/
+  AlbumMundial2026_Tracker.exe
+  app/
+    ...
+```
 
 ## Catálogo inicial
 

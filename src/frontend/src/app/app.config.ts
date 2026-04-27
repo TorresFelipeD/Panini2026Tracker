@@ -5,6 +5,12 @@ import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
 import { APP_CONFIG } from './core/tokens/app-config.token';
 
+function resolveApiBaseUrl(): string {
+  return window.location.port === '4200'
+    ? 'http://localhost:5098/api'
+    : '/api';
+}
+
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
@@ -12,7 +18,7 @@ export const appConfig: ApplicationConfig = {
     {
       provide: APP_CONFIG,
       useValue: {
-        apiBaseUrl: 'http://localhost:5098/api'
+        apiBaseUrl: resolveApiBaseUrl()
       }
     }
   ]

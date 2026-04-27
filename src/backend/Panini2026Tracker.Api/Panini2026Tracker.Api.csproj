@@ -4,6 +4,12 @@
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <RepositoryRoot>$(MSBuildThisFileDirectory)..\..\..\</RepositoryRoot>
+    <RuntimeOutputDir>$(RepositoryRoot)app-runtime</RuntimeOutputDir>
+    <RuntimeAppDir>$(RuntimeOutputDir)\app</RuntimeAppDir>
+    <FrontendProjectDir>$(RepositoryRoot)src\frontend</FrontendProjectDir>
+    <FrontendPackageDistDir>$(FrontendProjectDir)\dist\desktop-runtime\browser</FrontendPackageDistDir>
+    <LauncherProjectPath>$(RepositoryRoot)src\launcher\Panini2026Tracker.Launcher\Panini2026Tracker.Launcher.csproj</LauncherProjectPath>
   </PropertyGroup>
 
   <ItemGroup>
@@ -16,6 +22,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Update="appsettings.Development.json">
+      <CopyToPublishDirectory>Never</CopyToPublishDirectory>
+    </Content>
     <Content Update="Seed\album-catalog.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -23,5 +32,38 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
+
+  <Target Name="PackageDesktopRuntime"
+          AfterTargets="Build"
+          Condition="'$(Configuration)' == 'Release' and '$(SkipRuntimePackaging)' != 'true'">
+    <RemoveDir Directories="$(RuntimeOutputDir)" Condition="Exists('$(RuntimeOutputDir)')" />
+    <MakeDir Directories="$(RuntimeOutputDir)" />
+    <MakeDir Directories="$(RuntimeAppDir)" />
+
+    <RemoveDir Directories="$(FrontendProjectDir)\dist\desktop-runtime" Condition="Exists('$(FrontendProjectDir)\dist\desktop-runtime')" />
+
+    <Exec Command="npm run build -- --configuration production --output-path dist/desktop-runtime"
+          WorkingDirectory="$(FrontendProjectDir)" />
+
+    <Exec Command="dotnet publish &quot;$(MSBuildProjectFullPath)&quot; -c Release --no-build -o &quot;$(RuntimeAppDir)&quot; /p:SkipRuntimePackaging=true /p:UseAppHost=true /p:DebugType=None /p:DebugSymbols=false" />
+    <Exec Command="dotnet publish &quot;$(LauncherProjectPath)&quot; -c Release -o &quot;$(RuntimeOutputDir)&quot; -r win-x64 --self-contained false /p:PublishSingleFile=true /p:DebugType=None /p:DebugSymbols=false" />
+
+    <MakeDir Directories="$(RuntimeAppDir)\wwwroot" />
+
+    <ItemGroup>
+      <PublishedFrontendFiles Include="$(FrontendPackageDistDir)\**\*.*" />
+      <PublishedDebugSymbols Include="$(RuntimeOutputDir)\**\*.pdb" />
+      <LauncherSupportFiles Include="$(RuntimeOutputDir)\*.dll;$(RuntimeOutputDir)\*.deps.json;$(RuntimeOutputDir)\*.runtimeconfig.json" />
+    </ItemGroup>
+
+    <Copy SourceFiles="@(PublishedFrontendFiles)"
+          DestinationFiles="@(PublishedFrontendFiles->'$(RuntimeAppDir)\wwwroot\%(RecursiveDir)%(Filename)%(Extension)')"
+          SkipUnchangedFiles="true" />
+    <Copy SourceFiles="$(RepositoryRoot)app-config.json"
+          DestinationFiles="$(RuntimeAppDir)\app-config.json"
+          SkipUnchangedFiles="true" />
+    <Delete Files="@(LauncherSupportFiles)" />
+    <Delete Files="@(PublishedDebugSymbols)" />
+  </Target>
 
 </Project>
