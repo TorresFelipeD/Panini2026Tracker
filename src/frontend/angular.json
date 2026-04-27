@@ -32,6 +32,11 @@
                 "output": "/"
               },
               {
+                "glob": "favicon.ico",
+                "input": "src",
+                "output": "/"
+              },
+              {
                 "glob": "app-config.json",
                 "input": "../../..",
                 "output": "/assets/config"
@@ -97,6 +102,11 @@
             "assets": [
               {
                 "glob": "favicon.svg",
+                "input": "src",
+                "output": "/"
+              },
+              {
+                "glob": "favicon.ico",
                 "input": "src",
                 "output": "/"
               },
